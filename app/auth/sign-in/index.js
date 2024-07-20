@@ -3,15 +3,19 @@ import { StyleSheet, Text, TextInput, Touchable, TouchableOpacity, View } from '
 import React from 'react'
 import { useNavigation, useRouter } from 'expo-router'
 import { useEffect } from 'react'
+import { Colors } from '@/constants/Colors'
+import { Ionicons } from '@expo/vector-icons';
 
 export default function index() {
     const navigation = useNavigation()
     const router = useRouter()
 
-    // useEffect(() => {
-    //     navigation.setOptions({
-    //         headerShown: false
-    // }, []),
+    useEffect(() => {
+        navigation.setOptions({
+            headerShown: false
+        })
+    }, [])
+
     return (
         <View style={{
             padding: 25,  
@@ -19,22 +23,26 @@ export default function index() {
             paddingTop: 80,    
             height: '100%',
         }}>
+            <TouchableOpacity onPress={()=>router.back()}>
+                <Ionicons name="arrow-back-circle-outline" size={24} color="black" />
+            </TouchableOpacity>
           <Text style={{
                 fontSize: 30,
                 fontFamily: 'outfit-bold',
-          }}>Signing You in</Text>
+                marginTop: 30,
+          }}>Lets Sign You in</Text>
           <Text style={{
                 fontSize: 30,
                 fontFamily: 'outfit',
                 color: Colors.GRAY,
                 marginTop: 20,
-          }}>WeIcome bac</Text>
+          }}>Welcome Back</Text>
           <Text style={{
                 fontSize: 30,
                 fontFamily: 'outfit',
                 color: Colors.GRAY,
                 marginTop: 10,
-          }}>You Have Been Missed</Text>
+          }}>You Have Been Missed!</Text>
     
           <View style={{
                 marginTop: 50,
@@ -61,7 +69,7 @@ export default function index() {
     
           {/* sign in button */}
           <TouchableOpacity 
-            // onPress={() => router.replace('auth/sign-up')}
+            onPress={() => router.replace('/gift')}
           style={{
             padding: 20,
             backgroundColor: Colors.PRIMARY,
@@ -83,13 +91,13 @@ export default function index() {
                 backgroundColor: Colors.WHITE,
                 borderRadius: 15,
                 marginTop: 20,
-                borderwidth: 1,
+                borderWidth: 1,
             }}>
                 <Text style={{
                     fontFamily: 'outfit',
                     textAlign: 'center',
                     color: Colors.PRIMARY,
-                }}>Sign Up</Text>
+                }}>Create Account</Text>
             </TouchableOpacity>
         </View>
       )
@@ -100,7 +108,8 @@ const styles = StyleSheet.create({
     input:{
         padding: 15,
         borderRadius: 15,
-        borderwidth: 1,
+        borderWidth: 1,
         fontFamily: 'outfit',
+        borderColor: Colors.GRAY,
     }
 })

@@ -1,8 +1,11 @@
 import { Text, View } from "react-native";
 import Signin from "../components/login";
-import { initialize } from 'react-native-clarity';
+// import { tw } from 'nativewind';
 
-initialize("n48vwu9a8u");
+
+// import { initialize } from 'react-native-clarity';
+
+// initialize("n48vwu9a8u");
 
 export default function Index() {
   return (

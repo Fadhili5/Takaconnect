@@ -1,32 +1,32 @@
-import { View, Text, Image, StyleSheet, Touchable } from 'react-native'
+import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { Colors } from '@/constants/Colors'
 import { useRouter } from 'expo-router'
-import { TouchableOpacity } from 'react-native-gesture-handler'
 
 const login = () => {
 
     const router = useRouter()
   return (
     <View>
-        <Image source={require('../assets/images/haitenangaja_logo.jpeg')} 
-            style={{width: 200, height:450}}
+        <Image source={require('../assets/images/image.png')} 
+            style={{width: '100%', height:520}}
         />
         <View style={styles.container}>
             <Text style={{
-                fontSize: 30,
+                fontSize: 40,
                 fontFamily: 'outfit-bold',
                 textAlign: 'center',
                 marginTop: 10
-            }}>Therabot</Text>
+            }}>Therabot 🫂</Text>
 
             <Text style={{
-                fontSize: 20,
-                fontFamily: 'outfit-bold',
+                fontSize: 17,
+                fontFamily: 'outfit',
                 textAlign: 'center',
                 color: Colors.GRAY,
-                marginTop: 20
-            }}>Never wa</Text>
+                marginTop: 15
+            }}>I'm powered by AI, so surprises and mistakes are 
+                possible. Make sure to verify any generated code or suggestions </Text>
         </View>
         <TouchableOpacity style={styles.button}
             onPress={() => router.push('auth/sign-in')}
@@ -44,15 +44,14 @@ const login = () => {
 
 const styles = StyleSheet.create({
     container: {
-        padding: 15,
+        padding: 25,
         backgroundColor: Colors.WHITE,
         marginTop: -20,
-        borderTopLeftRadius: 30,
-        borderTopRightRadius: 30,
+        borderTopLeftRadius: 40,
+        borderTopRightRadius: 40,
         height: 100,
     },
     button: {
-        backgroundColor: Colors.PRIMARY,
         padding: 15,
         backgroundColor: Colors.PRIMARY,
         borderRadius: 99,
