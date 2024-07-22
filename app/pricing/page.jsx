@@ -1,9 +1,5 @@
-import {
-  Ionicons,
-} from "@expo/vector-icons";
-
 import React from 'react';
-import { View, Text, ScrollView, TouchableOpacity, StatusBar } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { useFonts } from 'expo-font';
 import tw from 'tailwind-react-native-classnames';
 
@@ -19,14 +15,8 @@ export default function PricingScreen() {
   }
 
   return (
-    <><StatusBar barStyle="dark-content" backgroundColor="#6B21A8" /><View style={tw`flex-row items-center py-8 justify-center bg-purple-800 mt-8`}>
-      <TouchableOpacity onPress={() => navigation.goBack()}>
-        <Ionicons name="arrow-back-circle-outline" size={24} color="white" />
-      </TouchableOpacity>
-      <Text style={[tw`text-white text-2xl ml-4`, { fontFamily: 'outfit-bold' }]}>Pricing</Text>
-    </View><ScrollView contentContainerStyle={tw`p-4`}>
-
-
+   
+      <ScrollView contentContainerStyle={tw`p-4`}>
         <Text style={[tw`text-center text-3xl mb-6`, { fontFamily: 'outfit-bold' }]}>
           Pricing Plans
         </Text>
@@ -77,6 +67,6 @@ export default function PricingScreen() {
             </TouchableOpacity>
           </View>
         </View>
-      </ScrollView></>
+      </ScrollView>
   );
 }
