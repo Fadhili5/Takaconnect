@@ -1,0 +1,17 @@
+{
+    "cli": {
+      "version": ">= 0.37.0"
+    },
+    "build": {
+      "production": {
+        "distribution": "store",
+        "android": {
+          "buildType": "app-bundle"
+        }
+      }
+    },
+    "submit": {
+      "production": {}
+    }
+  }
+  
