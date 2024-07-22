@@ -69,7 +69,7 @@ export default function index() {
     
           {/* sign in button */}
           <TouchableOpacity 
-            onPress={() => router.replace('/gift')}
+            onPress={() => router.replace('/home')}
           style={{
             padding: 20,
             backgroundColor: Colors.PRIMARY,

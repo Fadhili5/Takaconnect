@@ -51,9 +51,12 @@ export default function HomeScreen() {
             <View style={tw`w-1/2`}>
               <Card icon="journal-whills" title="Daily Journal" description="Keep track of your daily writing" />
             </View>
-            <View style={tw`w-1/2`}>
+            <TouchableOpacity style={tw`w-1/2`}
+              onPress={() => router.push('blogs/page')}
+
+            >
               <Card icon="book-open" title="Read Blogs" description="Articles, Posts & much more" />
-            </View>
+            </TouchableOpacity>
             <View style={tw`w-1/2`}>
               <Card icon="user-md" title="Attend Therapy" description="Speak with one of our amazing clinicians" />
             </View>
