@@ -17,7 +17,7 @@ const login = () => {
                 fontFamily: 'outfit-bold',
                 textAlign: 'center',
                 marginTop: 10
-            }}>Therabot 🫂</Text>
+            }}>DispatchAI</Text>
 
             <Text style={{
                 fontSize: 17,

@@ -1,62 +1,77 @@
 import React from 'react';
-import { View, Text, ScrollView, TouchableOpacity, Image } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
-import tw from 'tailwind-react-native-classnames';
+import tw from "tailwind-react-native-classnames";
 import { useRouter } from 'expo-router';
-import { useFonts } from 'expo-font';
-import AppLoading from 'expo-app-loading';
 
-export default function Chat() {
+export default function EmergencyServicesScreen() {
   const router = useRouter();
-
-  const [fontsLoaded] = useFonts({
-    'outfit': require('../../assets/fonts/Outfit-Regular.ttf'),
-    'outfit-bold': require('../../assets/fonts/Outfit-Medium.ttf'),
-    'outfit-medium': require('../../assets/fonts/Outfit-Bold.ttf'),
-  });
-
-  if (!fontsLoaded) {
-    return <AppLoading />;
-  }
+  
+  const navigateTo = (path) => {
+    router.push(path);
+  };
 
   return (
-    <View style={tw`flex-1 bg-white`}>
-      {/* Title */}
-      <View style={tw`items-center mt-20`}>
-        <Text style={[tw`text-xl`, { fontFamily: 'outfit-bold' }]}>Your Personal AI Companion</Text>
+    <ScrollView style={tw`flex-1`}>
+      <View style={tw`bg-purple-800 p-6 pb-12`}>
+        <View style={tw`flex-row items-center mt-10`}>
+          <TouchableOpacity onPress={() => router.back()}>
+            <FontAwesome5 name="arrow-left" size={24} color="white" />
+          </TouchableOpacity>
+          <Text style={[tw`text-white text-2xl ml-4`, { fontFamily: 'outfit-bold' }]}>Emergency Services</Text>
+        </View>
       </View>
 
-      <ScrollView contentContainerStyle={tw`flex-1 justify-center items-center bg-white p-4 w-full`}>
-
-        {/* Profile Image */}
-        <View style={tw`w-56 h-56 rounded-full overflow-hidden shadow-2xl mt-4`}>
-          <Image
-            source={require('../../assets/images/jeph.jpg')}
-            style={tw`w-full h-full`}
-          />
+      <View style={[tw`bg-white -mt-7 px-2`, { borderRadius: 30 }]}>
+        <View style={tw`mt-4 p-6`}>
+          <Text style={[tw`text-black text-lg`, { fontFamily: 'outfit-bold' }]}>Quick Access to Emergency Services</Text>
+          <Text style={[tw`text-gray-600 mt-2`, { fontFamily: 'outfit' }]}>
+            Select an option below to quickly access emergency contacts and services.
+          </Text>
         </View>
 
-        {/* Buttons */}
-        <View style={tw`flex-row justify-between items-center p-4 mt-6 `}>
-          <TouchableOpacity style={tw`items-center p-2 m-2`}
-            onPress={() => router.push('chat/page')}
-          >
-            <FontAwesome5 name="comment-dots" size={24} color="gray" />
-            <Text style={[tw`text-gray-500 mt-2`, { fontFamily: 'outfit' }]}>TEXT CHAT</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={tw`items-center p-2 m-2`}>
-            <FontAwesome5 name="microphone" size={24} color="gray" />
-            <Text style={[tw`text-gray-500 mt-2`, { fontFamily: 'outfit' }]}>Start</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={tw`items-center p-2 m-2`}>
-            <FontAwesome5 name="check-circle" size={24} color="gray" />
-            <Text style={[tw`text-gray-500 mt-2`, { fontFamily: 'outfit' }]}>FINISH</Text>
-          </TouchableOpacity>
+        <View style={tw`mt-2`}>
+          <View style={tw`flex-row flex-wrap justify-between`}>
+            <TouchableOpacity style={tw`w-1/2 p-2`} onPress={() => navigateTo('ambulance/page')}>
+              <EmergencyCard icon="ambulance" title="Call Ambulance" description="Get medical help fast" />
+            </TouchableOpacity>
+            <TouchableOpacity style={tw`w-1/2 p-2`} onPress={() => navigateTo('firefighter/page')}>
+              <EmergencyCard icon="fire-extinguisher" title="Call Firefighter" description="Report a fire emergency" />
+            </TouchableOpacity>
+            <TouchableOpacity style={tw`w-1/2 p-2`} onPress={() => navigateTo('Garbage/page')}>
+              <EmergencyCard icon="trash" title="Garbage Collector" description="Schedule garbage collection" />
+            </TouchableOpacity>
+            <TouchableOpacity style={tw`w-1/2 p-2`} onPress={() => navigateTo('blogs/page')}>
+              <EmergencyCard icon="book-open" title="Read Blogs" description="Articles, Posts & much more" />
+            </TouchableOpacity>
+            <TouchableOpacity style={tw`w-1/2 p-2`} onPress={() => navigateTo('flood-alert/page')}>
+              <EmergencyCard icon="water" title="Flood Alert" description="Get flood warnings" />
+            </TouchableOpacity>
+            <TouchableOpacity style={tw`w-1/2 p-2`} onPress={() => navigateTo('report-incident/page')}>
+              <EmergencyCard icon="exclamation-triangle" title="Report Incident" description="Report any other incident" />
+            </TouchableOpacity>
+            <TouchableOpacity style={tw`w-1/2 p-2`} onPress={() => navigateTo('first-aid/page')}>
+              <EmergencyCard icon="medkit" title="First Aid Tips" description="Learn basic first aid" />
+            </TouchableOpacity>
+            <TouchableOpacity style={tw`w-1/2 p-2`} onPress={() => navigateTo('Hospitals/page')}>
+              <EmergencyCard icon="hospital" title="Nearby Hospitals" description="Find hospitals near you" />
+            </TouchableOpacity>
+            <TouchableOpacity style={tw`w-1/2 p-2`} onPress={() => navigateTo('emergencyContacts/page')}>
+              <EmergencyCard icon="phone" title="Emergency Contacts" description="List of emergency contacts" />
+            </TouchableOpacity>
+          </View>
         </View>
-      </ScrollView>
-    </View>
+      </View>
+    </ScrollView>
   );
 }
 
-
-
+function EmergencyCard({ icon, title, description }) {
+  return (
+    <View style={tw`w-full bg-white p-4 rounded-xl shadow-md items-center`}>
+      <FontAwesome5 name={icon} size={32} color="#6b21a8" />
+      <Text style={[tw`text-purple-600 font-bold mt-2 text-center`, { fontFamily: 'outfit-bold' }]}>{title}</Text>
+      <Text style={[tw`text-gray-600 text-center mt-1`, { fontFamily: 'outfit' }]}>{description}</Text>
+    </View>
+  );
+}

@@ -42,7 +42,7 @@ export default function ProfileScreen() {
         <View style={{ position: "relative" }}>
           <Image
             source={{
-              uri: "https://res.cloudinary.com/dshp9jnuy/image/upload/v1665822253/avatars/nrxsg8sd9iy10bbsoenn.png",
+              uri: "https://randomuser.me/api/portraits/men/10.jpg",
             }}
             style={{ width: 90, height: 90, borderRadius: 100 }}
           />
@@ -167,7 +167,7 @@ export default function ProfileScreen() {
             </View>
             <View>
               <Text style={{ fontSize: 16, fontFamily: "outfit-bold" }}>
-                Enrolled courses
+                Incidents Reported
               </Text>
               <Text
                 style={{
@@ -175,7 +175,7 @@ export default function ProfileScreen() {
                   fontFamily: "outfit",
                 }}
               >
-                The all enrolled courses
+                The all Incidents Reported
               </Text>
             </View>
           </View>

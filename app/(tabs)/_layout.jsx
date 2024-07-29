@@ -3,6 +3,8 @@ import { Tabs } from 'expo-router';
 import React from 'react';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
+import { FontAwesome6 } from '@expo/vector-icons';
 
 export default function Tablayout() {
   return (
@@ -17,11 +19,11 @@ export default function Tablayout() {
         options={{
           tabBarLabel: 'Home',
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="home-heart" size={34} color={color} />
-          ),
+          <MaterialCommunityIcons name="home-circle-outline" size={30} color="black" />          
+        ),
         }}
       />
-      <Tabs.Screen
+      {/* <Tabs.Screen
         name="gift"
         options={{
           tabBarLabel: 'Gift',
@@ -29,25 +31,22 @@ export default function Tablayout() {
             <MaterialCommunityIcons name="gift-open-outline" size={24} color={color} />
           ),
         }}
-      />
+      /> */}
       <Tabs.Screen
         name="chat"
         options={{
-          // tabBarLabel: 'Chat',
+          tabBarLabel: 'services',
           tabBarIcon: ({ color }) => (
-            <TouchableOpacity style={styles.chatButton}>
-              <FontAwesome name="microphone" size={24} color="gray" />            
-            </TouchableOpacity>
+            <MaterialIcons name="miscellaneous-services" size={24} color="black" />
           ),
         }}
       />
       <Tabs.Screen
-        name="group"
+        name="community"
         options={{
-          tabBarLabel: 'Group',
+          tabBarLabel: 'community',
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="account-group" size={24} color={color} />
-          ),
+          <MaterialCommunityIcons name="account-group" size={24} color="black" />          ),
         }}
       />
       <Tabs.Screen
@@ -55,8 +54,7 @@ export default function Tablayout() {
         options={{
           tabBarLabel: 'Profile',
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="account" size={24} color={color} />
-          ),
+          <FontAwesome6 name="user-gear" size={24} color="black" />          ),
         }}
       />
     </Tabs>
@@ -73,15 +71,5 @@ const styles = StyleSheet.create({
     borderColor: '#e2e2e2',
     position: 'relative',
   },
-  chatButton: {
-    position: 'absolute',
-    bottom: 10,
-    width: 60,
-    height: 60,
-    borderRadius: 35,
-    backgroundColor: 'purple',
-    justifyContent: 'center',
-    alignItems: 'center',
-    zIndex: 1,
-  },
+  
 });
