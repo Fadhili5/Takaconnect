@@ -46,7 +46,7 @@ export default function HomeScreen() {
 
         <View style={tw`mt-2`}>
           <View style={tw`flex-row flex-wrap justify-between`}>
-            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('')}>
+            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('neighbourhood/page')}>
               <Card icon="users" title="My Neighbourhood " description="Development trends" />
               {/* <FontAwesome5 name="users" size={24} color="black" /> */}
             </TouchableOpacity>
@@ -77,11 +77,35 @@ export default function HomeScreen() {
             <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('emergencyContacts/page')}>
               <Card icon="phone" title="Emergency Contacts" description="List of emergency contacts" />
             </TouchableOpacity>
-            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('urbantips/page')}>
-              <Card icon="drafting-compass" title="Urban Planning tips" description="Guidance on city planning and infrastructure" />
-            </TouchableOpacity>
           </View>
         </View>
+
+
+        <View style={[tw`bg-white -mt-7 px-2`, { borderRadius: 30 }]}>
+        <View style={tw`p-6 rounded-2xl border border-purple-700 mt-4`}>
+          <View style={tw`flex-row items-center`}>
+            <FontAwesome5 name="exclamation-circle" size={48} color="#6b21a8" />
+            <View style={tw`ml-4`}>
+              <Text style={[tw`text-black text-lg mt-1`, { fontFamily: 'outfit-bold' }]}>Planning Services</Text>
+              <Text style={[tw`text-gray-600`, { fontFamily: 'outfit' }]}>Get statistical data about Green Cover</Text>
+              <TouchableOpacity onPress={() => navigateTo('green/page')}>
+                <Text style={[tw`text-purple-700 mt-2`, { fontFamily: 'outfit-medium' }]}>Access Now &gt;&gt;</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+        </View>
+
+        <View style={tw`mt-2`}>
+          <View style={tw`flex-row flex-wrap justify-between`}>
+            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('green/page')}>
+              <Card icon="users" title="Green Cover " description="Development trends" />
+            </TouchableOpacity>
+ 
+
+        </View>
+        </View>
+
       </View>
     </ScrollView>
   );

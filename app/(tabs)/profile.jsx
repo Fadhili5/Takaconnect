@@ -11,7 +11,8 @@ import tw from 'tailwind-react-native-classnames';
 import * as ImagePicker from "expo-image-picker";
 // import * as FileSystem from "expo-file-system";
 // import AsyncStorage from "@react-native-async-storage/async-storage";
-import { router } from "expo-router";
+// import { router } from "expo-router";
+import { useRouter } from 'expo-router';
 
 export default function ProfileScreen() {
   // const { user, loading } = useUser();
@@ -23,6 +24,11 @@ export default function ProfileScreen() {
     "outfit-bold": require("../../assets/fonts/Outfit-Bold.ttf"),
     "outfit-medium": require("../../assets/fonts/Outfit-Medium.ttf"),
   });
+  const router = useRouter();
+  
+  const navigateTo = (path) => {
+    router.push(path);
+  };
 
   if (!fontsLoaded) {
     return null;
@@ -32,7 +38,7 @@ export default function ProfileScreen() {
     <ScrollView>
       <StatusBar barStyle="dark-content" backgroundColor="#6B21A8" />
       <View style={tw`flex-row items-center py-8 justify-center bg-purple-800 mt-8 mb-4`}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
+        <TouchableOpacity  onPress={() => router.back()}>
           <Ionicons name="arrow-back-circle-outline" size={24} color="white" />
         </TouchableOpacity>
         <Text style={[tw`text-white text-2xl ml-4`, { fontFamily: 'outfit-bold' }]}>Profile</Text>
