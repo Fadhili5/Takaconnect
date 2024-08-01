@@ -45,6 +45,9 @@ export default function HomeScreen() {
 
         <View style={tw`mt-2`}>
           <View style={tw`flex-row flex-wrap justify-between`}>
+            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('')}>
+              <Card icon="ambulance" title="My Neighbourhood " description="Development trends" />
+            </TouchableOpacity>
             <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('ambulance/page')}>
               <Card icon="ambulance" title="Call Ambulance" description="Get medical help fast" />
             </TouchableOpacity>
