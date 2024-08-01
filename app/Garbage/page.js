@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, ScrollView, TouchableOpacity, Modal, StyleSheet } from 'react-native';
+import { View, Text, ScrollView, Image, TouchableOpacity, Modal, Linking, StyleSheet } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import * as Location from 'expo-location';
 import axios from 'axios';
-import tw from 'tailwind-react-native-classnames';
+import tw from 'twrnc';
 import { FontAwesome5 } from '@expo/vector-icons';
 
-const GarbageCollectionScreen = () => {
+const MapScreen = () => {
   const [region, setRegion] = useState(null);
-  const [collectors, setCollectors] = useState([]);
-  const [selectedCollector, setSelectedCollector] = useState(null);
+  const [hospitals, setHospitals] = useState([]);
+  const [selectedHospital, setSelectedHospital] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
+  // const API_KEY = AIzaSyCMrRQNL4Aan8e0SWx0hPusAWHpIHzcVXU
 
   useEffect(() => {
     (async () => {
@@ -26,29 +27,29 @@ const GarbageCollectionScreen = () => {
         latitudeDelta: 0.0922,
         longitudeDelta: 0.0421,
       });
-      fetchGarbageCollectors(location.coords.latitude, location.coords.longitude);
+      fetchHospitals(location.coords.latitude, location.coords.longitude);
     })();
   }, []);
 
-  const fetchGarbageCollectors = async (latitude, longitude) => {
-    // Mock data for garbage collectors
-    const data = [
-      { id: 1, name: 'Garbage Collector 1', location: { lat: latitude + 0.01, lng: longitude + 0.01 }, vicinity: '2 km away' },
-      { id: 2, name: 'Garbage Collector 2', location: { lat: latitude + 0.02, lng: longitude + 0.02 }, vicinity: '3 km away' },
-      { id: 3, name: 'Garbage Collector 3', location: { lat: latitude + 0.03, lng: longitude + 0.03 }, vicinity: '5 km away' },
-    ];
-    setCollectors(data);
+  const fetchHospitals = async (latitude, longitude) => {
+    const API_KEY = 'AIzaSyCMrRQNL4Aan8e0SWx0hPusAWHpIHzcVXU'; // Replace with your Google API Key
+    const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=5000&type=hospital&key=${API_KEY}`;
+    try {
+      const response = await axios.get(url);
+      setHospitals(response.data.results);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const handleCollectorPress = (collector) => {
-    setSelectedCollector(collector);
+  const handleHospitalPress = (hospital) => {
+    setSelectedHospital(hospital);
     setModalVisible(true);
   };
 
-  const handleCallPress = () => {
-    // This is a placeholder; adjust with actual phone numbers if available
-    const phoneNumber = selectedCollector?.phone || '1234567890';
-    Linking.openURL(`tel:${phoneNumber}`);
+  const handleBookUberPress = () => {
+    const uberLink = `https://m.uber.com/ul/?action=setPickup&client_id=YOUR_UBER_CLIENT_ID&pickup=my_location&dropoff[latitude]=${selectedHospital.geometry.location.lat}&dropoff[longitude]=${selectedHospital.geometry.location.lng}&dropoff[nickname]=${selectedHospital.name}`;
+    Linking.openURL(uberLink);
   };
 
   return (
@@ -56,61 +57,89 @@ const GarbageCollectionScreen = () => {
       <View style={tw`h-1/2`}>
         {region ? (
           <MapView style={tw`flex-1`} region={region}>
-            {collectors.map((collector, index) => (
+            {hospitals.map((hospital, index) => (
               <Marker
                 key={index}
                 coordinate={{
-                  latitude: collector.location.lat,
-                  longitude: collector.location.lng,
+                  latitude: hospital.geometry.location.lat,
+                  longitude: hospital.geometry.location.lng,
                 }}
-                title={collector.name}
-                description={collector.vicinity}
-                pinColor="blue"
+                title={hospital.name}
+                description={hospital.vicinity}
+                pinColor="red"
               />
             ))}
           </MapView>
         ) : (
           <View style={tw`flex-1 justify-center items-center`}>
-            <Text style={tw`text-lg font-semibold`}>Loading maps...</Text>
+            <Text style={tw`text-lg font-semibold`}>Loading Nishauri maps...</Text>
           </View>
         )}
       </View>
       <View style={tw`h-1/2 bg-gray-100 p-4`}>
-        <Text style={tw`text-xl font-bold mb-4`}>Nearby Garbage Collectors</Text>
+        <Text style={tw`text-xl font-bold mb-4`}>Nearby Hospitals</Text>
         <ScrollView>
-          {collectors.map((collector, index) => (
+          {hospitals.map((hospital, index) => (
             <TouchableOpacity
               key={index}
               style={tw`flex-row items-center mb-4 bg-white p-4 rounded-lg shadow-md`}
-              onPress={() => handleCollectorPress(collector)}
+              onPress={() => handleHospitalPress(hospital)}
             >
+              {/* <Image
+                source={{ uri: hospital.photos ? `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${hospital.photos[0].photo_reference}&key=${API_KEY}` : 'https://via.placeholder.com/50' }}
+                style={tw`w-12 h-12 rounded-full mr-4`}
+              /> */}
               <View>
-                <Text style={tw`text-lg font-semibold`}>{collector.name}</Text>
-                <Text style={tw`text-sm text-gray-600`}>{collector.vicinity}</Text>
+                <Text style={tw`text-lg font-semibold`}>{hospital.name}</Text>
+                <Text style={tw`text-sm text-gray-600`}>{hospital.vicinity}</Text>
               </View>
             </TouchableOpacity>
           ))}
         </ScrollView>
       </View>
 
-      {/* Collector Details Modal */}
+      {/* Hospital Details Modal */}
       <Modal visible={modalVisible} animationType="slide">
-        <View style={styles.modalContainer}>
-          <View style={styles.modalContent}>
-            <Text style={styles.title}>{selectedCollector?.name}</Text>
-            <Text style={styles.info}>Location: {selectedCollector?.vicinity}</Text>
-            <TouchableOpacity style={styles.button} onPress={handleCallPress}>
-              <View style={styles.buttonContent}>
-                <FontAwesome5 name="phone" size={18} color="white" />
-                <Text style={styles.buttonText}>Call Now</Text>
-              </View>
-            </TouchableOpacity>
-          </View>
-          <TouchableOpacity style={styles.closeButton} onPress={() => setModalVisible(false)}>
-            <Text style={styles.closeButtonText}>Close</Text>
+      <View style={styles.modalContainer}>
+        <View style={styles.modalContent}>
+          <Text style={styles.title}>{selectedHospital?.name}</Text>
+          <Text style={styles.info}>Address: {selectedHospital?.vicinity}</Text>
+          <Text style={styles.info}>Rating: {selectedHospital?.rating}</Text>
+          <Text style={styles.info}>
+            Open Now: {selectedHospital?.opening_hours?.open_now ? 'Yes' : 'No'}
+          </Text>
+          {selectedHospital?.opening_hours?.weekday_text && (
+            <>
+              <Text style={styles.subtitle}>Opening Hours:</Text>
+              {selectedHospital.opening_hours.weekday_text.map((hours, idx) => (
+                <Text key={idx} style={styles.info}>
+                  {hours}
+                </Text>
+              ))}
+            </>
+          )}
+          {selectedHospital?.types && (
+            <>
+              <Text style={styles.subtitle}>Specialities:</Text>
+              {selectedHospital.types.map((type, idx) => (
+                <Text key={idx} style={styles.info}>
+                  {type.replace('_', ' ')}
+                </Text>
+              ))}
+            </>
+          )}
+          <TouchableOpacity style={styles.button} onPress={handleBookUberPress}>
+            <View style={styles.buttonContent}>
+              <FontAwesome5 name="uber" size={18} color="white" />
+              <Text style={styles.buttonText}>Book Uber</Text>
+            </View>
           </TouchableOpacity>
         </View>
-      </Modal>
+        <TouchableOpacity style={styles.closeButton} onPress={() => setModalVisible(false)}>
+          <Text style={styles.closeButtonText}>Close</Text>
+        </TouchableOpacity>
+      </View>
+    </Modal>
     </View>
   );
 };
@@ -134,14 +163,19 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 10,
-    color: '#6b21a8', // purple color
   },
   info: {
     fontSize: 16,
     marginBottom: 5,
   },
+  subtitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginTop: 10,
+    marginBottom: 5,
+  },
   button: {
-    backgroundColor: '#6b21a8', // purple color
+    backgroundColor: 'blue',
     borderRadius: 20,
     padding: 12,
     alignItems: 'center',
@@ -171,4 +205,5 @@ const styles = StyleSheet.create({
   },
 });
 
-export default GarbageCollectionScreen;
+
+export default MapScreen;
