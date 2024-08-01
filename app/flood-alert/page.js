@@ -67,6 +67,7 @@ const FloodAlertsScreen = () => {
 
       {/* Alert List */}
       <ScrollView contentContainerStyle={tw`p-4`}>
+        <Text style={[tw`mb-3`, { fontFamily: 'outfit-bold' }]}>These results are from Red cross and the are updated every second</Text>
         <FlatList
           data={alerts}
           keyExtractor={(item) => item.id}
