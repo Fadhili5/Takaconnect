@@ -20,6 +20,22 @@ const ReportIncidentScreen = () => {
     router.back();
   };
 
+  const handleVoiceInput = () => {
+    Alert.alert('Info', 'Voice input feature is under development');
+  };
+
+  const handleAIInput = () => {
+    Alert.alert('Info', 'AI input feature is under development');
+  };
+
+  const incidentTypes = [
+    'Emergency',
+    'Abuse',
+    'Theft',
+    'Vandalism',
+    'Accident',
+  ];
+
   return (
     <View style={tw`flex-1 bg-white`}>
       {/* Header */}
@@ -34,6 +50,19 @@ const ReportIncidentScreen = () => {
 
       {/* Incident Form */}
       <ScrollView contentContainerStyle={tw`p-4`}>
+        <Text style={tw`text-lg font-bold mb-2`}>Select Incident Type</Text>
+        <View style={tw`flex-row flex-wrap mb-4`}>
+          {incidentTypes.map((type) => (
+            <TouchableOpacity
+              key={type}
+              style={[styles.card, incident === type && styles.selectedCard]}
+              onPress={() => setIncident(type)}
+            >
+              <Text style={tw`text-center`}>{type}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+
         <View style={tw`mb-4`}>
           <Text style={tw`text-lg font-bold mb-2`}>Incident Type</Text>
           <TextInput
@@ -55,6 +84,17 @@ const ReportIncidentScreen = () => {
           />
         </View>
 
+        <View style={tw`flex-row justify-between mb-6`}>
+          <TouchableOpacity style={styles.iconButton} onPress={handleVoiceInput}>
+            <FontAwesome5 name="microphone" size={24} color="white" />
+            <Text style={styles.iconButtonText}>Voice Input</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.iconButton} onPress={handleAIInput}>
+            <FontAwesome5 name="robot" size={24} color="white" />
+            <Text style={styles.iconButtonText}>Use AI</Text>
+          </TouchableOpacity>
+        </View>
+
         <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
           <Text style={styles.submitButtonText}>Submit Report</Text>
         </TouchableOpacity>
@@ -64,12 +104,39 @@ const ReportIncidentScreen = () => {
 };
 
 const styles = StyleSheet.create({
+  card: {
+    backgroundColor: '#f1f1f1',
+    padding: 10,
+    borderRadius: 8,
+    margin: 4,
+    minWidth: '30%',
+    alignItems: 'center',
+  },
+  selectedCard: {
+    backgroundColor: '#6b21a8',
+  },
   input: {
     borderWidth: 1,
     borderColor: '#d1d5db',
     borderRadius: 8,
     padding: 12,
     backgroundColor: '#f9f9f9',
+  },
+  iconButton: {
+    backgroundColor: '#6b21a8',
+    paddingVertical: 14,
+    paddingHorizontal: 10,
+    borderRadius: 8,
+    alignItems: 'center',
+    width: '48%',
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  iconButtonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginLeft: 8,
   },
   submitButton: {
     backgroundColor: '#6b21a8',

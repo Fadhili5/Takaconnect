@@ -77,6 +77,9 @@ export default function HomeScreen() {
             <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('emergencyContacts/page')}>
               <Card icon="phone" title="Emergency Contacts" description="List of emergency contacts" />
             </TouchableOpacity>
+            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('urbantips/page')}>
+              <Card icon="drafting-compass" title="Urban Planning tips" description="Guidance on city planning and infrastructure" />
+            </TouchableOpacity>
           </View>
         </View>
       </View>

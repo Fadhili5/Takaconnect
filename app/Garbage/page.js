@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, ScrollView, Image, TouchableOpacity, Modal, Linking, StyleSheet } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, StyleSheet, Animated, Easing, ActivityIndicator } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import * as Location from 'expo-location';
-import axios from 'axios';
 import tw from 'twrnc';
 import { FontAwesome5 } from '@expo/vector-icons';
 
 const MapScreen = () => {
   const [region, setRegion] = useState(null);
-  const [hospitals, setHospitals] = useState([]);
-  const [selectedHospital, setSelectedHospital] = useState(null);
-  const [modalVisible, setModalVisible] = useState(false);
-  // const API_KEY = AIzaSyCMrRQNL4Aan8e0SWx0hPusAWHpIHzcVXU
+  const [garbageCollectors, setGarbageCollectors] = useState([]);
+  const [selectedCollector, setSelectedCollector] = useState(null);
+  const [drawerVisible, setDrawerVisible] = useState(false);
+  const [connecting, setConnecting] = useState(false);
+  const drawerAnimation = new Animated.Value(-400);
 
   useEffect(() => {
     (async () => {
@@ -27,137 +27,142 @@ const MapScreen = () => {
         latitudeDelta: 0.0922,
         longitudeDelta: 0.0421,
       });
-      fetchHospitals(location.coords.latitude, location.coords.longitude);
+      generateRandomGarbageCollectors(location.coords.latitude, location.coords.longitude);
     })();
   }, []);
 
-  const fetchHospitals = async (latitude, longitude) => {
-    const API_KEY = 'AIzaSyCMrRQNL4Aan8e0SWx0hPusAWHpIHzcVXU'; // Replace with your Google API Key
-    const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=5000&type=hospital&key=${API_KEY}`;
-    try {
-      const response = await axios.get(url);
-      setHospitals(response.data.results);
-    } catch (error) {
-      console.log(error);
+  const generateRandomGarbageCollectors = (latitude, longitude) => {
+    const names = ["TAKATAKA SOLUTIONS", "Kibera Waste Recycle", "BioHarzard Waste Solutions"];
+    const collectors = [];
+    for (let i = 0; i < 3; i++) {
+      collectors.push({
+        id: i,
+        name: names[i],
+        location: {
+          latitude: latitude + (Math.random() - 0.5) * 0.02,
+          longitude: longitude + (Math.random() - 0.5) * 0.02,
+        },
+      });
     }
+    setGarbageCollectors(collectors);
   };
 
-  const handleHospitalPress = (hospital) => {
-    setSelectedHospital(hospital);
-    setModalVisible(true);
+  const handleCollectorPress = (collector) => {
+    setSelectedCollector(collector);
+    setDrawerVisible(true);
+    Animated.timing(drawerAnimation, {
+      toValue: 0,
+      duration: 300,
+      easing: Easing.inOut(Easing.ease),
+      useNativeDriver: false,
+    }).start();
   };
 
-  const handleBookUberPress = () => {
-    const uberLink = `https://m.uber.com/ul/?action=setPickup&client_id=YOUR_UBER_CLIENT_ID&pickup=my_location&dropoff[latitude]=${selectedHospital.geometry.location.lat}&dropoff[longitude]=${selectedHospital.geometry.location.lng}&dropoff[nickname]=${selectedHospital.name}`;
-    Linking.openURL(uberLink);
+  const handleConnectPress = () => {
+    setConnecting(true);
+    setTimeout(() => {
+      setConnecting(false);
+      alert('Connected to the collector successfully!');
+    }, 2000);
+  };
+
+  const closeDrawer = () => {
+    Animated.timing(drawerAnimation, {
+      toValue: -400,
+      duration: 300,
+      easing: Easing.inOut(Easing.ease),
+      useNativeDriver: false,
+    }).start(() => {
+      setDrawerVisible(false);
+    });
   };
 
   return (
     <View style={tw`flex-1 bg-white`}>
+      <View style={tw`bg-purple-800 p-4 mt-8`}>
+        <Text style={tw`text-white text-xl font-bold`}>Earn from Your Waste</Text>
+        <Text style={tw`text-white`}>Connect with local garbage collectors and get paid for your trash.</Text>
+      </View>
       <View style={tw`h-1/2`}>
         {region ? (
           <MapView style={tw`flex-1`} region={region}>
-            {hospitals.map((hospital, index) => (
+            {garbageCollectors.map((collector, index) => (
               <Marker
                 key={index}
                 coordinate={{
-                  latitude: hospital.geometry.location.lat,
-                  longitude: hospital.geometry.location.lng,
+                  latitude: collector.location.latitude,
+                  longitude: collector.location.longitude,
                 }}
-                title={hospital.name}
-                description={hospital.vicinity}
+                title={collector.name}
                 pinColor="red"
+                onPress={() => handleCollectorPress(collector)}
               />
             ))}
           </MapView>
         ) : (
           <View style={tw`flex-1 justify-center items-center`}>
-            <Text style={tw`text-lg font-semibold`}>Loading Nishauri maps...</Text>
+            <Text style={tw`text-lg font-semibold`}>Loading maps...</Text>
           </View>
         )}
       </View>
       <View style={tw`h-1/2 bg-gray-100 p-4`}>
-        <Text style={tw`text-xl font-bold mb-4`}>Nearby Hospitals</Text>
+        <Text style={tw`text-xl font-bold mb-4`}>Nearby Garbage Collectors</Text>
         <ScrollView>
-          {hospitals.map((hospital, index) => (
+          {garbageCollectors.map((collector, index) => (
             <TouchableOpacity
               key={index}
               style={tw`flex-row items-center mb-4 bg-white p-4 rounded-lg shadow-md`}
-              onPress={() => handleHospitalPress(hospital)}
+              onPress={() => handleCollectorPress(collector)}
             >
-              {/* <Image
-                source={{ uri: hospital.photos ? `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${hospital.photos[0].photo_reference}&key=${API_KEY}` : 'https://via.placeholder.com/50' }}
-                style={tw`w-12 h-12 rounded-full mr-4`}
-              /> */}
               <View>
-                <Text style={tw`text-lg font-semibold`}>{hospital.name}</Text>
-                <Text style={tw`text-sm text-gray-600`}>{hospital.vicinity}</Text>
+                <Text style={tw`text-lg font-semibold`}>{collector.name}</Text>
+                <Text style={tw`text-sm text-gray-600`}>Location: {collector.location.latitude.toFixed(4)}, {collector.location.longitude.toFixed(4)}</Text>
               </View>
             </TouchableOpacity>
           ))}
         </ScrollView>
       </View>
 
-      {/* Hospital Details Modal */}
-      <Modal visible={modalVisible} animationType="slide">
-      <View style={styles.modalContainer}>
-        <View style={styles.modalContent}>
-          <Text style={styles.title}>{selectedHospital?.name}</Text>
-          <Text style={styles.info}>Address: {selectedHospital?.vicinity}</Text>
-          <Text style={styles.info}>Rating: {selectedHospital?.rating}</Text>
-          <Text style={styles.info}>
-            Open Now: {selectedHospital?.opening_hours?.open_now ? 'Yes' : 'No'}
-          </Text>
-          {selectedHospital?.opening_hours?.weekday_text && (
-            <>
-              <Text style={styles.subtitle}>Opening Hours:</Text>
-              {selectedHospital.opening_hours.weekday_text.map((hours, idx) => (
-                <Text key={idx} style={styles.info}>
-                  {hours}
-                </Text>
-              ))}
-            </>
-          )}
-          {selectedHospital?.types && (
-            <>
-              <Text style={styles.subtitle}>Specialities:</Text>
-              {selectedHospital.types.map((type, idx) => (
-                <Text key={idx} style={styles.info}>
-                  {type.replace('_', ' ')}
-                </Text>
-              ))}
-            </>
-          )}
-          <TouchableOpacity style={styles.button} onPress={handleBookUberPress}>
-            <View style={styles.buttonContent}>
-              <FontAwesome5 name="uber" size={18} color="white" />
-              <Text style={styles.buttonText}>Book Uber</Text>
-            </View>
-          </TouchableOpacity>
-        </View>
-        <TouchableOpacity style={styles.closeButton} onPress={() => setModalVisible(false)}>
-          <Text style={styles.closeButtonText}>Close</Text>
-        </TouchableOpacity>
-      </View>
-    </Modal>
+      {/* Garbage Collector Details Drawer */}
+      {drawerVisible && (
+        <Animated.View style={[styles.drawer, { bottom: drawerAnimation }]}>
+          <View style={styles.drawerContent}>
+            <Text style={styles.title}>{selectedCollector?.name}</Text>
+            <Text style={styles.info}>Location: {selectedCollector?.location.latitude.toFixed(4)}, {selectedCollector?.location.longitude.toFixed(4)}</Text>
+            <TouchableOpacity style={styles.button} onPress={handleConnectPress} disabled={connecting}>
+              <View style={styles.buttonContent}>
+                {connecting ? (
+                  <ActivityIndicator size="small" color="white" />
+                ) : (
+                  <>
+                    <FontAwesome5 name="recycle" size={18} color="white" />
+                    <Text style={styles.buttonText}>Connect to Collector</Text>
+                  </>
+                )}
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.closeButton} onPress={closeDrawer}>
+              <Text style={styles.closeButtonText}>Close</Text>
+            </TouchableOpacity>
+          </View>
+        </Animated.View>
+      )}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  modalContainer: {
-    flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  modalContent: {
+  drawer: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
     backgroundColor: 'white',
-    borderRadius: 10,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
     padding: 20,
-    width: '90%',
-    maxHeight: '80%',
-    overflow: 'hidden',
+  },
+  drawerContent: {
+    alignItems: 'center',
   },
   title: {
     fontSize: 24,
@@ -168,14 +173,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginBottom: 5,
   },
-  subtitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginTop: 10,
-    marginBottom: 5,
-  },
   button: {
-    backgroundColor: 'blue',
+    backgroundColor: 'green',
     borderRadius: 20,
     padding: 12,
     alignItems: 'center',
@@ -195,7 +194,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FF5252',
     borderRadius: 20,
     padding: 12,
-    alignSelf: 'flex-end',
+    alignSelf: 'center',
     marginTop: 10,
   },
   closeButtonText: {
@@ -204,6 +203,5 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
-
 
 export default MapScreen;
