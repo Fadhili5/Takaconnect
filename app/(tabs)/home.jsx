@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, ScrollView, TouchableOpacity, Image } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
+
 import tw from "tailwind-react-native-classnames";
 import { useRouter } from 'expo-router';
 
@@ -46,7 +47,8 @@ export default function HomeScreen() {
         <View style={tw`mt-2`}>
           <View style={tw`flex-row flex-wrap justify-between`}>
             <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('')}>
-              <Card icon="ambulance" title="My Neighbourhood " description="Development trends" />
+              <Card icon="users" title="My Neighbourhood " description="Development trends" />
+              {/* <FontAwesome5 name="users" size={24} color="black" /> */}
             </TouchableOpacity>
             <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('ambulance/page')}>
               <Card icon="ambulance" title="Call Ambulance" description="Get medical help fast" />
