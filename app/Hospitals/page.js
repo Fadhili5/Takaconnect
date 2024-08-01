@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, ScrollView, TouchableOpacity, Modal, Linking, StyleSheet } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, StyleSheet, Animated, Easing, ActivityIndicator, Linking } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import * as Location from 'expo-location';
-import axios from 'axios';
-import tw from 'tailwind-react-native-classnames';
+import tw from 'twrnc';
 import { FontAwesome5 } from '@expo/vector-icons';
 
 const MapScreen = () => {
   const [region, setRegion] = useState(null);
-  const [data, setData] = useState([]);
-  const [selectedItem, setSelectedItem] = useState(null);
-  const [modalVisible, setModalVisible] = useState(false);
-  const [activeTab, setActiveTab] = useState('hospitals'); // default tab
+  const [garbageCollectors, setGarbageCollectors] = useState([]);
+  const [selectedCollector, setSelectedCollector] = useState(null);
+  const [drawerVisible, setDrawerVisible] = useState(false);
+  const [connecting, setConnecting] = useState(false);
+  const drawerAnimation = new Animated.Value(-400);
 
   useEffect(() => {
     (async () => {
@@ -27,43 +27,67 @@ const MapScreen = () => {
         latitudeDelta: 0.0922,
         longitudeDelta: 0.0421,
       });
-      if (activeTab === 'hospitals') {
-        fetchHospitals(location.coords.latitude, location.coords.longitude);
-      } else {
-        fetchGarbageCollectors(location.coords.latitude, location.coords.longitude);
-      }
+      generateRandomGarbageCollectors(location.coords.latitude, location.coords.longitude);
     })();
-  }, [activeTab]);
+  }, []);
 
-  const fetchHospitals = async (latitude, longitude) => {
-    const API_KEY = 'YOUR_GOOGLE_API_KEY'; // Replace with your Google API Key
-    const url = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=5000&type=hospital&key=${API_KEY}`;
-    try {
-      const response = await axios.get(url);
-      setData(response.data.results);
-    } catch (error) {
-      console.log(error);
+  const generateRandomGarbageCollectors = (latitude, longitude) => {
+    const names = ["Menelik Medical Centre", "The Kilimani Hospital", "Nairobi Womens Hospital", "Garden Specialist Hospital", "Kilimani Childrens Clinic"];
+    const collectors = [];
+    for (let i = 0; i < 3; i++) {
+      collectors.push({
+        id: i,
+        name: names[i],
+        location: {
+          latitude: latitude + (Math.random() - 0.5) * 0.02,
+          longitude: longitude + (Math.random() - 0.5) * 0.02,
+        },
+      });
+    }
+    setGarbageCollectors(collectors);
+  };
+
+  const handleCollectorPress = (collector) => {
+    setSelectedCollector(collector);
+    setDrawerVisible(true);
+    Animated.timing(drawerAnimation, {
+      toValue: 0,
+      duration: 300,
+      easing: Easing.inOut(Easing.ease),
+      useNativeDriver: false,
+    }).start();
+  };
+
+  const handleConnectPress = () => {
+    setConnecting(true);
+    setTimeout(() => {
+      setConnecting(false);
+      alert('Connected to the collector successfully!');
+    }, 2000);
+  };
+
+  const openUberApp = () => {
+    if (region) {
+      const url = `uber://?action=setPickup&pickup=my_location&dropoff[latitude]=${selectedCollector?.location.latitude}&dropoff[longitude]=${selectedCollector?.location.longitude}`;
+      Linking.canOpenURL(url).then(supported => {
+        if (supported) {
+          Linking.openURL(url);
+        } else {
+          alert('Uber app is not installed.');
+        }
+      });
     }
   };
 
-  const fetchGarbageCollectors = async (latitude, longitude) => {
-    // Mock data for garbage collectors
-    const data = [
-      { id: 1, name: 'Garbage Collector 1', location: { lat: latitude + 0.01, lng: longitude + 0.01 }, vicinity: '2 km away' },
-      { id: 2, name: 'Garbage Collector 2', location: { lat: latitude + 0.02, lng: longitude + 0.02 }, vicinity: '3 km away' },
-      { id: 3, name: 'Garbage Collector 3', location: { lat: latitude + 0.03, lng: longitude + 0.03 }, vicinity: '5 km away' },
-    ];
-    setData(data);
-  };
-
-  const handleItemPress = (item) => {
-    setSelectedItem(item);
-    setModalVisible(true);
-  };
-
-  const handleBookUberPress = () => {
-    const uberLink = `https://m.uber.com/ul/?action=setPickup&client_id=YOUR_UBER_CLIENT_ID&pickup=my_location&dropoff[latitude]=${selectedItem.geometry.location.lat}&dropoff[longitude]=${selectedItem.geometry.location.lng}&dropoff[nickname]=${selectedItem.name}`;
-    Linking.openURL(uberLink);
+  const closeDrawer = () => {
+    Animated.timing(drawerAnimation, {
+      toValue: -400,
+      duration: 300,
+      easing: Easing.inOut(Easing.ease),
+      useNativeDriver: false,
+    }).start(() => {
+      setDrawerVisible(false);
+    });
   };
 
   return (
@@ -71,16 +95,16 @@ const MapScreen = () => {
       <View style={tw`h-1/2`}>
         {region ? (
           <MapView style={tw`flex-1`} region={region}>
-            {data.map((item, index) => (
+            {garbageCollectors.map((collector, index) => (
               <Marker
                 key={index}
                 coordinate={{
-                  latitude: item.geometry ? item.geometry.location.lat : item.location.lat,
-                  longitude: item.geometry ? item.geometry.location.lng : item.location.lng,
+                  latitude: collector.location.latitude,
+                  longitude: collector.location.longitude,
                 }}
-                title={item.name}
-                description={item.vicinity}
+                title={collector.name}
                 pinColor="red"
+                onPress={() => handleCollectorPress(collector)}
               />
             ))}
           </MapView>
@@ -91,112 +115,78 @@ const MapScreen = () => {
         )}
       </View>
       <View style={tw`h-1/2 bg-gray-100 p-4`}>
-        <View style={tw`flex-row justify-around`}>
-          <TouchableOpacity
-            style={[tw`p-4 rounded-full`, activeTab === 'hospitals' ? tw`bg-purple-800` : tw`bg-gray-300`]}
-            onPress={() => setActiveTab('hospitals')}
-          >
-            <Text style={tw`text-white font-semibold`}>Hospitals</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[tw`p-4 rounded-full`, activeTab === 'garbageCollectors' ? tw`bg-purple-800` : tw`bg-gray-300`]}
-            onPress={() => setActiveTab('garbageCollectors')}
-          >
-            <Text style={tw`text-white font-semibold`}>Garbage Collectors</Text>
-          </TouchableOpacity>
-        </View>
-        <ScrollView style={tw`mt-4`}>
-          {data.map((item, index) => (
+        <Text style={tw`text-xl font-bold mb-4`}>Nearby Garbage Collectors</Text>
+        <ScrollView>
+          {garbageCollectors.map((collector, index) => (
             <TouchableOpacity
               key={index}
               style={tw`flex-row items-center mb-4 bg-white p-4 rounded-lg shadow-md`}
-              onPress={() => handleItemPress(item)}
+              onPress={() => handleCollectorPress(collector)}
             >
               <View>
-                <Text style={tw`text-lg font-semibold`}>{item.name}</Text>
-                <Text style={tw`text-sm text-gray-600`}>{item.vicinity}</Text>
+                <Text style={tw`text-lg font-semibold`}>{collector.name}</Text>
+                <Text style={tw`text-sm text-gray-600`}>Location: {collector.location.latitude.toFixed(4)}, {collector.location.longitude.toFixed(4)}</Text>
               </View>
             </TouchableOpacity>
           ))}
         </ScrollView>
       </View>
 
-      {/* Details Modal */}
-      <Modal visible={modalVisible} animationType="slide">
-        <View style={styles.modalContainer}>
-          <View style={styles.modalContent}>
-            <Text style={styles.title}>{selectedItem?.name}</Text>
-            <Text style={styles.info}>Address: {selectedItem?.vicinity}</Text>
-            {selectedItem?.rating && <Text style={styles.info}>Rating: {selectedItem?.rating}</Text>}
-            {selectedItem?.opening_hours?.weekday_text && (
-              <>
-                <Text style={styles.subtitle}>Opening Hours:</Text>
-                {selectedItem.opening_hours.weekday_text.map((hours, idx) => (
-                  <Text key={idx} style={styles.info}>
-                    {hours}
-                  </Text>
-                ))}
-              </>
-            )}
-            {selectedItem?.types && (
-              <>
-                <Text style={styles.subtitle}>Specialities:</Text>
-                {selectedItem.types.map((type, idx) => (
-                  <Text key={idx} style={styles.info}>
-                    {type.replace('_', ' ')}
-                  </Text>
-                ))}
-              </>
-            )}
-            <TouchableOpacity style={styles.button} onPress={handleBookUberPress}>
+      {/* Garbage Collector Details Drawer */}
+      {drawerVisible && (
+        <Animated.View style={[styles.drawer, { bottom: drawerAnimation }]}>
+          <View style={styles.drawerContent}>
+            <Text style={styles.title}>{selectedCollector?.name}</Text>
+            <Text style={styles.info}>Location: {selectedCollector?.location.latitude.toFixed(4)}, {selectedCollector?.location.longitude.toFixed(4)}</Text>
+            <TouchableOpacity style={styles.button} onPress={handleConnectPress} disabled={connecting}>
               <View style={styles.buttonContent}>
-                <FontAwesome5 name="uber" size={18} color="white" />
-                <Text style={styles.buttonText}>Book Uber</Text>
+                {connecting ? (
+                  <ActivityIndicator size="small" color="white" />
+                ) : (
+                  <>
+                    <FontAwesome5 name="phone" size={18} color="white" />
+                    <Text style={styles.buttonText}>Call</Text>
+                  </>
+                )}
               </View>
             </TouchableOpacity>
+            <TouchableOpacity style={styles.uberButton} onPress={openUberApp}>
+              <Text style={styles.uberButtonText}>Get Uber</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.closeButton} onPress={closeDrawer}>
+              <Text style={styles.closeButtonText}>Close</Text>
+            </TouchableOpacity>
           </View>
-          <TouchableOpacity style={styles.closeButton} onPress={() => setModalVisible(false)}>
-            <Text style={styles.closeButtonText}>Close</Text>
-          </TouchableOpacity>
-        </View>
-      </Modal>
+        </Animated.View>
+      )}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  modalContainer: {
-    flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  modalContent: {
+  drawer: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
     backgroundColor: 'white',
-    borderRadius: 10,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
     padding: 20,
-    width: '90%',
-    maxHeight: '80%',
-    overflow: 'hidden',
+  },
+  drawerContent: {
+    alignItems: 'center',
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 10,
-    color: '#6b21a8', // purple color
   },
   info: {
     fontSize: 16,
     marginBottom: 5,
   },
-  subtitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginTop: 10,
-    marginBottom: 5,
-  },
   button: {
-    backgroundColor: '#6b21a8', // purple color
+    backgroundColor: 'green',
     borderRadius: 20,
     padding: 12,
     alignItems: 'center',
@@ -216,12 +206,24 @@ const styles = StyleSheet.create({
     backgroundColor: '#FF5252',
     borderRadius: 20,
     padding: 12,
-    alignSelf: 'flex-end',
+    alignSelf: 'center',
     marginTop: 10,
   },
   closeButtonText: {
     color: 'white',
     fontSize: 16,
+    fontWeight: 'bold',
+  },
+  uberButton: {
+    backgroundColor: '#000000',
+    borderRadius: 20,
+    padding: 12,
+    alignItems: 'center',
+    marginTop: 10,
+  },
+  uberButtonText: {
+    color: 'white',
+    fontSize: 18,
     fontWeight: 'bold',
   },
 });

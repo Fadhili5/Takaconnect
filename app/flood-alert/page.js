@@ -1,132 +1,127 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, ScrollView, Modal, TouchableOpacity, StyleSheet, Linking } from 'react-native';
-import MapView, { Marker } from 'react-native-maps';
-import * as Location from 'expo-location';
-import axios from 'axios';
+import React, { useState, useEffect } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, ScrollView, FlatList, Animated, Easing } from 'react-native';
 import tw from 'twrnc';
 import { FontAwesome5 } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
 
-const FloodAlertScreen = () => {
-  const [region, setRegion] = useState(null);
-  const [floodAlerts, setFloodAlerts] = useState([]);
+const initialAlerts = [
+  // Sample data structure
+  { id: '1', title: 'Severe Flood Warning', description: 'Heavy rains expected to cause severe flooding. Evacuate low-lying areas.', details: 'More detailed information about the flood warning, including safety tips and affected areas.' },
+  { id: '2', title: 'Minor Flood Alert', description: 'Possible minor flooding in certain areas. Be cautious and stay updated.', details: 'Additional details on minor flooding and precautionary measures.' },
+  // Add more alerts as needed
+];
+
+const FloodAlertsScreen = () => {
+  const [alerts, setAlerts] = useState(initialAlerts);
   const [selectedAlert, setSelectedAlert] = useState(null);
-  const [modalVisible, setModalVisible] = useState(false);
+  const [drawerVisible, setDrawerVisible] = useState(false);
+  const drawerAnimation = new Animated.Value(-400);
+  const router = useRouter();
+
+  // Function to simulate fetching alerts from an API
+  const fetchAlerts = () => {
+    // Replace with real API call
+    setAlerts(initialAlerts);
+  };
 
   useEffect(() => {
-    (async () => {
-      let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== 'granted') {
-        console.log('Permission to access location was denied');
-        return;
-      }
-      let location = await Location.getCurrentPositionAsync({});
-      setRegion({
-        latitude: location.coords.latitude,
-        longitude: location.coords.longitude,
-        latitudeDelta: 0.0922,
-        longitudeDelta: 0.0421,
-      });
-      fetchFloodAlerts(location.coords.latitude, location.coords.longitude);
-    })();
+    fetchAlerts();
   }, []);
-
-  const fetchFloodAlerts = async (latitude, longitude) => {
-    const API_KEY = 'YOUR_API_KEY'; // Replace with your API key
-    const url = `https://example.com/flood-alerts?location=${latitude},${longitude}&radius=5000&key=${API_KEY}`;
-    try {
-      const response = await axios.get(url);
-      setFloodAlerts(response.data.results);
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   const handleAlertPress = (alert) => {
     setSelectedAlert(alert);
-    setModalVisible(true);
+    setDrawerVisible(true);
+    Animated.timing(drawerAnimation, {
+      toValue: 0,
+      duration: 300,
+      easing: Easing.inOut(Easing.ease),
+      useNativeDriver: false,
+    }).start();
+  };
+
+  const closeDrawer = () => {
+    Animated.timing(drawerAnimation, {
+      toValue: -400,
+      duration: 300,
+      easing: Easing.inOut(Easing.ease),
+      useNativeDriver: false,
+    }).start(() => {
+      setDrawerVisible(false);
+    });
   };
 
   return (
     <View style={tw`flex-1 bg-white`}>
-      <View style={tw`h-1/2`}>
-        {region ? (
-          <MapView style={tw`flex-1`} region={region}>
-            {floodAlerts.map((alert, index) => (
-              <Marker
-                key={index}
-                coordinate={{
-                  latitude: alert.latitude,
-                  longitude: alert.longitude,
-                }}
-                title={alert.title}
-                description={alert.description}
-                pinColor="blue"
-              />
-            ))}
-          </MapView>
-        ) : (
-          <View style={tw`flex-1 justify-center items-center`}>
-            <Text style={tw`text-lg font-semibold`}>Loading map...</Text>
-          </View>
-        )}
-      </View>
-      <View style={tw`h-1/2 bg-gray-100 p-4`}>
-        <Text style={tw`text-xl font-bold mb-4`}>Flood Alerts</Text>
-        <ScrollView>
-          {floodAlerts.map((alert, index) => (
-            <TouchableOpacity
-              key={index}
-              style={tw`flex-row items-center mb-4 bg-white p-4 rounded-lg shadow-md`}
-              onPress={() => handleAlertPress(alert)}
-            >
-              <View>
-                <Text style={tw`text-lg font-semibold`}>{alert.title}</Text>
-                <Text style={tw`text-sm text-gray-600`}>{alert.description}</Text>
-              </View>
-            </TouchableOpacity>
-          ))}
-        </ScrollView>
-      </View>
-
-      {/* Alert Details Modal */}
-      <Modal visible={modalVisible} animationType="slide">
-        <View style={styles.modalContainer}>
-          <View style={styles.modalContent}>
-            <Text style={styles.title}>{selectedAlert?.title}</Text>
-            <Text style={styles.info}>Description: {selectedAlert?.description}</Text>
-            <Text style={styles.info}>Location: {selectedAlert?.location}</Text>
-            <Text style={styles.info}>Severity: {selectedAlert?.severity}</Text>
-            <Text style={styles.info}>Date: {selectedAlert?.date}</Text>
-            <TouchableOpacity style={styles.button} onPress={() => Linking.openURL(selectedAlert?.moreInfoUrl)}>
-              <View style={styles.buttonContent}>
-                <FontAwesome5 name="info-circle" size={18} color="white" />
-                <Text style={styles.buttonText}>More Info</Text>
-              </View>
-            </TouchableOpacity>
-          </View>
-          <TouchableOpacity style={styles.closeButton} onPress={() => setModalVisible(false)}>
-            <Text style={styles.closeButtonText}>Close</Text>
+      {/* Header */}
+      <View style={tw`bg-blue-800 p-6 pb-12`}>
+        <View style={tw`flex-row items-center mt-10`}>
+          <TouchableOpacity onPress={() => router.back()}>
+            <FontAwesome5 name="arrow-left" size={24} color="white" />
+          </TouchableOpacity>
+          <Text style={[tw`text-white text-2xl ml-4`, { fontFamily: 'outfit-bold' }]}>Flood Alerts</Text>
+          <TouchableOpacity style={styles.refreshButton} onPress={fetchAlerts}>
+            <FontAwesome5 name="sync" size={24} color="white" />
           </TouchableOpacity>
         </View>
-      </Modal>
+      </View>
+
+      {/* Alert List */}
+      <ScrollView contentContainerStyle={tw`p-4`}>
+        <FlatList
+          data={alerts}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <TouchableOpacity key={item.id} style={styles.card} onPress={() => handleAlertPress(item)}>
+              <View style={styles.cardContent}>
+                <Text style={[tw`text-lg font-bold`, { fontFamily: 'outfit-bold' }]}>{item.title}</Text>
+                <Text style={[tw`text-sm`, { fontFamily: 'outfit' }]}>{item.description}</Text>
+              </View>
+            </TouchableOpacity>
+          )}
+        />
+      </ScrollView>
+
+      {/* Alert Details Drawer */}
+      {drawerVisible && (
+        <Animated.View style={[styles.drawer, { bottom: drawerAnimation }]}>
+          <View style={styles.drawerContent}>
+            <Text style={styles.title}>{selectedAlert?.title}</Text>
+            <Text style={styles.info}>{selectedAlert?.details}</Text>
+            <TouchableOpacity style={styles.closeButton} onPress={closeDrawer}>
+              <Text style={styles.closeButtonText}>Close</Text>
+            </TouchableOpacity>
+          </View>
+        </Animated.View>
+      )}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  modalContainer: {
-    flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  modalContent: {
-    backgroundColor: 'white',
-    borderRadius: 10,
-    padding: 20,
-    width: '90%',
-    maxHeight: '80%',
+  card: {
+    backgroundColor: '#f9f9f9',
+    borderRadius: 8,
     overflow: 'hidden',
+    marginBottom: 16,
+    shadowColor: '#000',
+    shadowOpacity: 0.1,
+    shadowRadius: 10,
+    elevation: 5,
+  },
+  cardContent: {
+    padding: 12,
+  },
+  drawer: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    backgroundColor: 'white',
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    padding: 20,
+  },
+  drawerContent: {
+    alignItems: 'center',
   },
   title: {
     fontSize: 24,
@@ -136,29 +131,13 @@ const styles = StyleSheet.create({
   info: {
     fontSize: 16,
     marginBottom: 5,
-  },
-  button: {
-    backgroundColor: 'blue',
-    borderRadius: 20,
-    padding: 12,
-    alignItems: 'center',
-    marginTop: 20,
-  },
-  buttonContent: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  buttonText: {
-    color: 'white',
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginLeft: 10,
+    textAlign: 'center',
   },
   closeButton: {
     backgroundColor: '#FF5252',
     borderRadius: 20,
     padding: 12,
-    alignSelf: 'flex-end',
+    alignSelf: 'center',
     marginTop: 10,
   },
   closeButtonText: {
@@ -166,6 +145,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
   },
+  refreshButton: {
+    marginLeft: 'auto',
+  },
 });
 
-export default FloodAlertScreen;
+export default FloodAlertsScreen;
