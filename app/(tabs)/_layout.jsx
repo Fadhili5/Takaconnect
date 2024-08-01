@@ -1,12 +1,21 @@
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import React, { useEffect } from 'react';
+import { StyleSheet } from 'react-native';
+import * as SplashScreen from 'expo-splash-screen';
 import { Tabs } from 'expo-router';
-import React from 'react';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { FontAwesome } from '@expo/vector-icons';
-import { MaterialIcons } from '@expo/vector-icons';
-import { FontAwesome6 } from '@expo/vector-icons';
+import { MaterialCommunityIcons, MaterialIcons, FontAwesome } from '@expo/vector-icons';
 
-export default function Tablayout() {
+SplashScreen.preventAutoHideAsync(); // Ensure splash screen is handled
+
+export default function Layout() {
+  useEffect(() => {
+    async function prepare() {
+      // Hide the splash screen after the preparation
+      await SplashScreen.hideAsync();
+    }
+
+    prepare();
+  }, []);
+
   return (
     <Tabs
       screenOptions={{
@@ -19,34 +28,26 @@ export default function Tablayout() {
         options={{
           tabBarLabel: 'Home',
           tabBarIcon: ({ color }) => (
-          <MaterialCommunityIcons name="home-circle-outline" size={30} color="black" />          
-        ),
-        }}
-      />
-      {/* <Tabs.Screen
-        name="gift"
-        options={{
-          tabBarLabel: 'Gift',
-          tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="gift-open-outline" size={24} color={color} />
+            <MaterialCommunityIcons name="home-circle-outline" size={30} color={color} />
           ),
         }}
-      /> */}
+      />
       <Tabs.Screen
         name="chat"
         options={{
-          tabBarLabel: 'services',
+          tabBarLabel: 'Services',
           tabBarIcon: ({ color }) => (
-            <MaterialIcons name="miscellaneous-services" size={24} color="black" />
+            <MaterialIcons name="miscellaneous-services" size={24} color={color} />
           ),
         }}
       />
       <Tabs.Screen
         name="community"
         options={{
-          tabBarLabel: 'community',
+          tabBarLabel: 'Community',
           tabBarIcon: ({ color }) => (
-          <MaterialCommunityIcons name="account-group" size={24} color="black" />          ),
+            <MaterialCommunityIcons name="account-group" size={24} color={color} />
+          ),
         }}
       />
       <Tabs.Screen
@@ -54,7 +55,8 @@ export default function Tablayout() {
         options={{
           tabBarLabel: 'Profile',
           tabBarIcon: ({ color }) => (
-          <FontAwesome6 name="user-gear" size={24} color="black" />          ),
+            <FontAwesome name="gear" size={24} color={color} />
+          ),
         }}
       />
     </Tabs>
@@ -71,5 +73,4 @@ const styles = StyleSheet.create({
     borderColor: '#e2e2e2',
     position: 'relative',
   },
-  
 });

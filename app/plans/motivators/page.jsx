@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, Image, StatusBar, ScrollView, Pressable } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, TouchableOpacity, Image, StatusBar, ScrollView, Pressable, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import Checkbox from 'expo-checkbox';
 import tw from 'tailwind-react-native-classnames';
-import AppLoading from 'expo-app-loading';
+import * as SplashScreen from 'expo-splash-screen';
 import { useFonts } from 'expo-font';
 import { useNavigation } from '@react-navigation/native';
+
+// Prevent splash screen from auto-hiding
+SplashScreen.preventAutoHideAsync();
 
 const BuildMyJourneyScreen = () => {
   const navigation = useNavigation();
@@ -15,11 +18,19 @@ const BuildMyJourneyScreen = () => {
     'outfit-medium': require('../../../assets/fonts/Outfit-Medium.ttf'),
   });
 
+  useEffect(() => {
+    if (fontsLoaded) {
+      // Hide splash screen once fonts are loaded
+      SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
+
   if (!fontsLoaded) {
-    return <AppLoading />;
+    // You can return a loading spinner or placeholder here
+    return <View style={styles.container} />;
   }
 
-  const [pressedCard, setPressedCard] = useState(null);
+  const [pressedCard, setPressedCard] = useState<number | null>(null);
   const [checkedItems, setCheckedItems] = useState({
     motivation: false,
     careerAdvancement: false,
@@ -36,7 +47,7 @@ const BuildMyJourneyScreen = () => {
     positiveImpact: false,
   });
 
-  const handleCheckboxChange = (name) => {
+  const handleCheckboxChange = (name: string) => {
     setCheckedItems((prevState) => ({
       ...prevState,
       [name]: !prevState[name],
@@ -82,5 +93,14 @@ const BuildMyJourneyScreen = () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'white', // Match your splash screen background color
+  },
+});
 
 export default BuildMyJourneyScreen;

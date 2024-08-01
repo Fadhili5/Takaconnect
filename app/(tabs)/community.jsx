@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   AntDesign,
   FontAwesome,
@@ -9,7 +9,7 @@ import { View, Text, Image, ScrollView, StyleSheet, StatusBar, TouchableOpacity 
 import tw from 'tailwind-react-native-classnames';
 import { useNavigation } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
-import AppLoading from 'expo-app-loading';
+import * as SplashScreen from 'expo-splash-screen';
 
 const Post = ({ post }) => (
   <View style={styles.postContainer}>
@@ -47,76 +47,55 @@ const CommunityScreen = () => {
     'outfit-medium': require('../../assets/fonts/Outfit-Medium.ttf'),
   });
 
+  useEffect(() => {
+    const prepare = async () => {
+      try {
+        await SplashScreen.preventAutoHideAsync();
+        // Load any resources or data that we need prior to rendering the app
+      } catch (e) {
+        console.warn(e);
+      } finally {
+        if (fontsLoaded) {
+          await SplashScreen.hideAsync();
+        }
+      }
+    };
+
+    prepare();
+  }, [fontsLoaded]);
+
   if (!fontsLoaded) {
-    return <AppLoading />;
+    return null;
   }
 
   const posts = [
     {
       id: 1,
       user: {
-        name: 'Alex Njuguna',
-        profilePicture: 'https://randomuser.me/api/portraits/men/10.jpg',
+        name: 'John Doe',
+        profilePicture: 'https://via.placeholder.com/150'
       },
-      content: 'We successfully organized a community clean-up last weekend! The streets look amazing now.',
-      likes: 25,
+      content: 'Just moved to a new apartment in Kilimani! Loving the new neighborhood.',
+      likes: 23,
       comments: [
-        { id: 1, user: 'Mary Kimani', comment: 'Great job, Alex! The neighborhood looks much better.' },
-        { id: 2, user: 'John Doe', comment: 'Let’s do this more often.' },
-      ],
+        { id: 1, user: 'Alice', comment: 'Welcome to the neighborhood!' },
+        { id: 2, user: 'Bob', comment: 'Hope you enjoy living there!' }
+      ]
     },
     {
       id: 2,
       user: {
-        name: 'Sarah Wambui',
-        profilePicture: 'https://randomuser.me/api/portraits/women/12.jpg',
+        name: 'Jane Smith',
+        profilePicture: 'https://via.placeholder.com/150'
       },
-      content: 'The traffic congestion on Market Street is getting worse every day. Any suggestions for improvement?',
-      likes: 10,
+      content: 'Quick Mart has great deals on groceries this week. Check it out!',
+      likes: 15,
       comments: [
-        { id: 1, user: 'Peter Kamau', comment: 'We need better public transportation options.' },
-        { id: 2, user: 'Grace Njeri', comment: 'Maybe we can organize a carpool system.' },
-      ],
-    },
-    {
-      id: 3,
-      user: {
-        name: 'James Karanja',
-        profilePicture: 'https://randomuser.me/api/portraits/men/15.jpg',
-      },
-      content: 'Proud to announce that our community garden project is finally up and running!',
-      likes: 40,
-      comments: [
-        { id: 1, user: 'Lucy Wanjiku', comment: 'Fantastic news! Can’t wait to visit.' },
-        { id: 2, user: 'Samuel Mwangi', comment: 'Great initiative, James!' },
-      ],
-    },
-    {
-      id: 4,
-      user: {
-        name: 'Nancy Otieno',
-        profilePicture: 'https://randomuser.me/api/portraits/women/16.jpg',
-      },
-      content: 'The new park has become a hub for families and kids. Such a positive change for our area!',
-      likes: 30,
-      comments: [
-        { id: 1, user: 'David Onyango', comment: 'The park is fantastic! My kids love it.' },
-        { id: 2, user: 'Jane Wafula', comment: 'So happy to see this development.' },
-      ],
-    },
-    {
-      id: 5,
-      user: {
-        name: 'Emma Mwangi',
-        profilePicture: 'https://randomuser.me/api/portraits/women/20.jpg',
-      },
-      content: 'There has been an increase in noise pollution in our area lately. Any thoughts on how to tackle this issue?',
-      likes: 5,
-      comments: [
-        { id: 1, user: 'Peter Njoroge', comment: 'We should petition the local government to enforce noise regulations.' },
-        { id: 2, user: 'Anne Kariuki', comment: 'Maybe we can create awareness campaigns about the impact of noise pollution.' },
-      ],
-    },
+        { id: 1, user: 'Charlie', comment: 'Thanks for the tip!' },
+        { id: 2, user: 'Daisy', comment: 'I love their fresh produce.' }
+      ]
+    }
+    // Add more posts as needed
   ];
 
   return (
@@ -150,121 +129,110 @@ const CommunityScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f0f0f0',
-  },
-  header: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    marginVertical: 20,
-    color: '#333',
+    backgroundColor: '#F7F7F7'
   },
   postContainer: {
-    backgroundColor: '#fff',
-    borderRadius: 10,
-    padding: 15,
-    marginHorizontal: 10,
-    marginVertical: 10,
+    backgroundColor: 'white',
+    padding: 16,
+    marginBottom: 12,
+    borderRadius: 8,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
-    shadowRadius: 5,
+    shadowRadius: 4,
+    elevation: 1
   },
   userInfo: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 10,
+    marginBottom: 8
   },
   profilePicture: {
     width: 40,
     height: 40,
     borderRadius: 20,
-    marginRight: 10,
+    marginRight: 10
   },
   userName: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#333',
     fontFamily: 'outfit-bold',
+    fontSize: 16
   },
   postContent: {
-    fontSize: 16,
-    color: '#666',
-    marginBottom: 10,
     fontFamily: 'outfit',
+    fontSize: 14,
+    color: '#333',
+    marginBottom: 10
   },
   postActions: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginVertical: 10,
+    marginBottom: 10
   },
   likesContainer: {
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   likeCount: {
     marginLeft: 5,
-    fontSize: 16,
-    color: '#333',
-    fontFamily: 'outfit-medium',
+    fontFamily: 'outfit',
+    fontSize: 14,
+    color: '#333'
   },
   commentsContainer: {
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   commentCount: {
     marginLeft: 5,
-    fontSize: 16,
-    color: '#333',
-    fontFamily: 'outfit-medium',
+    fontFamily: 'outfit',
+    fontSize: 14,
+    color: '#333'
   },
   commentsSection: {
-    marginTop: 10,
+    marginTop: 10
   },
   commentContainer: {
     flexDirection: 'row',
-    marginBottom: 5,
+    marginBottom: 6
   },
   commentUser: {
-    fontWeight: 'bold',
-    marginRight: 5,
-    color: '#333',
     fontFamily: 'outfit-bold',
+    fontSize: 14,
+    color: '#333'
   },
   commentText: {
-    color: '#666',
     fontFamily: 'outfit',
+    fontSize: 14,
+    color: '#333'
   },
   healthSection: {
-    padding: 20,
-    backgroundColor: '#fff',
-    borderRadius: 10,
-    marginHorizontal: 10,
-    marginVertical: 10,
+    padding: 16,
+    backgroundColor: 'white',
+    borderRadius: 8,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
-    shadowRadius: 5,
+    shadowRadius: 4,
+    elevation: 1
   },
   healthHeader: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginBottom: 10,
-    color: '#333',
     fontFamily: 'outfit-bold',
+    fontSize: 16,
+    marginBottom: 12,
+    color: '#333'
   },
   healthButton: {
-    backgroundColor: '#4CAF50',
-    padding: 15,
-    borderRadius: 10,
-    alignItems: 'center',
-    marginVertical: 5,
+    backgroundColor: '#6B21A8',
+    padding: 10,
+    borderRadius: 8,
+    marginBottom: 8
   },
   healthButtonText: {
-    color: '#fff',
-    fontSize: 16,
-    fontFamily: 'outfit',
-  },
+    fontFamily: 'outfit-bold',
+    color: 'white',
+    textAlign: 'center',
+    fontSize: 14
+  }
 });
 
 export default CommunityScreen;

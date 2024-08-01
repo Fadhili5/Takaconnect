@@ -1,9 +1,13 @@
-import React from 'react';
-import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
-import { Card, Button, Icon } from 'react-native-elements';
+import React, { useEffect } from 'react';
+import { View, Text, TouchableOpacity, ScrollView, StyleSheet } from 'react-native';
+import { Card, Button } from 'react-native-elements';
 import { FontAwesome5 } from '@expo/vector-icons';
 import tw from 'twrnc';
 import { useRouter } from 'expo-router';
+import * as SplashScreen from 'expo-splash-screen';
+
+// Keep the splash screen visible while we fetch resources
+SplashScreen.preventAutoHideAsync();
 
 const developments = [
   {
@@ -25,7 +29,12 @@ const developments = [
 
 const Page = () => {
   const router = useRouter();
-  
+
+  useEffect(() => {
+    // Hide the splash screen once your app is ready to be displayed
+    SplashScreen.hideAsync();
+  }, []);
+
   const navigateTo = (path) => {
     router.push(path);
   };
@@ -37,20 +46,20 @@ const Page = () => {
           <TouchableOpacity onPress={() => navigateTo('/community')}>
             <FontAwesome5 name="arrow-left" size={24} color="white" />
           </TouchableOpacity>
-          <Text style={[tw`text-white text-2xl ml-4`, { fontFamily: 'outfit-bold' }]}>New Developments</Text>
+          <Text style={[tw`text-white text-2xl ml-4`, styles.title]}>New Developments</Text>
         </View>
-      </View> 
+      </View>
       {developments.map((development, index) => (
         <Card key={index}>
           <Card.Title>{development.title}</Card.Title>
-          <Card.Divider/>
+          <Card.Divider />
           <Card.Image source={{ uri: development.image }} />
-          <Text style={{ marginBottom: 10 }}>
+          <Text style={styles.description}>
             {development.description}
           </Text>
           <Button
-            icon={<Icon name='code' color='#ffffff' />}
-            buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0,backgroundColor:'#4B0082', marginBottom: 0 }}
+            icon={<FontAwesome5 name='comment-dots' size={15} color='#ffffff' />}
+            buttonStyle={styles.button}
             title='Comment on Community Forum'
             onPress={() => navigateTo('/community')}
           />
@@ -59,5 +68,22 @@ const Page = () => {
     </ScrollView>
   );
 }
+
+const styles = StyleSheet.create({
+  title: {
+    fontFamily: 'outfit-bold'
+  },
+  description: {
+    marginBottom: 10,
+    fontFamily: 'outfit'
+  },
+  button: {
+    borderRadius: 0,
+    marginLeft: 0,
+    marginRight: 0,
+    backgroundColor: '#4B0082',
+    marginBottom: 0
+  }
+});
 
 export default Page;

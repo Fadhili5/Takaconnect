@@ -1,6 +1,11 @@
-import { Stack } from "expo-router";
+import React, { useEffect } from 'react';
+import { StyleSheet, View } from 'react-native';
+import * as SplashScreen from 'expo-splash-screen';
+import { Stack } from 'expo-router';
 import { useFonts } from 'expo-font';
-import AppLoading from 'expo-app-loading';
+
+// Prevent the splash screen from auto-hiding
+SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const [fontsLoaded] = useFonts({
@@ -9,8 +14,16 @@ export default function RootLayout() {
     'outfit-medium': require('../assets/fonts/Outfit-Medium.ttf'),
   });
 
+  useEffect(() => {
+    if (fontsLoaded) {
+      // Hide the splash screen once fonts are loaded
+      SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
+
   if (!fontsLoaded) {
-    return <AppLoading />;
+    // You can return null or a loading spinner here
+    return <View style={styles.container} />;
   }
 
   return (
@@ -19,3 +32,12 @@ export default function RootLayout() {
     </Stack>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'white', // Match your splash screen background color
+  },
+});
