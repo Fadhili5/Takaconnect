@@ -81,7 +81,7 @@ export default function HomeScreen() {
         </View>
 
 
-        <View style={[tw`bg-white -mt-7 px-2`, { borderRadius: 30 }]}>
+        <View style={[tw`bg-white mb-9 px-2`, { borderRadius: 30 }]}>
         <View style={tw`p-6 rounded-2xl border border-purple-700 mt-4`}>
           <View style={tw`flex-row items-center`}>
             <FontAwesome5 name="exclamation-circle" size={48} color="#6b21a8" />
@@ -96,15 +96,7 @@ export default function HomeScreen() {
         </View>
         </View>
 
-        <View style={tw`mt-2`}>
-          <View style={tw`flex-row flex-wrap justify-between`}>
-            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('green/page')}>
-              <Card icon="users" title="Green Cover " description="Development trends" />
-            </TouchableOpacity>
- 
-
-        </View>
-        </View>
+        
 
       </View>
     </ScrollView>
