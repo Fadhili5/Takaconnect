@@ -1,17 +1,41 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, TouchableOpacity, ActivityIndicator, StatusBar, Image } from 'react-native';
-import axios from 'axios';
 import tw from 'tailwind-react-native-classnames';
 import { Ionicons } from '@expo/vector-icons';
 import { useFonts } from 'expo-font';
-// import { useNavigation } from '@react-navigation/native';
-
+import { useRouter } from 'expo-router';
 
 const categories = ['Anxiety', 'Depression', 'Stress', 'Well-being'];
 
-const BlogScreen = ({ navigation }) => {
-    // const navigation = useNavigation();
+// Sample JSON object containing blog data
+const sampleBlogData = [
+  {
+    id: 1,
+    title: 'Comprendre l\'anxiété',
+    body: 'L\'anxiété est une réaction normale au stress et peut être bénéfique dans certaines situations.',
+    imageUrl: 'https://images.pexels.com/photos/4672710/pexels-photo-4672710.jpeg'
+  },
+  {
+    id: 2,
+    title: 'Lutter contre la dépression',
+    body: 'La dépression est un trouble de l\'humeur fréquent mais grave. Elle affecte la façon dont vous vous sentez, pensez et gérez les activités quotidiennes.',
+    imageUrl: 'https://images.pexels.com/photos/4672710/pexels-photo-4672710.jpeg'
+  },
+  {
+    id: 3,
+    title: 'Gérer le stress',
+    body: 'Le stress est une réaction physique et mentale naturelle aux expériences de la vie.',
+    imageUrl: 'https://images.pexels.com/photos/4672710/pexels-photo-4672710.jpeg'
+  },
+  {
+    id: 4,
+    title: 'Bien-être et santé mentale',
+    body: 'Le bien-être est un état de santé physique, mentale et sociale complète.',
+    imageUrl: 'https://images.pexels.com/photos/4672710/pexels-photo-4672710.jpeg'
+  }
+];
 
+const BlogScreen = ({ navigation }) => {
   const [fontsLoaded] = useFonts({
     'outfit': require('../../assets/fonts/Outfit-Regular.ttf'),
     'outfit-bold': require('../../assets/fonts/Outfit-Bold.ttf'),
@@ -19,6 +43,7 @@ const BlogScreen = ({ navigation }) => {
   });
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
     fetchBlogs();
@@ -26,13 +51,13 @@ const BlogScreen = ({ navigation }) => {
 
   const fetchBlogs = async () => {
     try {
-      const response = await axios.get('https://jsonplaceholder.typicode.com/posts');
-      // Mocking image URLs for demonstration purposes
-      const blogsWithImages = response.data.map(blog => ({
+      const blogsWithImages = sampleBlogData.map(blog => ({
         ...blog,
-        imageUrl: 'https://images.pexels.com/photos/4672710/pexels-photo-4672710.jpeg' // Replace with actual image URLs
+        imageUrl: blog.imageUrl // Use predefined image URLs
       }));
-      setBlogs(blogsWithImages);
+      
+      const translatedBlogs = await translateBlogs(blogsWithImages);
+      setBlogs(translatedBlogs);
       setLoading(false);
     } catch (error) {
       console.error('Error fetching blogs:', error);
@@ -40,8 +65,32 @@ const BlogScreen = ({ navigation }) => {
     }
   };
 
+  const translateBlogs = async (blogs) => {
+    const translatedBlogs = await Promise.all(blogs.map(async (blog) => {
+      const translatedTitle = await translateText(blog.title, 'fr', 'en');
+      const translatedBody = await translateText(blog.body, 'fr', 'en');
+      return { ...blog, title: translatedTitle, body: translatedBody };
+    }));
+    return translatedBlogs;
+  };
+
+  const translateText = async (text, sourceLang, targetLang) => {
+    // Mock translation function for demonstration purposes
+    const translations = {
+      'Comprendre l\'anxiété': 'Understanding Anxiety',
+      'Lutter contre la dépression': 'Fighting Depression',
+      'Gérer le stress': 'Managing Stress',
+      'Bien-être et santé mentale': 'Well-being and Mental Health',
+      'L\'anxiété est une réaction normale au stress et peut être bénéfique dans certaines situations.': 'Anxiety is a normal reaction to stress and can be beneficial in some situations.',
+      'La dépression est un trouble de l\'humeur fréquent mais grave. Elle affecte la façon dont vous vous sentez, pensez et gérez les activités quotidiennes.': 'Depression is a common but serious mood disorder. It affects how you feel, think, and handle daily activities.',
+      'Le stress est une réaction physique et mentale naturelle aux expériences de la vie.': 'Stress is a natural physical and mental reaction to life experiences.',
+      'Le bien-être est un état de santé physique, mentale et sociale complète.': 'Well-being is a state of complete physical, mental, and social health.'
+    };
+    return translations[text] || text; // Return translated text or original text if translation is not found
+  };
+
   const renderCategoryItem = ({ item }) => (
-    <TouchableOpacity style={tw`bg-white p-3 rounded-lg mr-3 shadow`}>
+    <TouchableOpacity style={tw`bg-white  rounded-lg mr-3 shadow`}>
       <Text style={tw`text-lg font-semibold`}>{item}</Text>
     </TouchableOpacity>
   );
@@ -73,20 +122,20 @@ const BlogScreen = ({ navigation }) => {
   return (
     <View style={tw`flex-1 bg-gray-100`}>
       <StatusBar barStyle="dark-content" backgroundColor="#6B21A8" />
-      <View style={tw`flex-row items-center py-8 justify-center  bg-purple-800 mt-8`}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
+      <View style={tw`flex-row items-center py-8 justify-center bg-purple-800 mt-8`}>
+        <TouchableOpacity onPress={() => router.back()}>
           <Ionicons name="arrow-back-circle-outline" size={24} color="white" />
         </TouchableOpacity>
         <Text style={[tw`text-white text-2xl ml-4`, { fontFamily: 'outfit-bold' }]}>Read Blogs</Text>
       </View>
-      <FlatList
+      {/* <FlatList
         data={categories}
         renderItem={renderCategoryItem}
         keyExtractor={(item) => item}
         horizontal
         showsHorizontalScrollIndicator={false}
         style={tw`mt-4 mb-4`}
-      />
+      /> */}
       <FlatList
         data={blogs}
         renderItem={renderBlogItem}
