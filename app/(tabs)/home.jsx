@@ -114,3 +114,6 @@ function Card({ icon, title, description }) {
     </View>
   );
 }
+
+
+
