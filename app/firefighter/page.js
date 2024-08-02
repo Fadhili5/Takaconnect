@@ -5,12 +5,12 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 
 const emergencyServices = [
-  { id: 1, type: 'ambulance', name: 'Ambulance 1', phone: '123-456-7891', location: 'Location 1' },
-  { id: 2, type: 'ambulance', name: 'Ambulance 2', phone: '123-456-7892', location: 'Location 2' },
-  { id: 3, type: 'ambulance', name: 'Ambulance 3', phone: '123-456-7893', location: 'Location 3' },
-  { id: 4, type: 'firefighter', name: 'Fire Department 1', phone: '123-456-7894', location: 'Location 4' },
-  { id: 5, type: 'firefighter', name: 'Fire Department 2', phone: '123-456-7895', location: 'Location 5' },
-  { id: 6, type: 'firefighter', name: 'Fire Department 3', phone: '123-456-7896', location: 'Location 6' },
+  { id: 1, type: 'ambulance', name: 'Ambulance 1', phone: '+254717382028', location: 'Location 1' },
+  { id: 2, type: 'ambulance', name: 'Ambulance 2', phone: '+254717382028', location: 'Location 2' },
+  { id: 3, type: 'ambulance', name: 'Ambulance 3', phone: '+254717382028', location: 'Location 3' },
+  { id: 4, type: 'firefighter', name: 'Fire Department 1', phone: '+254717382028', location: 'Location 4' },
+  { id: 5, type: 'firefighter', name: 'Fire Department 2', phone: '+254717382028', location: 'Location 5' },
+  { id: 6, type: 'firefighter', name: 'Fire Department 3', phone: '+254717382028', location: 'Location 6' },
 ];
 
 const EmergencyServiceScreen = () => {

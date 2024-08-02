@@ -4,7 +4,7 @@ import tw from 'twrnc';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 
-const ambulancePhone = '123-456-7891'; // Replace with the actual phone number
+const ambulancePhone = '+254717382028'; // Replace with the actual phone number
 
 const CallAmbulanceScreen = () => {
   const router = useRouter();
