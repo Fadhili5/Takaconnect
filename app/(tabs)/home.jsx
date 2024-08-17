@@ -48,16 +48,19 @@ export default function HomeScreen() {
             <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('ReportCorruptPolice/page')}>
               <Card icon="user-shield" title="Report a corrupt police" description=" " />
             </TouchableOpacity>
+            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('ReportCorruptPolice/page')}>
+              <Card icon="user-shield" title="Report a police brutality" description=" " />
+            </TouchableOpacity>
             <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('governmentProjects/page')}>
               <Card icon="building" title="Government projects around you" description="exp " />
             </TouchableOpacity>
             <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('community')}>
               <Card icon="comments" title="Community forum" description="Discover what's cooking" />
             </TouchableOpacity>
-            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('recallGovernor')}>
+            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('recallGovernor/page')}>
               <Card icon="user-times" title="Recall your governor" description="Join 20,000 members to recall DR.Susan" />
             </TouchableOpacity>
-            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('leaderPerformance')}>
+            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('leaderPerformance/page')}>
               <Card icon="chart-line" title="How your leaders are performing" description="Join 20,000 members to recall DR.Susan" />
             </TouchableOpacity>
             <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('budgetTracking')}>
@@ -66,10 +69,10 @@ export default function HomeScreen() {
             <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('reportFraud')}>
               <Card icon="exclamation-triangle" title="Report Fraud" description="Report fraudulent activities" />
             </TouchableOpacity>
-            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('publicPetitions')}>
+            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('publicPetitions/page')}>
               <Card icon="file-signature" title="Public Petitions" description="Start or sign petitions" />
             </TouchableOpacity>
-            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('localMeetings')}>
+            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('localMeetings/page')}>
               <Card icon="users" title="Local Meetings" description="Join local community meetings" />
             </TouchableOpacity>
             <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('environmentalIssues')}>
