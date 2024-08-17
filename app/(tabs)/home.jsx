@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, ScrollView, TouchableOpacity, Image } from 'react-native';
 import { FontAwesome5 } from '@expo/vector-icons';
 
+
 import tw from "tailwind-react-native-classnames";
 import { useRouter } from 'expo-router';
 
@@ -14,7 +15,7 @@ export default function HomeScreen() {
 
   return (
     <ScrollView style={tw`flex-1`}>
-      <View style={tw`bg-purple-800 p-6 pb-12`}>
+      <View style={tw`bg-black p-6 pb-12`}>
         <View style={tw`flex-row items-center mt-10`}>
           <TouchableOpacity>
             <Image
@@ -25,7 +26,7 @@ export default function HomeScreen() {
           <View>
             <Text style={[tw`text-white text-lg`, { fontFamily: 'outfit-bold' }]}>Welcome!</Text>
             <Text style={[tw`text-white text-xl`, { fontFamily: 'outfit' }]}>Caleb Jephunneh</Text>
-            <Text style={[tw`text-white text-xl`, { fontFamily: 'outfit' }]}>Kilimani Prop Tech</Text>
+            <Text style={[tw`text-white text-xl`, { fontFamily: 'outfit' }]}>HakiSpeaks</Text>
           </View>
         </View>
       </View>
@@ -36,7 +37,7 @@ export default function HomeScreen() {
             <FontAwesome5 name="exclamation-circle" size={48} color="#6b21a8" />
             <View style={tw`ml-4`}>
               <Text style={[tw`text-black text-lg mt-1`, { fontFamily: 'outfit-bold' }]}>Emergency Services</Text>
-              <Text style={[tw`text-gray-600`, { fontFamily: 'outfit' }]}>Quickly access emergency contacts and services</Text>
+              <Text style={[tw`text-gray-600`, { fontFamily: 'outfit' }]}>Quickly Report a corrupt police</Text>
               <TouchableOpacity onPress={() => navigateTo('emergencyContacts/page')}>
                 <Text style={[tw`text-purple-700 mt-2`, { fontFamily: 'outfit-medium' }]}>Access Now &gt;&gt;</Text>
               </TouchableOpacity>
@@ -46,57 +47,26 @@ export default function HomeScreen() {
 
         <View style={tw`mt-2`}>
           <View style={tw`flex-row flex-wrap justify-between`}>
-            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('neighbourhood/page')}>
-              <Card icon="users" title="My Neighbourhood " description="Development trends" />
+            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('')}>
+              <Card icon="users" title="Report a corrupt police " description=" " />
               {/* <FontAwesome5 name="users" size={24} color="black" /> */}
             </TouchableOpacity>
-            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('ambulance/page')}>
-              <Card icon="ambulance" title="Call Ambulance" description="Get medical help fast" />
+            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('')}>
+              <Card icon="users" title="Goverment projects around you " description="exp " />
+              {/* <FontAwesome5 name="users" size={24} color="black" /> */}
             </TouchableOpacity>
-            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('firefighter/page')}>
-              <Card icon="fire-extinguisher" title="Call Firefighter" description="Report a fire emergency" />
+            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('')}>
+              <Card icon="users" title="Community forum " description="discrover whats cooking  " />
             </TouchableOpacity>
-            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('Garbage/page')}>
-              <Card icon="trash" title="Garbage Collector" description="Schedule garbage collection" />
+            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('')}>
+              <Card icon="users" title="Recall your governor " description="Join 20,000 members to recall DR.Susan  " />
             </TouchableOpacity>
-            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('blogs/page')}>
-              <Card icon="book-open" title="Read Blogs" description="Articles, Posts & much more" />
+            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('')}>
+              <Card icon="users" title="How your leaders are performing " description="Join 20,000 members to recall DR.Susan  " />
             </TouchableOpacity>
-            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('flood-alert/page')}>
-              <Card icon="water" title="Flood Alert" description="Get flood warnings" />
-            </TouchableOpacity>
-            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('report-incident/page')}>
-              <Card icon="exclamation-triangle" title="Report Incident" description="Report any other incident" />
-            </TouchableOpacity>
-            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('first-aid/page')}>
-              <Card icon="medkit" title="First Aid Tips" description="Learn basic first aid" />
-            </TouchableOpacity>
-            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('Hospitals/page')}>
-              <Card icon="hospital" title="Nearby Hospitals" description="Find hospitals near you" />
-            </TouchableOpacity>
-            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('emergencyContacts/page')}>
-              <Card icon="phone" title="Emergency Contacts" description="List of emergency contacts" />
-            </TouchableOpacity>
+
           </View>
-        </View>
-
-
-        <View style={[tw`bg-white mb-9 px-2`, { borderRadius: 30 }]}>
-        <View style={tw`p-6 rounded-2xl border border-purple-700 mt-4`}>
-          <View style={tw`flex-row items-center`}>
-            <FontAwesome5 name="exclamation-circle" size={48} color="#6b21a8" />
-            <View style={tw`ml-4`}>
-              <Text style={[tw`text-black text-lg mt-1`, { fontFamily: 'outfit-bold' }]}>Planning Services</Text>
-              <Text style={[tw`text-gray-600`, { fontFamily: 'outfit' }]}>Get statistical data about Green Cover</Text>
-              <TouchableOpacity onPress={() => navigateTo('green/page')}>
-                <Text style={[tw`text-purple-700 mt-2`, { fontFamily: 'outfit-medium' }]}>Access Now &gt;&gt;</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
-        </View>
-
-        
+        </View>     
 
       </View>
     </ScrollView>

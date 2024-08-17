@@ -1,15 +1,6 @@
-import React, { useEffect } from 'react';
-import {
-  AntDesign,
-  FontAwesome,
-  Ionicons,
-  MaterialCommunityIcons,
-} from "@expo/vector-icons";
-import { View, Text, Image, ScrollView, StyleSheet, StatusBar, TouchableOpacity } from 'react-native';
-import tw from 'tailwind-react-native-classnames';
-import { useNavigation } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
-import * as SplashScreen from 'expo-splash-screen';
+import React from 'react';
+import { View, Text, Image, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
+import { FontAwesome } from '@expo/vector-icons';
 
 const Post = ({ post }) => (
   <View style={styles.postContainer}>
@@ -40,86 +31,92 @@ const Post = ({ post }) => (
 );
 
 const CommunityScreen = () => {
-  const navigation = useNavigation();
-  const [fontsLoaded] = useFonts({
-    'outfit': require('../../assets/fonts/Outfit-Regular.ttf'),
-    'outfit-bold': require('../../assets/fonts/Outfit-Bold.ttf'),
-    'outfit-medium': require('../../assets/fonts/Outfit-Medium.ttf'),
-  });
-
-  useEffect(() => {
-    const prepare = async () => {
-      try {
-        await SplashScreen.preventAutoHideAsync();
-        // Load any resources or data that we need prior to rendering the app
-      } catch (e) {
-        console.warn(e);
-      } finally {
-        if (fontsLoaded) {
-          await SplashScreen.hideAsync();
-        }
-      }
-    };
-
-    prepare();
-  }, [fontsLoaded]);
-
-  if (!fontsLoaded) {
-    return null;
-  }
-
   const posts = [
+    {
+      id: 5,
+      user: {
+        name: 'Dr.Samson Wabumuna',
+        profilePicture: 'https://randomuser.me/api/portraits/men/69.jpg',
+      },
+      content: 'Reports of political harassment in our community are increasing. Let’s stand together against this injustice.',
+      likes: 10,
+      comments: [
+        { id: 1, user: 'Caleb Otieno', comment: 'This needs to stop!' },
+        { id: 2, user: 'Onyango Victor', comment: 'We need to take action.' },
+      ],
+    },
     {
       id: 1,
       user: {
-        name: 'John Doe',
-        profilePicture: 'https://via.placeholder.com/150'
+        name: 'Joseph Maina',
+        profilePicture: 'https://randomuser.me/api/portraits/men/75.jpg',
       },
-      content: 'Just moved to a new apartment in Kilimani! Loving the new neighborhood.',
-      likes: 23,
+      content: 'Our roads remain underdeveloped despite numerous promises. It’s time to hold our leaders accountable.',
+      likes: 15,
       comments: [
-        { id: 1, user: 'Alice', comment: 'Welcome to the neighborhood!' },
-        { id: 2, user: 'Bob', comment: 'Hope you enjoy living there!' }
-      ]
+        { id: 1, user: 'Henry Okoth', comment: 'Absolutely, we need better infrastructure.' },
+        { id: 2, user: 'Metronila Johnson', comment: 'When will this change?' },
+      ],
     },
     {
       id: 2,
       user: {
-        name: 'Jane Smith',
-        profilePicture: 'https://via.placeholder.com/150'
+        name: 'Esther Wangithi',
+        profilePicture: 'https://randomuser.me/api/portraits/women/42.jpg',
       },
-      content: 'Quick Mart has great deals on groceries this week. Check it out!',
-      likes: 15,
+      content: 'Corruption in our local government is rampant. We must demand transparency and accountability.',
+      likes: 20,
       comments: [
-        { id: 1, user: 'Charlie', comment: 'Thanks for the tip!' },
-        { id: 2, user: 'Daisy', comment: 'I love their fresh produce.' }
-      ]
-    }
-    // Add more posts as needed
+        { id: 1, user: 'Michael Joseph', comment: 'This is unacceptable!' },
+        { id: 2, user: 'Sarah Wainaina', comment: 'We need to fight corruption together.' },
+      ],
+    },
+    {
+      id: 3,
+      user: {
+        name: 'Elvis Wanaina',
+        profilePicture: 'https://randomuser.me/api/portraits/men/78.jpg',
+      },
+      content: 'Our community lacks basic healthcare facilities. It’s time to demand better services.',
+      likes: 8,
+      comments: [
+        { id: 1, user: 'Mbru Davis', comment: 'This is a serious issue.' },
+        { id: 2, user: 'Joshua Smith', comment: 'We need to raise our voices.' },
+      ],
+    },
+    {
+      id: 4,
+      user: {
+        name: 'Brenda Salama',
+        profilePicture: 'https://randomuser.me/api/portraits/women/50.jpg',
+      },
+      content: 'Education standards in our area are declining. Let’s push for better schools and resources.',
+      likes: 25,
+      comments: [
+        { id: 1, user: 'Chore Albert', comment: 'Our children deserve better.' },
+        { id: 2, user: 'Eunice Aulo', comment: 'We need to address this immediately.' },
+      ],
+    },
   ];
+  
+  
 
   return (
     <ScrollView style={styles.container}>
-      <StatusBar barStyle="dark-content" backgroundColor="#6B21A8" />
-      <View style={tw`flex-row items-center py-8 justify-center bg-purple-800 mt-8 mb-4`}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Ionicons name="arrow-back-circle-outline" size={24} color="white" />
-        </TouchableOpacity>
-        <Text style={[tw`text-white text-2xl ml-4`, { fontFamily: 'outfit-bold' }]}>Community Feed</Text>
-      </View>
+      <Text style={styles.header}>Community Feed</Text>
       {posts.map((post) => (
         <Post key={post.id} post={post} />
       ))}
       <View style={styles.healthSection}>
-        <Text style={styles.healthHeader}>Other Discussions</Text>
+        <Text style={styles.healthHeader}>Health Discussions</Text>
         <TouchableOpacity style={styles.healthButton}>
-          <Text style={styles.healthButtonText}>Health Discussions</Text>
+          <Text style={styles.healthButtonText}>Book an Appointment</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.healthButton}>
-          <Text style={styles.healthButtonText}>Garbage Discussions</Text>
+          <Text style={styles.healthButtonText}>Dietary Recommendations</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.healthButton}>
-          <Text style={styles.healthButtonText}>Green Cover</Text>
+          <Text style={styles.healthButtonText}>Exercise Tips</Text>
         </TouchableOpacity>
       </View>
     </ScrollView>
@@ -129,110 +126,114 @@ const CommunityScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F7F7F7'
+    backgroundColor: '#f0f0f0',
+  },
+  header: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginVertical: 20,
+    color: '#333',
+    marginTop: 40,
   },
   postContainer: {
-    backgroundColor: 'white',
-    padding: 16,
-    marginBottom: 12,
-    borderRadius: 8,
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    padding: 15,
+    marginHorizontal: 10,
+    marginVertical: 10,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 1
+    shadowRadius: 5,
   },
   userInfo: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 8
+    marginBottom: 10,
   },
   profilePicture: {
     width: 40,
     height: 40,
     borderRadius: 20,
-    marginRight: 10
+    marginRight: 10,
   },
   userName: {
-    fontFamily: 'outfit-bold',
-    fontSize: 16
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#333',
   },
   postContent: {
-    fontFamily: 'outfit',
-    fontSize: 14,
-    color: '#333',
-    marginBottom: 10
+    fontSize: 16,
+    color: '#666',
+    marginBottom: 10,
   },
   postActions: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 10
+    marginVertical: 10,
   },
   likesContainer: {
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   likeCount: {
     marginLeft: 5,
-    fontFamily: 'outfit',
-    fontSize: 14,
-    color: '#333'
+    fontSize: 16,
+    color: '#333',
   },
   commentsContainer: {
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   commentCount: {
     marginLeft: 5,
-    fontFamily: 'outfit',
-    fontSize: 14,
-    color: '#333'
+    fontSize: 16,
+    color: '#333',
   },
   commentsSection: {
-    marginTop: 10
+    marginTop: 10,
   },
   commentContainer: {
     flexDirection: 'row',
-    marginBottom: 6
+    marginBottom: 5,
   },
   commentUser: {
-    fontFamily: 'outfit-bold',
-    fontSize: 14,
-    color: '#333'
+    fontWeight: 'bold',
+    marginRight: 5,
+    color: '#333',
   },
   commentText: {
-    fontFamily: 'outfit',
-    fontSize: 14,
-    color: '#333'
+    color: '#666',
   },
   healthSection: {
-    padding: 16,
-    backgroundColor: 'white',
-    borderRadius: 8,
+    padding: 20,
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    marginHorizontal: 10,
+    marginVertical: 10,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 1
+    shadowRadius: 5,
   },
   healthHeader: {
-    fontFamily: 'outfit-bold',
-    fontSize: 16,
-    marginBottom: 12,
-    color: '#333'
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 10,
+    color: '#333',
   },
   healthButton: {
-    backgroundColor: '#6B21A8',
-    padding: 10,
-    borderRadius: 8,
-    marginBottom: 8
+    backgroundColor: '#4CAF50',
+    padding: 15,
+    borderRadius: 10,
+    alignItems: 'center',
+    marginVertical: 5,
   },
   healthButtonText: {
-    fontFamily: 'outfit-bold',
-    color: 'white',
-    textAlign: 'center',
-    fontSize: 14
-  }
+    color: '#fff',
+    fontSize: 16,
+  },
 });
 
 export default CommunityScreen;

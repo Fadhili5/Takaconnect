@@ -18,47 +18,38 @@ export default function EmergencyServicesScreen() {
           <TouchableOpacity onPress={() => router.back()}>
             <FontAwesome5 name="arrow-left" size={24} color="white" />
           </TouchableOpacity>
-          <Text style={[tw`text-white text-2xl ml-4`, { fontFamily: 'outfit-bold' }]}>Emergency Services</Text>
+          <Text style={[tw`text-white text-2xl ml-4`, { fontFamily: 'outfit-bold' }]}>HakiAI Services</Text>
         </View>
       </View>
 
       <View style={[tw`bg-white -mt-7 px-2`, { borderRadius: 30 }]}>
-        <View style={tw`mt-4 p-6`}>
+        {/* <View style={tw`mt-4 p-6`}>
           <Text style={[tw`text-black text-lg`, { fontFamily: 'outfit-bold' }]}>Quick Access to Emergency Services</Text>
           <Text style={[tw`text-gray-600 mt-2`, { fontFamily: 'outfit' }]}>
             Select an option below to quickly access emergency contacts and services.
           </Text>
-        </View>
+        </View> */}
 
         <View style={tw`mt-2`}>
-          <View style={tw`flex-row flex-wrap justify-between`}>
-            <TouchableOpacity style={tw`w-1/2 p-2`} onPress={() => navigateTo('ambulance/page')}>
-              <EmergencyCard icon="ambulance" title="Call Ambulance" description="Get medical help fast" />
+        <View style={tw`flex-row flex-wrap justify-between`}>
+            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('')}>
+              <Card icon="users" title="Report a corrupt police " description=" " />
+              {/* <FontAwesome5 name="users" size={24} color="black" /> */}
             </TouchableOpacity>
-            <TouchableOpacity style={tw`w-1/2 p-2`} onPress={() => navigateTo('firefighter/page')}>
-              <EmergencyCard icon="fire-extinguisher" title="Call Firefighter" description="Report a fire emergency" />
+            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('')}>
+              <Card icon="users" title="Goverment projects around you " description="exp " />
+              {/* <FontAwesome5 name="users" size={24} color="black" /> */}
             </TouchableOpacity>
-            <TouchableOpacity style={tw`w-1/2 p-2`} onPress={() => navigateTo('Garbage/page')}>
-              <EmergencyCard icon="trash" title="Garbage Collector" description="Schedule garbage collection" />
+            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('')}>
+              <Card icon="users" title="Community forum " description="discrover whats cooking  " />
             </TouchableOpacity>
-            <TouchableOpacity style={tw`w-1/2 p-2`} onPress={() => navigateTo('blogs/page')}>
-              <EmergencyCard icon="book-open" title="Read Blogs" description="Articles, Posts & much more" />
+            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('')}>
+              <Card icon="users" title="Recall your governor " description="Join 20,000 members to recall DR.Susan  " />
             </TouchableOpacity>
-            <TouchableOpacity style={tw`w-1/2 p-2`} onPress={() => navigateTo('flood-alert/page')}>
-              <EmergencyCard icon="water" title="Flood Alert" description="Get flood warnings" />
+            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('')}>
+              <Card icon="users" title="How your leaders are performing " description="Join 20,000 members to recall DR.Susan  " />
             </TouchableOpacity>
-            <TouchableOpacity style={tw`w-1/2 p-2`} onPress={() => navigateTo('report-incident/page')}>
-              <EmergencyCard icon="exclamation-triangle" title="Report Incident" description="Report any other incident" />
-            </TouchableOpacity>
-            <TouchableOpacity style={tw`w-1/2 p-2`} onPress={() => navigateTo('first-aid/page')}>
-              <EmergencyCard icon="medkit" title="First Aid Tips" description="Learn basic first aid" />
-            </TouchableOpacity>
-            <TouchableOpacity style={tw`w-1/2 p-2`} onPress={() => navigateTo('Hospitals/page')}>
-              <EmergencyCard icon="hospital" title="Nearby Hospitals" description="Find hospitals near you" />
-            </TouchableOpacity>
-            <TouchableOpacity style={tw`w-1/2 p-2`} onPress={() => navigateTo('emergencyContacts/page')}>
-              <EmergencyCard icon="phone" title="Emergency Contacts" description="List of emergency contacts" />
-            </TouchableOpacity>
+
           </View>
         </View>
       </View>
@@ -66,12 +57,15 @@ export default function EmergencyServicesScreen() {
   );
 }
 
-function EmergencyCard({ icon, title, description }) {
+function Card({ icon, title, description }) {
   return (
-    <View style={tw`w-full bg-white p-4 rounded-xl shadow-md items-center`}>
-      <FontAwesome5 name={icon} size={32} color="#6b21a8" />
-      <Text style={[tw`text-purple-600 font-bold mt-2 text-center`, { fontFamily: 'outfit-bold' }]}>{title}</Text>
-      <Text style={[tw`text-gray-600 text-center mt-1`, { fontFamily: 'outfit' }]}>{description}</Text>
+    <View style={tw`w-40 bg-white p-4 m-2 rounded-xl shadow-md`}>
+      <View style={tw`items-center`}>
+        <FontAwesome5 name={icon} size={32} color="#6b21a8" />
+        <Text style={[tw`text-purple-600 font-bold mt-2 text-center`, { fontFamily: 'outfit-bold' }]}>{title}</Text>
+        <Text style={[tw`text-gray-600 text-center mt-1`, { fontFamily: 'outfit' }]}>{description}</Text>
+      </View>
     </View>
   );
 }
+
