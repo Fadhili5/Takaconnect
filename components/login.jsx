@@ -15,10 +15,10 @@ const Login = () => {
           resizeMode="cover"
         />
         <View style={styles.content}>
-          <Text style={styles.title}>kiliSpeaks</Text>
+          <Text style={styles.title}>HakiSpeaks</Text>
           <Text style={styles.subtitle}>
-            I'm powered by AI, so surprises and mistakes are
-            possible. Make sure to verify any generated code or suggestions.
+            Speak out your rights and let your voice be heard
+            lets stop corruption and injustice in our society
           </Text>
         </View>
         <TouchableOpacity
