@@ -5,9 +5,9 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import tw from "tailwind-react-native-classnames";
 
 const projects = [
-  { id: 1, name: 'Kilimani Sports Ground', details: 'A sports ground in Kilimani area.', coordinate: { latitude: -1.2921, longitude: 36.8219 }, completed: 75, invested: 1000000, used: 750000, progress: 'On Track', stolen: 250000 },
-  { id: 2, name: 'Kilimani Hospital', details: 'A hospital in Kilimani area.', coordinate: { latitude: -1.2922, longitude: 36.8220 }, completed: 50, invested: 2000000, used: 1000000, progress: 'Delayed', stolen: 1000000 },
-  { id: 3, name: 'Kilimani Library', details: 'A public library in Kilimani area.', coordinate: { latitude: -1.2923, longitude: 36.8221 }, completed: 30, invested: 1500000, used: 450000, progress: 'On Track', stolen: 1050000 },
+  { id: 1, name: 'Kilimani Sports Ground', details: 'A sports ground in Kilimani area.', coordinate: { latitude: -1.2921, longitude: 36.8219 }, completed: 75, invested: 10000000, used: 7500000, progress: 'On Track', stolen: 250000 },
+  { id: 2, name: 'Kilimani Hospital', details: 'A hospital in Kilimani area.', coordinate: { latitude: -1.2922, longitude: 36.8220 }, completed: 50, invested: 7000000, used: 2000000, progress: 'Delayed', stolen: 1000000 },
+  { id: 3, name: 'Kilimani Library', details: 'A public library in Kilimani area.', coordinate: { latitude: -1.2923, longitude: 36.8221 }, completed: 30, invested: 1500000, used: 4500000, progress: 'On Track', stolen: 1050000 },
   { id: 4, name: 'Kilimani Community Center', details: 'A community center in Kilimani area.', coordinate: { latitude: -1.2924, longitude: 36.8222 }, completed: 90, invested: 2500000, used: 2250000, progress: 'On Track', stolen: 250000 },
   { id: 5, name: 'Kilimani Park', details: 'A public park in Kilimani area.', coordinate: { latitude: -1.2925, longitude: 36.8223 }, completed: 60, invested: 3000000, used: 1800000, progress: 'Delayed', stolen: 1200000 },
   { id: 6, name: 'Kilimani School', details: 'A primary school in Kilimani area.', coordinate: { latitude: -1.2926, longitude: 36.8224 }, completed: 80, invested: 3500000, used: 2800000, progress: 'On Track', stolen: 700000 },
@@ -65,10 +65,10 @@ function MapScreen() {
                 <Text style={[tw`text-2xl mb-4`, { fontFamily: 'outfit-bold' }]}>{selectedProject.name}</Text>
                 <Text style={[tw`text-lg`, { fontFamily: 'outfit' }]}>{selectedProject.details}</Text>
                 <Text style={[tw`text-lg`, { fontFamily: 'outfit' }]}>Completed: {selectedProject.completed}%</Text>
-                <Text style={[tw`text-lg`, { fontFamily: 'outfit' }]}>Invested: ${selectedProject.invested}</Text>
-                <Text style={[tw`text-lg`, { fontFamily: 'outfit' }]}>Used: ${selectedProject.used}</Text>
+                <Text style={[tw`text-lg`, { fontFamily: 'outfit' }]}>Invested: Kes{selectedProject.invested}</Text>
+                <Text style={[tw`text-lg`, { fontFamily: 'outfit' }]}>Used: Kes{selectedProject.used}</Text>
                 <Text style={[tw`text-lg`, { fontFamily: 'outfit' }]}>Progress: {selectedProject.progress}</Text>
-                <Text style={[tw`text-lg`, { fontFamily: 'outfit' }]}>Stolen: ${selectedProject.stolen}</Text>
+                <Text style={[tw`text-lg`, { fontFamily: 'outfit' }]}>Stolen: Kes{selectedProject.stolen}</Text>
               </>
             ) : (
               <Text style={[tw`text-lg`, { fontFamily: 'outfit' }]}>Select a project to see details</Text>
