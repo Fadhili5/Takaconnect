@@ -16,7 +16,10 @@ export default function LeaderPerformance() {
       role: 'Governor',
       corruptionCases: 5,
       reports: 200,
-      businesses: ['Owns a supermarket', 'Owns a real estate company'],
+      businesses: [
+        { name: 'Doe Supermarket', address: 'Shop 2, Street 4' },
+        { name: 'Doe Real Estate', address: 'Building 5, Avenue 3' }
+      ],
       caseDescriptions: [
         'Embezzlement of public funds',
         'Bribery and corruption',
@@ -34,7 +37,10 @@ export default function LeaderPerformance() {
       role: 'Police Chief',
       corruptionCases: 2,
       reports: 50,
-      businesses: ['Owns a security company', 'Owns a private investigation firm'],
+      businesses: [
+        { name: 'Smith Security', address: 'Shop 10, Street 8' },
+        { name: 'Smith Investigations', address: 'Office 3, Building 2' }
+      ],
       caseDescriptions: [
         'Accepting bribes',
         'Abuse of power'
@@ -49,7 +55,10 @@ export default function LeaderPerformance() {
       role: 'Mayor',
       corruptionCases: 1,
       reports: 30,
-      businesses: ['Owns a restaurant', 'Owns a boutique'],
+      businesses: [
+        { name: 'Johnson Restaurant', address: 'Shop 5, Street 6' },
+        { name: 'Johnson Boutique', address: 'Shop 7, Street 9' }
+      ],
       caseDescriptions: [
         'Conflict of interest in city contracts'
       ],
@@ -63,7 +72,10 @@ export default function LeaderPerformance() {
       role: 'Senator',
       corruptionCases: 4,
       reports: 150,
-      businesses: ['Owns a law firm', 'Owns a consulting agency'],
+      businesses: [
+        { name: 'Brown Law Firm', address: 'Office 1, Building 4' },
+        { name: 'Brown Consulting', address: 'Office 2, Building 6' }
+      ],
       caseDescriptions: [
         'Insider trading',
         'Fraudulent activities',
@@ -80,7 +92,10 @@ export default function LeaderPerformance() {
       role: 'Councilman',
       corruptionCases: 3,
       reports: 70,
-      businesses: ['Owns a construction company', 'Owns a logistics firm'],
+      businesses: [
+        { name: 'Davis Construction', address: 'Shop 3, Street 7' },
+        { name: 'Davis Logistics', address: 'Warehouse 2, Industrial Area' }
+      ],
       caseDescriptions: [
         'Kickbacks from contractors',
         'Favoritism in public projects',
@@ -96,7 +111,10 @@ export default function LeaderPerformance() {
       role: 'Sheriff',
       corruptionCases: 2,
       reports: 40,
-      businesses: ['Owns a ranch', 'Owns a security training academy'],
+      businesses: [
+        { name: 'White Ranch', address: 'Farm 1, Countryside' },
+        { name: 'White Security Academy', address: 'Training Center, Street 5' }
+      ],
       caseDescriptions: [
         'Excessive use of force',
         'Covering up misconduct'
@@ -111,7 +129,10 @@ export default function LeaderPerformance() {
       role: 'Councilwoman',
       corruptionCases: 3,
       reports: 60,
-      businesses: ['Owns a tech startup', 'Owns a marketing agency'],
+      businesses: [
+        { name: 'Green Tech', address: 'Office 4, Building 8' },
+        { name: 'Green Marketing', address: 'Office 5, Building 9' }
+      ],
       caseDescriptions: [
         'Insider trading',
         'Misuse of public resources',
@@ -127,7 +148,10 @@ export default function LeaderPerformance() {
       role: 'Commissioner',
       corruptionCases: 4,
       reports: 90,
-      businesses: ['Owns a chain of gyms', 'Owns a health supplement company'],
+      businesses: [
+        { name: 'Black Gyms', address: 'Gym 1, Street 10' },
+        { name: 'Black Supplements', address: 'Shop 8, Street 11' }
+      ],
       caseDescriptions: [
         'Fraudulent contracts',
         'Bribery',
@@ -144,7 +168,10 @@ export default function LeaderPerformance() {
       role: 'Judge',
       corruptionCases: 1,
       reports: 20,
-      businesses: ['Owns a law firm', 'Owns a publishing house'],
+      businesses: [
+        { name: 'Blue Law Firm', address: 'Office 6, Building 12' },
+        { name: 'Blue Publishing', address: 'Shop 9, Street 13' }
+      ],
       caseDescriptions: [
         'Bias in court rulings'
       ],
@@ -158,7 +185,10 @@ export default function LeaderPerformance() {
       role: 'Chief Inspector',
       corruptionCases: 3,
       reports: 80,
-      businesses: ['Owns a detective agency', 'Owns a security equipment store'],
+      businesses: [
+        { name: 'White Detective Agency', address: 'Office 7, Building 14' },
+        { name: 'White Security Store', address: 'Shop 10, Street 15' }
+      ],
       caseDescriptions: [
         'Accepting bribes',
         'Tampering with evidence',
@@ -166,7 +196,7 @@ export default function LeaderPerformance() {
       ],
       color: 'orange'
     }
-  ];
+];
 
   const openModal = (leader) => {
     setSelectedLeader(leader);

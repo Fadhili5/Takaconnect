@@ -30,28 +30,64 @@ export default function EmergencyServicesScreen() {
           </Text>
         </View> */}
 
-        <View style={tw`mt-2`}>
-        <View style={tw`flex-row flex-wrap justify-between`}>
-            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('')}>
-              <Card icon="users" title="Report a corrupt police " description=" " />
-              {/* <FontAwesome5 name="users" size={24} color="black" /> */}
+<View style={tw`mt-2`}>
+          <View style={tw`flex-row flex-wrap justify-between`}>
+            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('ReportCorruptPolice/page')}>
+              <Card icon="user-shield" title="Report a corrupt police" description=" " />
             </TouchableOpacity>
-            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('')}>
-              <Card icon="users" title="Goverment projects around you " description="exp " />
-              {/* <FontAwesome5 name="users" size={24} color="black" /> */}
+            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('ReportPoliceBrutality/page')}>
+              <Card icon="user-shield" title="Report a police brutality" description=" " />
             </TouchableOpacity>
-            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('')}>
-              <Card icon="users" title="Community forum " description="discrover whats cooking  " />
+            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('governmentProjects/page')}>
+              <Card icon="building" title="Government projects around you" description="exp " />
             </TouchableOpacity>
-            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('')}>
-              <Card icon="users" title="Recall your governor " description="Join 20,000 members to recall DR.Susan  " />
+            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('community')}>
+              <Card icon="comments" title="Community forum" description="Discover what's cooking" />
             </TouchableOpacity>
-            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('')}>
-              <Card icon="users" title="How your leaders are performing " description="Join 20,000 members to recall DR.Susan  " />
+            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('recallGovernor/page')}>
+              <Card icon="user-times" title="Recall your governor" description="Join 20,000 members to recall DR.Susan" />
             </TouchableOpacity>
-
+            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('leaderPerformance/page')}>
+              <Card icon="chart-line" title="How your leaders are performing" description="Join 20,000 members to recall DR.Susan" />
+            </TouchableOpacity>
+            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('budgetTracking/page')}>
+              <Card icon="money-check-alt" title="Track Budget & Expenditure" description="Monitor government spending" />
+            </TouchableOpacity>
+            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('report-incident/page')}>
+              <Card icon="exclamation-triangle" title="Report Fraud" description="Report fraudulent activities" />
+            </TouchableOpacity>
+            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('publicPetitions/page')}>
+              <Card icon="file-signature" title="Public Petitions" description="Start or sign petitions" />
+            </TouchableOpacity>
+            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('localMeetings/page')}>
+              <Card icon="users" title="Local Meetings" description="Join local community meetings" />
+            </TouchableOpacity>
+            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('reportlostID/page')}>
+              <Card icon="id-card" title="Recover lost ID" description="Recover lost ID" />
+            </TouchableOpacity>
+            {/* <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('educationQuality')}>
+              <Card icon="school" title="Monitor Education Quality" description="Track the quality of local schools" />
+            </TouchableOpacity> */}
+            {/* <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('healthcareServices')}>
+              <Card icon="hospital" title="Healthcare Services" description="Monitor local healthcare services" />
+            </TouchableOpacity> */}
+            {/* <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('whistleblower')}>
+              <Card icon="bullhorn" title="Whistleblower Protection" description="Report without fear" />
+            </TouchableOpacity> */}
+            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('legalAid')}>
+              <Card icon="balance-scale" title="Legal Aid" description="Get legal assistance" />
+            </TouchableOpacity>
+            {/* <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('publicTransport')}>
+              <Card icon="bus" title="Public Transport Issues" description="Report issues with public transport" />
+            </TouchableOpacity> */}
+            {/* <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('waterQuality')}>
+              <Card icon="tint" title="Water Quality" description="Monitor and report water quality" />
+            </TouchableOpacity> */}
+            {/* <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('roadConditions')}>
+              <Card icon="road" title="Road Conditions" description="Report poor road conditions" />
+            </TouchableOpacity> */}
           </View>
-        </View>
+        </View>    
       </View>
     </ScrollView>
   );

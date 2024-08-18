@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, Switch, ScrollView, Modal } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, Switch, ScrollView, Modal, Linking } from 'react-native';
 import { FontAwesome5, FontAwesome } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -41,93 +41,99 @@ export default function ReportCorruptPoliceScreen() {
     console.log({ image, rank, location, comments, date, severity, witnesses, isAnonymous });
   };
 
+  const handleCallPress = () => {
+    Linking.openURL('tel:+2546666666');
+  };
+
   return (
-    <ScrollView style={tw`flex-1 p-6 bg-white`}>
-      <Text style={[tw`text-2xl text-center mb-4 mt-8`, { fontFamily: 'outfit-bold' }]}>Report a Corrupt Police Officer</Text>
-      
-      <TouchableOpacity onPress={pickImage} style={styles.imagePicker}>
-        {image ? (
-          <Image source={{ uri: image }} style={styles.image} />
-        ) : (
-          <FontAwesome5 name="camera" size={32} color="#6b21a8" />
-        )}
-      </TouchableOpacity>
-      <Text style={[tw`text-center mb-4`, { fontFamily: 'outfit' }]}>Upload a picture of the police officer</Text>
-
-      <View style={tw`mb-4`}>
-        <Text style={[tw`text-lg mb-2`, { fontFamily: 'outfit-bold' }]}>Police Rank</Text>
-        <TouchableOpacity style={styles.dropdown} onPress={() => setRank('Sergeant')}>
-          <Text style={tw`text-gray-600`}>{rank || 'Select Rank'}</Text>
+    <View style={tw`flex-1 bg-white`}>
+      <ScrollView style={tw`p-6`}>
+        <Text style={[tw`text-2xl text-center mb-4 mt-8`, { fontFamily: 'outfit-bold' }]}>Report Police Brutality</Text>
+        
+        <TouchableOpacity onPress={pickImage} style={styles.imagePicker}>
+          {image ? (
+            <Image source={{ uri: image }} style={styles.image} />
+          ) : (
+            <FontAwesome5 name="camera" size={32} color="#6b21a8" />
+          )}
         </TouchableOpacity>
-      </View>
+        <Text style={[tw`text-center mb-4`, { fontFamily: 'outfit' }]}>Upload a picture of the police officer</Text>
 
-      <View style={tw`mb-4`}>
-        <Text style={[tw`text-lg mb-2`, { fontFamily: 'outfit-bold' }]}>Location</Text>
-        <TouchableOpacity style={styles.dropdown} onPress={() => setLocation('Downtown')}>
-          <Text style={tw`text-gray-600`}>{location || 'Select Location'}</Text>
-        </TouchableOpacity>
-      </View>
+        <View style={tw`mb-4`}>
+          <Text style={[tw`text-lg mb-2`, { fontFamily: 'outfit-bold' }]}>Police Rank</Text>
+          <TouchableOpacity style={styles.dropdown} onPress={() => setRank('Sergeant')}>
+            <Text style={tw`text-gray-600`}>{rank || 'Select Rank'}</Text>
+          </TouchableOpacity>
+        </View>
 
-      <View style={tw`mb-4`}>
-        <Text style={[tw`text-lg mb-2`, { fontFamily: 'outfit-bold' }]}>Date and Time</Text>
-        <TouchableOpacity style={styles.dropdown} onPress={() => setShowDatePicker(true)}>
-          <Text style={tw`text-gray-600`}>{date.toLocaleString()}</Text>
-        </TouchableOpacity>
-        {showDatePicker && (
-          <DateTimePicker
-            value={date}
-            mode="datetime"
-            display="default"
-            onChange={handleDateChange}
+        <View style={tw`mb-4`}>
+          <Text style={[tw`text-lg mb-2`, { fontFamily: 'outfit-bold' }]}>Location</Text>
+          <TouchableOpacity style={styles.dropdown} onPress={() => setLocation('Downtown')}>
+            <Text style={tw`text-gray-600`}>{location || 'Select Location'}</Text>
+          </TouchableOpacity>
+        </View>
+
+        <View style={tw`mb-4`}>
+          <Text style={[tw`text-lg mb-2`, { fontFamily: 'outfit-bold' }]}>Date and Time</Text>
+          <TouchableOpacity style={styles.dropdown} onPress={() => setShowDatePicker(true)}>
+            <Text style={tw`text-gray-600`}>{date.toLocaleString()}</Text>
+          </TouchableOpacity>
+          {showDatePicker && (
+            <DateTimePicker
+              value={date}
+              mode="datetime"
+              display="default"
+              onChange={handleDateChange}
+            />
+          )}
+        </View>
+
+        <View style={tw`mb-4`}>
+          <Text style={[tw`text-lg mb-2`, { fontFamily: 'outfit-bold' }]}>Severity Level</Text>
+          <TouchableOpacity style={styles.dropdown} onPress={() => setSeverity('High')}>
+            <Text style={tw`text-gray-600`}>{severity || 'Select Severity'}</Text>
+          </TouchableOpacity>
+        </View>
+
+        <View style={tw`mb-4`}>
+          <Text style={[tw`text-lg mb-2`, { fontFamily: 'outfit-bold' }]}>Witnesses</Text>
+          <TextInput
+            style={styles.textArea}
+            multiline
+            numberOfLines={2}
+            onChangeText={setWitnesses}
+            value={witnesses}
+            placeholder="Enter witness names and contact information..."
           />
-        )}
-      </View>
+        </View>
 
-      <View style={tw`mb-4`}>
-        <Text style={[tw`text-lg mb-2`, { fontFamily: 'outfit-bold' }]}>Severity Level</Text>
-        <TouchableOpacity style={styles.dropdown} onPress={() => setSeverity('High')}>
-          <Text style={tw`text-gray-600`}>{severity || 'Select Severity'}</Text>
+        <View style={tw`mb-4 flex-row items-center`}>
+          <Text style={[tw`text-lg`, { fontFamily: 'outfit-bold' }]}>Report Anonymously</Text>
+          <Switch
+            value={isAnonymous}
+            onValueChange={setIsAnonymous}
+            style={tw`ml-2`}
+          />
+        </View>
+
+        <View style={tw`mb-4`}>
+          <Text style={[tw`text-lg mb-2`, { fontFamily: 'outfit-bold' }]}>Additional Comments</Text>
+          <TextInput
+            style={styles.textArea}
+            multiline
+            numberOfLines={4}
+            onChangeText={setComments}
+            value={comments}
+            placeholder="Write your comments here..."
+          />
+        </View>
+
+        <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
+          <Text style={[tw`text-white text-center`, { fontFamily: 'outfit-bold' }]}>Submit Report</Text>
         </TouchableOpacity>
-      </View>
+      </ScrollView>
 
-      <View style={tw`mb-4`}>
-        <Text style={[tw`text-lg mb-2`, { fontFamily: 'outfit-bold' }]}>Witnesses</Text>
-        <TextInput
-          style={styles.textArea}
-          multiline
-          numberOfLines={2}
-          onChangeText={setWitnesses}
-          value={witnesses}
-          placeholder="Enter witness names and contact information..."
-        />
-      </View>
-
-      <View style={tw`mb-4 flex-row items-center`}>
-        <Text style={[tw`text-lg`, { fontFamily: 'outfit-bold' }]}>Report Anonymously</Text>
-        <Switch
-          value={isAnonymous}
-          onValueChange={setIsAnonymous}
-          style={tw`ml-2`}
-        />
-      </View>
-
-      <View style={tw`mb-4`}>
-        <Text style={[tw`text-lg mb-2`, { fontFamily: 'outfit-bold' }]}>Additional Comments</Text>
-        <TextInput
-          style={styles.textArea}
-          multiline
-          numberOfLines={4}
-          onChangeText={setComments}
-          value={comments}
-          placeholder="Write your comments here..."
-        />
-      </View>
-
-      <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
-        <Text style={[tw`text-white text-center`, { fontFamily: 'outfit-bold' }]}>Submit Report</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.callButton} onPress={() => setModalVisible(true)}>
+      <TouchableOpacity style={styles.callButton} onPress={handleCallPress}>
         <FontAwesome name="phone" size={32} color="#6b21a8" />
       </TouchableOpacity>
 
@@ -137,17 +143,17 @@ export default function ReportCorruptPoliceScreen() {
         visible={modalVisible}
         onRequestClose={() => setModalVisible(false)}
       >
-        <View style={tw`flex-1 justify-center items-center bg-black bg-opacity-50`}>
-          <View style={tw`bg-white p-6 rounded-lg`}>
+        <View style={tw`flex-1 justify-center items-center bg-black mb-4 bg-opacity-50`}>
+          <View style={tw`bg-white p-6 rounded-full`}>
             <Text style={[tw`text-xl mb-4`, { fontFamily: 'outfit-bold' }]}>Report via Call</Text>
-            <Text style={[tw`text-lg mb-4`, { fontFamily: 'outfit' }]}>Call us at: +2546666666</Text>
+            <Text style={[tw`text-lg mb-4`, { fontFamily: 'outfit' }]}>Call us at: +18576889770</Text>
             <TouchableOpacity style={styles.closeButton} onPress={() => setModalVisible(false)}>
               <Text style={[tw`text-white text-center`, { fontFamily: 'outfit-bold' }]}>Close</Text>
             </TouchableOpacity>
           </View>
         </View>
       </Modal>
-    </ScrollView>
+    </View>
   );
 }
 

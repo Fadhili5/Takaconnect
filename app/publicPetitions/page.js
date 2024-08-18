@@ -11,8 +11,10 @@ export default function PublicPetitions() {
   const [signature, setSignature] = useState('');
 
   const petitions = [
-    { id: 1, title: 'Petition 1', description: 'Description of Petition 1' },
-    { id: 2, title: 'Petition 2', description: 'Description of Petition 2' },
+    { id: 3, title: 'Improve Healthcare Facilities', description: 'Petition to improve healthcare facilities in rural areas.', signatures: 2000 },
+    { id: 4, title: 'Enhance Governance Transparency', description: 'Petition to enhance transparency in government operations.', signatures: 1500 },
+    { id: 5, title: 'Political Reform', description: 'Petition for political reform to ensure fair elections.', signatures: 1800 },
+    { id: 6, title: 'Repair and Maintain Roads', description: 'Petition to repair and maintain roads in urban areas.', signatures: 2200 },
     // Add more petitions as needed
   ];
 
@@ -47,6 +49,9 @@ export default function PublicPetitions() {
           >
             <Text style={[tw`text-black text-lg`, { fontFamily: 'outfit-bold' }]}>{petition.title}</Text>
             <Text style={[tw`text-gray-600`, { fontFamily: 'outfit' }]}>{petition.description}</Text>
+            <Text style={[tw`text-gray-600 mt-2`, { fontFamily: 'outfit' }]}>
+              {petition.signatures} people have signed this petition so far
+            </Text>
           </TouchableOpacity>
         ))}
       </View>

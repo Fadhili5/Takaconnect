@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, ScrollView, TouchableOpacity, Image } from 'react-native';
 import { FontAwesome5, MaterialIcons, Ionicons, Entypo } from '@expo/vector-icons';
+import AntDesign from '@expo/vector-icons/AntDesign';
 import tw from "tailwind-react-native-classnames";
 import { useRouter } from 'expo-router';
 
@@ -21,10 +22,11 @@ export default function HomeScreen() {
               style={tw`w-16 h-16 rounded-full mr-4`}
             />
           </TouchableOpacity>
-          <View>
+                    <View>
             <Text style={[tw`text-white text-lg`, { fontFamily: 'outfit-bold' }]}>Welcome!</Text>
             <Text style={[tw`text-white text-xl`, { fontFamily: 'outfit' }]}>Caleb Jephunneh</Text>
             <Text style={[tw`text-white text-xl`, { fontFamily: 'outfit' }]}>HakiSpeaks</Text>
+            {/* <Text style={[tw`text-white text-lg mt-2`, { fontFamily: 'outfit' }]}>2 years 5 months 2 days to election</Text> */}
           </View>
         </View>
       </View>
@@ -63,10 +65,10 @@ export default function HomeScreen() {
             <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('leaderPerformance/page')}>
               <Card icon="chart-line" title="How your leaders are performing" description="Join 20,000 members to recall DR.Susan" />
             </TouchableOpacity>
-            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('budgetTracking')}>
+            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('budgetTracking/page')}>
               <Card icon="money-check-alt" title="Track Budget & Expenditure" description="Monitor government spending" />
             </TouchableOpacity>
-            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('reportFraud')}>
+            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('report-incident/page')}>
               <Card icon="exclamation-triangle" title="Report Fraud" description="Report fraudulent activities" />
             </TouchableOpacity>
             <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('publicPetitions/page')}>
@@ -75,33 +77,25 @@ export default function HomeScreen() {
             <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('localMeetings/page')}>
               <Card icon="users" title="Local Meetings" description="Join local community meetings" />
             </TouchableOpacity>
-            {/* <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('environmentalIssues')}>
-              <Card icon="leaf" title="Report Environmental Issues" description="Report pollution and other issues" />
-            </TouchableOpacity> */}
-            {/* <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('educationQuality')}>
-              <Card icon="school" title="Monitor Education Quality" description="Track the quality of local schools" />
-            </TouchableOpacity> */}
-            {/* <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('healthcareServices')}>
-              <Card icon="hospital" title="Healthcare Services" description="Monitor local healthcare services" />
-            </TouchableOpacity> */}
-            {/* <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('whistleblower')}>
-              <Card icon="bullhorn" title="Whistleblower Protection" description="Report without fear" />
-            </TouchableOpacity> */}
+            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('reportlostID/page')}>
+              <Card icon="id-card" title="Recover lost ID" description="Recover lost ID" />
+            </TouchableOpacity>
             <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('legalAid')}>
               <Card icon="balance-scale" title="Legal Aid" description="Get legal assistance" />
             </TouchableOpacity>
-            {/* <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('publicTransport')}>
-              <Card icon="bus" title="Public Transport Issues" description="Report issues with public transport" />
-            </TouchableOpacity> */}
-            {/* <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('waterQuality')}>
-              <Card icon="tint" title="Water Quality" description="Monitor and report water quality" />
-            </TouchableOpacity> */}
-            {/* <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('roadConditions')}>
-              <Card icon="road" title="Road Conditions" description="Report poor road conditions" />
-            </TouchableOpacity> */}
           </View>
-        </View>     
+        </View>
 
+        {/* Advertise Your Business Section */}
+        <View style={tw`p-6 mt-4 bg-gray-100 rounded-2xl border border-gray-300 mb-4`}>
+          <Text style={[tw`text-black text-lg`, { fontFamily: 'outfit-bold' }]}>Advertise Your Business With Us</Text>
+          <Text style={[tw`text-gray-600 mt-2`, { fontFamily: 'outfit' }]}>
+            Reach thousands of potential customers by advertising your business on our platform.
+          </Text>
+          <TouchableOpacity onPress={() => navigateTo('advertiseWithUs/page')}>
+            <Text style={[tw`text-purple-700 mt-2`, { fontFamily: 'outfit-medium' }]}>Learn More &gt;&gt;</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </ScrollView>
   );
