@@ -10,8 +10,8 @@ export default function LeaderPerformance() {
   const leaders = [
     {
       id: 1,
-      name: 'Governor John Doe',
-      image: require('../../assets/images/jeph.jpg'), // Replace with actual image path
+      name: 'Governor Johnson Sakaja',
+      image: require('../../assets/images/Johnson.JPG'), // Replace with actual image path
       score: 3.5,
       role: 'Governor',
       corruptionCases: 5,
@@ -21,85 +21,80 @@ export default function LeaderPerformance() {
         { name: 'Doe Real Estate', address: 'Building 5, Avenue 3' }
       ],
       caseDescriptions: [
-        'Embezzlement of public funds',
-        'Bribery and corruption',
+        'Mismanaging the city’s funds',
+        'Irregular procurements',
         'Misuse of office',
-        'Illegal land acquisition',
-        'Tax evasion'
+        'Ghost workers on the payroll',
+        'Alleged bribery allegations'
       ],
       color: 'red'
     },
     {
       id: 2,
-      name: 'Police Chief Jane Smith',
-      image: require('../../assets/images/jeph.jpg'), // Replace with actual image path
+      name: 'Ex Governor Okoth Obado',
+      image: require('../../assets/images/Obado.jpg'), // Replace with actual image path
       score: 4.2,
-      role: 'Police Chief',
-      corruptionCases: 2,
+      role: 'Ex Governor Migori',
+      corruptionCases: 7,
       reports: 50,
       businesses: [
-        { name: 'Smith Security', address: 'Shop 10, Street 8' },
-        { name: 'Smith Investigations', address: 'Office 3, Building 2' }
+        { name: 'Sunrise Centre', address: 'Suna East' },
+        { name: 'Two apartments in Greenspan', address: 'Lower Savanna Dakar Rd Greenspan Mall Embakasi East' }
       ],
       caseDescriptions: [
-        'Accepting bribes',
-        'Abuse of power'
+        'Mismanagement of county funds',
+        'Alleged theft of public funds',
+        'Suspicious payments to multiple companies(1.98 billion)'
       ],
       color: 'orange'
     },
     {
       id: 3,
-      name: 'Mayor Alice Johnson',
-      image: require('../../assets/images/jeph.jpg'), // Replace with actual image path
+      name: 'Mary Syombua Mutunga',
+      image: require('../../assets/images/police1.jpg'), // Replace with actual image path
       score: 4.8,
-      role: 'Mayor',
+      role: 'OCS Itabua Police Station',
       corruptionCases: 1,
       reports: 30,
       businesses: [
-        { name: 'Johnson Restaurant', address: 'Shop 5, Street 6' },
+        { name: 'Land MN/I/2458', address: 'Itabua,Embu' },
         { name: 'Johnson Boutique', address: 'Shop 7, Street 9' }
       ],
       caseDescriptions: [
-        'Conflict of interest in city contracts'
+        'Kes100,000 bribe to facilitate release of impounded motor vehicle from Station’s yard'
       ],
       color: 'yellow'
     },
     {
       id: 4,
-      name: 'Senator Bob Brown',
-      image: require('../../assets/images/jeph.jpg'), // Replace with actual image path
+      name: 'Joash Rotich Koriese',
+      image: require('../../assets/images/CorruptJoash.jpg'), // Replace with actual image path
       score: 3.0,
-      role: 'Senator',
+      role: 'Inspector of Police',
       corruptionCases: 4,
-      reports: 150,
+      reports: 10,
       businesses: [
-        { name: 'Brown Law Firm', address: 'Office 1, Building 4' },
-        { name: 'Brown Consulting', address: 'Office 2, Building 6' }
+        { name: 'Poshomill', address: 'Bungoma, Building 4' },
+        { name: 'Amani shop', address: 'Office 2, Building 6' }
       ],
       caseDescriptions: [
-        'Insider trading',
-        'Fraudulent activities',
-        'Misappropriation of campaign funds',
-        'Nepotism'
+        'Ksh.0.5 million bribe to withdraw charges against a transporter and release detained goods'
       ],
       color: 'red'
     },
     {
       id: 5,
-      name: 'Councilman Charlie Davis',
+      name: 'Yagnesh Devani',
       image: require('../../assets/images/jeph.jpg'), // Replace with actual image path
       score: 4.5,
-      role: 'Councilman',
+      role: 'Business tycoon',
       corruptionCases: 3,
       reports: 70,
       businesses: [
-        { name: 'Davis Construction', address: 'Shop 3, Street 7' },
-        { name: 'Davis Logistics', address: 'Warehouse 2, Industrial Area' }
+        { name: 'Triton Petroleum Limited', address: 'Warehouse 2, Industrial Area' }
       ],
       caseDescriptions: [
-        'Kickbacks from contractors',
-        'Favoritism in public projects',
-        'Illegal campaign contributions'
+        'Kes.7.6 billion Triton Oil scandal'
       ],
       color: 'orange'
     },
