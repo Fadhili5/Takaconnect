@@ -33,13 +33,13 @@ export default function HomeScreen() {
 
       <View style={[tw`bg-white -mt-7 px-2`, { borderRadius: 30 }]}>
         <View style={tw`p-6 rounded-2xl border border-purple-700 mt-4`}>
-          <View style={tw`flex-row items-center`}>
-            <FontAwesome5 name="exclamation-circle" size={48} color="#6b21a8" />
+                    <View style={tw`flex-row items-center bg-purple-100 p-4 rounded-xl mt-4`}>
+            <FontAwesome5 name="hand-holding-heart" size={48} color="#6b21a8" />
             <View style={tw`ml-4`}>
-              <Text style={[tw`text-black text-lg mt-1`, { fontFamily: 'outfit-bold' }]}>Emergency Services</Text>
-              <Text style={[tw`text-gray-600`, { fontFamily: 'outfit' }]}>Quickly Report a corrupt police</Text>
-              <TouchableOpacity onPress={() => navigateTo('emergencyContacts/page')}>
-                <Text style={[tw`text-purple-700 mt-2`, { fontFamily: 'outfit-medium' }]}>Access Now &gt;&gt;</Text>
+              <Text style={[tw`text-black text-lg mt-1`, { fontFamily: 'outfit-bold' }]}>Support Our Cause</Text>
+              <Text style={[tw`text-gray-600`, { fontFamily: 'outfit' }]}>Your donations help us fight corruption and promote transparency.</Text>
+              <TouchableOpacity onPress={() => navigateTo('DonateScreen/page')}>
+                <Text style={[tw`text-purple-700 mt-2`, { fontFamily: 'outfit-medium' }]}>Donate Now &gt;&gt;</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -48,10 +48,10 @@ export default function HomeScreen() {
         <View style={tw`mt-2`}>
           <View style={tw`flex-row flex-wrap justify-between`}>
             <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('ReportCorruptPolice/page')}>
-              <Card icon="user-shield" title="Report a corrupt police" description=" " />
+              <Card icon="user-shield" title="Report a corrupt kanjo" description=" Report the corrupt to EACC " />
             </TouchableOpacity>
             <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('ReportPoliceBrutality/page')}>
-              <Card icon="user-shield" title="Report a police brutality" description=" " />
+              <Card icon="user-shield" title="Report a kanjo brutality" description="Report brutality to Human Rights " />
             </TouchableOpacity>
             <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('governmentProjects/page')}>
               <Card icon="building" title="Government projects around you" description="exp " />
