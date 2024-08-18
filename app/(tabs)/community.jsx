@@ -1,8 +1,8 @@
-import React from 'react';
-import { View, Text, Image, ScrollView, StyleSheet, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, Image, ScrollView, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 
-const Post = ({ post }) => (
+const Post = ({ post, onUpvote }) => (
   <View style={styles.postContainer}>
     <View style={styles.userInfo}>
       <Image source={{ uri: post.user.profilePicture }} style={styles.profilePicture} />
@@ -10,10 +10,10 @@ const Post = ({ post }) => (
     </View>
     <Text style={styles.postContent}>{post.content}</Text>
     <View style={styles.postActions}>
-      <View style={styles.likesContainer}>
+      <TouchableOpacity style={styles.likesContainer} onPress={() => onUpvote(post.id)}>
         <FontAwesome name="heart" size={20} color="red" />
         <Text style={styles.likeCount}>{post.likes}</Text>
-      </View>
+      </TouchableOpacity>
       <View style={styles.commentsContainer}>
         <FontAwesome name="comment" size={20} color="gray" />
         <Text style={styles.commentCount}>{post.comments.length}</Text>
@@ -31,7 +31,7 @@ const Post = ({ post }) => (
 );
 
 const CommunityScreen = () => {
-  const posts = [
+  const [posts, setPosts] = useState([
     {
       id: 5,
       user: {
@@ -97,26 +97,55 @@ const CommunityScreen = () => {
         { id: 2, user: 'Eunice Aulo', comment: 'We need to address this immediately.' },
       ],
     },
-  ];
-  
-  
+  ]);
+
+  const [newPostContent, setNewPostContent] = useState('');
+
+  const handleUpvote = (postId) => {
+    setPosts(posts.map(post => post.id === postId ? { ...post, likes: post.likes + 1 } : post));
+  };
+
+  const handleAddPost = () => {
+    if (newPostContent.trim()) {
+      const newPost = {
+        id: posts.length + 1,
+        user: {
+          name: 'New User',
+          profilePicture: 'https://randomuser.me/api/portraits/men/1.jpg',
+        },
+        content: newPostContent,
+        likes: 0,
+        comments: [],
+      };
+      setPosts([newPost, ...posts]);
+      setNewPostContent('');
+    }
+  };
 
   return (
     <ScrollView style={styles.container}>
       <Text style={styles.header}>Community Feed</Text>
+      <View style={styles.newPostContainer}>
+        <TextInput
+          style={styles.newPostInput}
+          placeholder="What's on your mind?"
+          value={newPostContent}
+          onChangeText={setNewPostContent}
+        />
+        <TouchableOpacity style={styles.newPostButton} onPress={handleAddPost}>
+          <Text style={styles.newPostButtonText}>Post</Text>
+        </TouchableOpacity>
+      </View>
       {posts.map((post) => (
-        <Post key={post.id} post={post} />
+        <Post key={post.id} post={post} onUpvote={handleUpvote} />
       ))}
-      <View style={styles.healthSection}>
-        <Text style={styles.healthHeader}>Health Discussions</Text>
-        <TouchableOpacity style={styles.healthButton}>
-          <Text style={styles.healthButtonText}>Book an Appointment</Text>
+      <View style={styles.governmentSection}>
+        <Text style={styles.governmentHeader}>Government Discussions</Text>
+        <TouchableOpacity style={styles.governmentButton}>
+          <Text style={styles.governmentButtonText}>Corruption in Nairobi</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.healthButton}>
-          <Text style={styles.healthButtonText}>Dietary Recommendations</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.healthButton}>
-          <Text style={styles.healthButtonText}>Exercise Tips</Text>
+        <TouchableOpacity style={styles.governmentButton}>
+          <Text style={styles.governmentButtonText}>Sign the Recall Governor Petition</Text>
         </TouchableOpacity>
       </View>
     </ScrollView>
@@ -135,6 +164,37 @@ const styles = StyleSheet.create({
     marginVertical: 20,
     color: '#333',
     marginTop: 40,
+  },
+  newPostContainer: {
+    flexDirection: 'row',
+    padding: 10,
+    backgroundColor: '#fff',
+    marginHorizontal: 10,
+    borderRadius: 10,
+    marginBottom: 20,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 5,
+  },
+  newPostInput: {
+    flex: 1,
+    borderColor: '#ccc',
+    borderWidth: 1,
+    borderRadius: 10,
+    padding: 10,
+    marginRight: 10,
+  },
+  newPostButton: {
+    backgroundColor: '#4CAF50',
+    padding: 10,
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  newPostButtonText: {
+    color: '#fff',
+    fontSize: 16,
   },
   postContainer: {
     backgroundColor: '#fff',
@@ -206,7 +266,7 @@ const styles = StyleSheet.create({
   commentText: {
     color: '#666',
   },
-  healthSection: {
+  governmentSection: {
     padding: 20,
     backgroundColor: '#fff',
     borderRadius: 10,
@@ -217,20 +277,20 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 5,
   },
-  healthHeader: {
+  governmentHeader: {
     fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 10,
     color: '#333',
   },
-  healthButton: {
+  governmentButton: {
     backgroundColor: '#4CAF50',
     padding: 15,
     borderRadius: 10,
     alignItems: 'center',
     marginVertical: 5,
   },
-  healthButtonText: {
+  governmentButtonText: {
     color: '#fff',
     fontSize: 16,
   },

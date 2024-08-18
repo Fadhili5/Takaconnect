@@ -55,7 +55,7 @@ export default function HomeScreen() {
               <Card icon="user-shield" title="Report a kanjo brutality" description="Report brutality to Human Rights " />
             </TouchableOpacity>
             <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('governmentProjects/page')}>
-              <Card icon="building" title="Government projects around you" description="exp " />
+              <Card icon="building" title="Government projects around you" description="take pictures lets evaluate them" />
             </TouchableOpacity>
             <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('community')}>
               <Card icon="comments" title="Community forum" description="Discover what's cooking" />

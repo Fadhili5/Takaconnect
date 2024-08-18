@@ -15,7 +15,7 @@ export default function DonateScreen() {
 
   return (
     <ScrollView style={tw`flex-1 bg-white p-6`}>
-      <View style={tw`mb-6`}>
+      <View style={tw`mb-6 mt-8`}>
         <Text style={[tw`text-2xl text-center text-purple-700`, { fontFamily: 'outfit-bold' }]}>Support Our Cause</Text>
         <Text style={[tw`text-lg text-center text-gray-600 mt-4`, { fontFamily: 'outfit' }]}>
           Your donations help us fight corruption and promote transparency. Every contribution makes a difference.
@@ -26,13 +26,13 @@ export default function DonateScreen() {
         <Text style={[tw`text-lg text-gray-700`, { fontFamily: 'outfit-medium' }]}>Choose an amount to donate:</Text>
         <View style={tw`flex-row justify-around mt-4`}>
           <TouchableOpacity style={tw`bg-purple-700 p-4 rounded-lg`} onPress={() => handleDonate(10)}>
-            <Text style={[tw`text-white text-lg`, { fontFamily: 'outfit-bold' }]}>$10</Text>
+            <Text style={[tw`text-white text-lg`, { fontFamily: 'outfit-bold' }]}>100</Text>
           </TouchableOpacity>
           <TouchableOpacity style={tw`bg-purple-700 p-4 rounded-lg`} onPress={() => handleDonate(20)}>
-            <Text style={[tw`text-white text-lg`, { fontFamily: 'outfit-bold' }]}>$20</Text>
+            <Text style={[tw`text-white text-lg`, { fontFamily: 'outfit-bold' }]}>200</Text>
           </TouchableOpacity>
           <TouchableOpacity style={tw`bg-purple-700 p-4 rounded-lg`} onPress={() => handleDonate(50)}>
-            <Text style={[tw`text-white text-lg`, { fontFamily: 'outfit-bold' }]}>$50</Text>
+            <Text style={[tw`text-white text-lg`, { fontFamily: 'outfit-bold' }]}>500</Text>
           </TouchableOpacity>
         </View>
       </View>
