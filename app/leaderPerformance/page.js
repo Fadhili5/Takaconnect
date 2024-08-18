@@ -11,7 +11,7 @@ export default function LeaderPerformance() {
     {
       id: 1,
       name: 'Governor Johnson Sakaja',
-      image: require('../../assets/images/Johnson.JPG'), // Replace with actual image path
+      image: require('../../assets/images/haitenangaja_logo.jpeg'), // Replace with actual image path
       score: 3.5,
       role: 'Governor',
       corruptionCases: 5,

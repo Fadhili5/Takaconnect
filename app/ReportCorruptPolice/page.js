@@ -16,6 +16,8 @@ export default function ReportCorruptPoliceScreen() {
   const [witnesses, setWitnesses] = useState('');
   const [isAnonymous, setIsAnonymous] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
+  const [submitModalVisible, setSubmitModalVisible] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState('');
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -39,6 +41,8 @@ export default function ReportCorruptPoliceScreen() {
   const handleSubmit = () => {
     // Handle form submission
     console.log({ image, rank, location, comments, date, severity, witnesses, isAnonymous });
+    setSubmitMessage(`Police reported and this is case number 5 of 12 other corrupt cases he has committed.`);
+    setSubmitModalVisible(true);
   };
 
   const handleCallPress = () => {
@@ -48,7 +52,7 @@ export default function ReportCorruptPoliceScreen() {
   return (
     <View style={tw`flex-1 bg-white`}>
       <ScrollView style={tw`p-6`}>
-        <Text style={[tw`text-2xl text-center mb-4 mt-8`, { fontFamily: 'outfit-bold' }]}>Report Police Brutality</Text>
+        <Text style={[tw`text-2xl text-center mb-4 mt-8`, { fontFamily: 'outfit-bold' }]}>Report kanjo Brutality</Text>
         
         <TouchableOpacity onPress={pickImage} style={styles.imagePicker}>
           {image ? (
@@ -148,6 +152,23 @@ export default function ReportCorruptPoliceScreen() {
             <Text style={[tw`text-xl mb-4`, { fontFamily: 'outfit-bold' }]}>Report via Call</Text>
             <Text style={[tw`text-lg mb-4`, { fontFamily: 'outfit' }]}>Call us at: +18576889770</Text>
             <TouchableOpacity style={styles.closeButton} onPress={() => setModalVisible(false)}>
+              <Text style={[tw`text-white text-center`, { fontFamily: 'outfit-bold' }]}>Close</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
+
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={submitModalVisible}
+        onRequestClose={() => setSubmitModalVisible(false)}
+      >
+        <View style={tw`flex-1 justify-center items-center bg-black mb-4 bg-opacity-50`}>
+          <View style={tw`bg-white p-6 rounded-lg`}>
+            <Text style={[tw`text-xl mb-4`, { fontFamily: 'outfit-bold' }]}>Submission Successful</Text>
+            <Text style={[tw`text-lg mb-4`, { fontFamily: 'outfit' }]}>{submitMessage}</Text>
+            <TouchableOpacity style={styles.closeButton} onPress={() => setSubmitModalVisible(false)}>
               <Text style={[tw`text-white text-center`, { fontFamily: 'outfit-bold' }]}>Close</Text>
             </TouchableOpacity>
           </View>
