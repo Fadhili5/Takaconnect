@@ -43,7 +43,7 @@ export default function ReportCorruptPoliceScreen() {
 
   return (
     <ScrollView style={tw`flex-1 p-6 bg-white`}>
-      <Text style={[tw`text-2xl text-center mb-4 mt-8`, { fontFamily: 'outfit-bold' }]}>Report a Corrupt Police Officer</Text>
+      <Text style={[tw`text-2xl text-center mb-4 mt-8`, { fontFamily: 'outfit-bold' }]}>Report Police Brutality</Text>
       
       <TouchableOpacity onPress={pickImage} style={styles.imagePicker}>
         {image ? (

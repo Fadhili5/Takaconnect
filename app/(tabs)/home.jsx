@@ -48,7 +48,7 @@ export default function HomeScreen() {
             <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('ReportCorruptPolice/page')}>
               <Card icon="user-shield" title="Report a corrupt police" description=" " />
             </TouchableOpacity>
-            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('ReportCorruptPolice/page')}>
+            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('ReportPoliceBrutality/page')}>
               <Card icon="user-shield" title="Report a police brutality" description=" " />
             </TouchableOpacity>
             <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('governmentProjects/page')}>
@@ -75,30 +75,30 @@ export default function HomeScreen() {
             <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('localMeetings/page')}>
               <Card icon="users" title="Local Meetings" description="Join local community meetings" />
             </TouchableOpacity>
-            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('environmentalIssues')}>
+            {/* <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('environmentalIssues')}>
               <Card icon="leaf" title="Report Environmental Issues" description="Report pollution and other issues" />
-            </TouchableOpacity>
-            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('educationQuality')}>
+            </TouchableOpacity> */}
+            {/* <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('educationQuality')}>
               <Card icon="school" title="Monitor Education Quality" description="Track the quality of local schools" />
-            </TouchableOpacity>
-            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('healthcareServices')}>
+            </TouchableOpacity> */}
+            {/* <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('healthcareServices')}>
               <Card icon="hospital" title="Healthcare Services" description="Monitor local healthcare services" />
-            </TouchableOpacity>
-            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('whistleblower')}>
+            </TouchableOpacity> */}
+            {/* <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('whistleblower')}>
               <Card icon="bullhorn" title="Whistleblower Protection" description="Report without fear" />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('legalAid')}>
               <Card icon="balance-scale" title="Legal Aid" description="Get legal assistance" />
             </TouchableOpacity>
-            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('publicTransport')}>
+            {/* <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('publicTransport')}>
               <Card icon="bus" title="Public Transport Issues" description="Report issues with public transport" />
-            </TouchableOpacity>
-            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('waterQuality')}>
+            </TouchableOpacity> */}
+            {/* <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('waterQuality')}>
               <Card icon="tint" title="Water Quality" description="Monitor and report water quality" />
-            </TouchableOpacity>
-            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('roadConditions')}>
+            </TouchableOpacity> */}
+            {/* <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('roadConditions')}>
               <Card icon="road" title="Road Conditions" description="Report poor road conditions" />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </View>
         </View>     
 
