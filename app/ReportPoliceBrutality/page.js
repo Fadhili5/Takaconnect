@@ -75,6 +75,7 @@ export default function ReportCorruptPoliceScreen() {
           <TouchableOpacity style={styles.dropdown} onPress={() => setLocation('Downtown')}>
             <Text style={tw`text-gray-600`}>{location || 'Select Location'}</Text>
           </TouchableOpacity>
+          
         </View>
 
         <View style={tw`mb-4`}>
