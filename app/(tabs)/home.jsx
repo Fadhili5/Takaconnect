@@ -14,7 +14,7 @@ export default function HomeScreen() {
 
   return (
     <ScrollView style={tw`flex-1`}>
-      <View style={tw`bg-black p-6 pb-12`}>
+      <View style={tw`bg-purple-900 p-6 pb-12`}>
         <View style={tw`flex-row items-center mt-10`}>
           <TouchableOpacity>
             <Image
@@ -32,12 +32,13 @@ export default function HomeScreen() {
       </View>
 
       <View style={[tw`bg-white -mt-7 px-2`, { borderRadius: 30 }]}>
-        <View style={tw`p-6 rounded-2xl border border-purple-700 mt-4`}>
-                    <View style={tw`flex-row items-center bg-purple-100 p-4 rounded-xl mt-4`}>
+        <View style={tw`p-2 rounded-2xl border border-purple-700 mt-4`}>
+                    <View style={tw`flex-row items-center bg-purple-100 p-4 rounded-xl `}>
             <FontAwesome5 name="hand-holding-heart" size={48} color="#6b21a8" />
             <View style={tw`ml-4`}>
               <Text style={[tw`text-black text-lg mt-1`, { fontFamily: 'outfit-bold' }]}>Support Our Cause</Text>
-              <Text style={[tw`text-gray-600`, { fontFamily: 'outfit' }]}>Your donations help us fight corruption and promote transparency.</Text>
+              <Text style={[tw`text-gray-600`, { fontFamily: 'outfit' }]}>Your donations help us fight corruption</Text>
+              <Text style={[tw`text-gray-600`, { fontFamily: 'outfit' }]}> and Promote Community participation.</Text>
               <TouchableOpacity onPress={() => navigateTo('DonateScreen/page')}>
                 <Text style={[tw`text-purple-700 mt-2`, { fontFamily: 'outfit-medium' }]}>Donate Now &gt;&gt;</Text>
               </TouchableOpacity>
@@ -80,7 +81,7 @@ export default function HomeScreen() {
             <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('reportlostID/page')}>
               <Card icon="id-card" title="Recover lost ID" description="Recover lost ID" />
             </TouchableOpacity>
-            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('legalAid')}>
+            <TouchableOpacity style={tw`w-1/2`} onPress={() => navigateTo('legalAid/page')}>
               <Card icon="balance-scale" title="Legal Aid" description="Get legal assistance" />
             </TouchableOpacity>
           </View>

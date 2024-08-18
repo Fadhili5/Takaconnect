@@ -1,7 +1,9 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity, SafeAreaView } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity, SafeAreaView, Dimensions } from 'react-native';
 import { Colors } from '@/constants/Colors';
 import { useRouter } from 'expo-router';
+
+const { width, height } = Dimensions.get('window');
 
 const Login = () => {
   const router = useRouter();
@@ -38,8 +40,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: '100%',
-    height: 520,
-
+    height: height * 0.5,
   },
   content: {
     padding: 25,
@@ -47,17 +48,17 @@ const styles = StyleSheet.create({
     marginTop: 30,
     borderTopLeftRadius: 40,
     borderTopRightRadius: 40,
-    height: 100,
+    height: height * 0.3,
     justifyContent: 'center',
   },
   title: {
-    fontSize: 40,
+    fontSize: width * 0.1,
     fontFamily: 'outfit-bold',
     textAlign: 'center',
     marginTop: 10,
   },
   subtitle: {
-    fontSize: 17,
+    fontSize: width * 0.04,
     fontFamily: 'outfit',
     textAlign: 'center',
     color: Colors.GRAY,
@@ -67,11 +68,11 @@ const styles = StyleSheet.create({
     padding: 15,
     backgroundColor: Colors.PRIMARY,
     borderRadius: 99,
-    marginTop: '20%',
+    marginTop: '10%',
     alignItems: 'center',
   },
   buttonText: {
-    fontSize: 20,
+    fontSize: width * 0.05,
     fontFamily: 'outfit',
     textAlign: 'center',
     color: Colors.WHITE,
