@@ -33,7 +33,7 @@ export default function LeaderPerformance() {
       id: 2,
       name: 'Ex Governor Okoth Obado',
       image: require('../../assets/images/Obado.jpg'), // Replace with actual image path
-      score: 4.2,
+      score: 1.2,
       role: 'Ex Governor Migori',
       corruptionCases: 7,
       reports: 50,
@@ -61,7 +61,7 @@ export default function LeaderPerformance() {
         { name: 'Johnson Boutique', address: 'Shop 7, Street 9' }
       ],
       caseDescriptions: [
-        'Kes100,000 bribe to facilitate release of impounded motor vehicle from Station’s yard'
+        'Kes100,000 bribe to facilitate release of impounded motor vehicle from Station yard'
       ],
       color: 'yellow'
     },
@@ -85,13 +85,13 @@ export default function LeaderPerformance() {
     {
       id: 5,
       name: 'Yagnesh Devani',
-      image: require('../../assets/images/jeph.jpg'), // Replace with actual image path
-      score: 4.5,
+      image: require('../../assets/images/corrupttycoon.jpg'), // Replace with actual image path
+      score: 1.5,
       role: 'Business tycoon',
       corruptionCases: 3,
-      reports: 70,
+      reports: 7,
       businesses: [
-        { name: 'Triton Petroleum Limited', address: 'Warehouse 2, Industrial Area' }
+        { name: 'Triton Petroleum Limited', address: 'Parklands/Highridge Chiromo Fuji Plaza House' }
       ],
       caseDescriptions: [
         'Kes.7.6 billion Triton Oil scandal'
@@ -100,94 +100,35 @@ export default function LeaderPerformance() {
     },
     {
       id: 6,
-      name: 'Sheriff Emily White',
-      image: require('../../assets/images/jeph.jpg'), // Replace with actual image path
-      score: 4.0,
-      role: 'Sheriff',
+      name: 'Douglas Ondieki Getanda',
+      image: require('../../assets/images/kplc.jpg'), // Replace with actual image path
+      score: 2.0,
+      role: 'KPLC OFFICIAL',
       corruptionCases: 2,
-      reports: 40,
+      reports: 4,
       businesses: [
-        { name: 'White Ranch', address: 'Farm 1, Countryside' },
-        { name: 'White Security Academy', address: 'Training Center, Street 5' }
+        { name: 'Uhondo Butchery', address: 'Taifa Center, Street 5' }
       ],
       caseDescriptions: [
-        'Excessive use of force',
-        'Covering up misconduct'
+        'Bribe to facilitate installation of transformer in Makadara'
       ],
       color: 'yellow'
     },
     {
       id: 7,
-      name: 'Councilwoman Diana Green',
-      image: require('../../assets/images/jeph.jpg'), // Replace with actual image path
-      score: 3.8,
-      role: 'Councilwoman',
+      name: 'Najib Mohammed Balala',
+      image: require('../../assets/images/Najib.jpg'), // Replace with actual image path
+      score: 2.8,
+      role: 'Former minister of Tourism',
       corruptionCases: 3,
       reports: 60,
       businesses: [
-        { name: 'Green Tech', address: 'Office 4, Building 8' },
-        { name: 'Green Marketing', address: 'Office 5, Building 9' }
+        { name: 'Tea business', address: 'Office 5, Building 9' }
       ],
       caseDescriptions: [
-        'Insider trading',
-        'Misuse of public resources',
-        'Conflict of interest'
-      ],
-      color: 'orange'
-    },
-    {
-      id: 8,
-      name: 'Commissioner Frank Black',
-      image: require('../../assets/images/jeph.jpg'), // Replace with actual image path
-      score: 3.2,
-      role: 'Commissioner',
-      corruptionCases: 4,
-      reports: 90,
-      businesses: [
-        { name: 'Black Gyms', address: 'Gym 1, Street 10' },
-        { name: 'Black Supplements', address: 'Shop 8, Street 11' }
-      ],
-      caseDescriptions: [
-        'Fraudulent contracts',
-        'Bribery',
-        'Embezzlement',
-        'Tax evasion'
-      ],
-      color: 'red'
-    },
-    {
-      id: 9,
-      name: 'Judge Helen Blue',
-      image: require('../../assets/images/jeph.jpg'), // Replace with actual image path
-      score: 4.6,
-      role: 'Judge',
-      corruptionCases: 1,
-      reports: 20,
-      businesses: [
-        { name: 'Blue Law Firm', address: 'Office 6, Building 12' },
-        { name: 'Blue Publishing', address: 'Shop 9, Street 13' }
-      ],
-      caseDescriptions: [
-        'Bias in court rulings'
-      ],
-      color: 'yellow'
-    },
-    {
-      id: 10,
-      name: 'Chief Inspector Gary White',
-      image: require('../../assets/images/jeph.jpg'), // Replace with actual image path
-      score: 3.9,
-      role: 'Chief Inspector',
-      corruptionCases: 3,
-      reports: 80,
-      businesses: [
-        { name: 'White Detective Agency', address: 'Office 7, Building 14' },
-        { name: 'White Security Store', address: 'Shop 10, Street 15' }
-      ],
-      caseDescriptions: [
-        'Accepting bribes',
-        'Tampering with evidence',
-        'Abuse of power'
+        'alleged procurement fraud',
+        'theft of public funds',
+        'Unlawful acquisition of Public Property'
       ],
       color: 'orange'
     }
