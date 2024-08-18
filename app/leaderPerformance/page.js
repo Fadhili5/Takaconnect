@@ -10,8 +10,8 @@ export default function LeaderPerformance() {
   const leaders = [
     {
       id: 1,
-      name: 'Governor John Doe',
-      image: require('../../assets/images/jeph.jpg'), // Replace with actual image path
+      name: 'Governor Johnson Sakaja',
+      image: require('../../assets/images/Johnson.JPG'), // Replace with actual image path
       score: 3.5,
       role: 'Governor',
       corruptionCases: 5,
@@ -21,178 +21,114 @@ export default function LeaderPerformance() {
         { name: 'Doe Real Estate', address: 'Building 5, Avenue 3' }
       ],
       caseDescriptions: [
-        'Embezzlement of public funds',
-        'Bribery and corruption',
+        'Mismanaging the city’s funds',
+        'Irregular procurements',
         'Misuse of office',
-        'Illegal land acquisition',
-        'Tax evasion'
+        'Ghost workers on the payroll',
+        'Alleged bribery allegations'
       ],
       color: 'red'
     },
     {
       id: 2,
-      name: 'Police Chief Jane Smith',
-      image: require('../../assets/images/jeph.jpg'), // Replace with actual image path
-      score: 4.2,
-      role: 'Police Chief',
-      corruptionCases: 2,
+      name: 'Ex Governor Okoth Obado',
+      image: require('../../assets/images/Obado.jpg'), // Replace with actual image path
+      score: 1.2,
+      role: 'Ex Governor Migori',
+      corruptionCases: 7,
       reports: 50,
       businesses: [
-        { name: 'Smith Security', address: 'Shop 10, Street 8' },
-        { name: 'Smith Investigations', address: 'Office 3, Building 2' }
+        { name: 'Sunrise Centre', address: 'Suna East' },
+        { name: 'Two apartments in Greenspan', address: 'Lower Savanna Dakar Rd Greenspan Mall Embakasi East' }
       ],
       caseDescriptions: [
-        'Accepting bribes',
-        'Abuse of power'
+        'Mismanagement of county funds',
+        'Alleged theft of public funds',
+        'Suspicious payments to multiple companies(1.98 billion)'
       ],
       color: 'orange'
     },
     {
       id: 3,
-      name: 'Mayor Alice Johnson',
-      image: require('../../assets/images/jeph.jpg'), // Replace with actual image path
+      name: 'Mary Syombua Mutunga',
+      image: require('../../assets/images/police1.jpg'), // Replace with actual image path
       score: 4.8,
-      role: 'Mayor',
+      role: 'OCS Itabua Police Station',
       corruptionCases: 1,
       reports: 30,
       businesses: [
-        { name: 'Johnson Restaurant', address: 'Shop 5, Street 6' },
+        { name: 'Land MN/I/2458', address: 'Itabua,Embu' },
         { name: 'Johnson Boutique', address: 'Shop 7, Street 9' }
       ],
       caseDescriptions: [
-        'Conflict of interest in city contracts'
+        'Kes100,000 bribe to facilitate release of impounded motor vehicle from Station yard'
       ],
       color: 'yellow'
     },
     {
       id: 4,
-      name: 'Senator Bob Brown',
-      image: require('../../assets/images/jeph.jpg'), // Replace with actual image path
+      name: 'Joash Rotich Koriese',
+      image: require('../../assets/images/CorruptJoash.jpg'), // Replace with actual image path
       score: 3.0,
-      role: 'Senator',
+      role: 'Inspector of Police',
       corruptionCases: 4,
-      reports: 150,
+      reports: 10,
       businesses: [
-        { name: 'Brown Law Firm', address: 'Office 1, Building 4' },
-        { name: 'Brown Consulting', address: 'Office 2, Building 6' }
+        { name: 'Poshomill', address: 'Bungoma, Building 4' },
+        { name: 'Amani shop', address: 'Office 2, Building 6' }
       ],
       caseDescriptions: [
-        'Insider trading',
-        'Fraudulent activities',
-        'Misappropriation of campaign funds',
-        'Nepotism'
+        'Ksh.0.5 million bribe to withdraw charges against a transporter and release detained goods'
       ],
       color: 'red'
     },
     {
       id: 5,
-      name: 'Councilman Charlie Davis',
-      image: require('../../assets/images/jeph.jpg'), // Replace with actual image path
-      score: 4.5,
-      role: 'Councilman',
+      name: 'Yagnesh Devani',
+      image: require('../../assets/images/corrupttycoon.jpg'), // Replace with actual image path
+      score: 1.5,
+      role: 'Business tycoon',
       corruptionCases: 3,
-      reports: 70,
+      reports: 7,
       businesses: [
-        { name: 'Davis Construction', address: 'Shop 3, Street 7' },
-        { name: 'Davis Logistics', address: 'Warehouse 2, Industrial Area' }
+        { name: 'Triton Petroleum Limited', address: 'Parklands/Highridge Chiromo Fuji Plaza House' }
       ],
       caseDescriptions: [
-        'Kickbacks from contractors',
-        'Favoritism in public projects',
-        'Illegal campaign contributions'
+        'Kes.7.6 billion Triton Oil scandal'
       ],
       color: 'orange'
     },
     {
       id: 6,
-      name: 'Sheriff Emily White',
-      image: require('../../assets/images/jeph.jpg'), // Replace with actual image path
-      score: 4.0,
-      role: 'Sheriff',
+      name: 'Douglas Ondieki Getanda',
+      image: require('../../assets/images/kplc.jpg'), // Replace with actual image path
+      score: 2.0,
+      role: 'KPLC OFFICIAL',
       corruptionCases: 2,
-      reports: 40,
+      reports: 4,
       businesses: [
-        { name: 'White Ranch', address: 'Farm 1, Countryside' },
-        { name: 'White Security Academy', address: 'Training Center, Street 5' }
+        { name: 'Uhondo Butchery', address: 'Taifa Center, Street 5' }
       ],
       caseDescriptions: [
-        'Excessive use of force',
-        'Covering up misconduct'
+        'Bribe to facilitate installation of transformer in Makadara'
       ],
       color: 'yellow'
     },
     {
       id: 7,
-      name: 'Councilwoman Diana Green',
-      image: require('../../assets/images/jeph.jpg'), // Replace with actual image path
-      score: 3.8,
-      role: 'Councilwoman',
+      name: 'Najib Mohammed Balala',
+      image: require('../../assets/images/Najib.jpg'), // Replace with actual image path
+      score: 2.8,
+      role: 'Former minister of Tourism',
       corruptionCases: 3,
       reports: 60,
       businesses: [
-        { name: 'Green Tech', address: 'Office 4, Building 8' },
-        { name: 'Green Marketing', address: 'Office 5, Building 9' }
+        { name: 'Tea business', address: 'Office 5, Building 9' }
       ],
       caseDescriptions: [
-        'Insider trading',
-        'Misuse of public resources',
-        'Conflict of interest'
-      ],
-      color: 'orange'
-    },
-    {
-      id: 8,
-      name: 'Commissioner Frank Black',
-      image: require('../../assets/images/jeph.jpg'), // Replace with actual image path
-      score: 3.2,
-      role: 'Commissioner',
-      corruptionCases: 4,
-      reports: 90,
-      businesses: [
-        { name: 'Black Gyms', address: 'Gym 1, Street 10' },
-        { name: 'Black Supplements', address: 'Shop 8, Street 11' }
-      ],
-      caseDescriptions: [
-        'Fraudulent contracts',
-        'Bribery',
-        'Embezzlement',
-        'Tax evasion'
-      ],
-      color: 'red'
-    },
-    {
-      id: 9,
-      name: 'Judge Helen Blue',
-      image: require('../../assets/images/jeph.jpg'), // Replace with actual image path
-      score: 4.6,
-      role: 'Judge',
-      corruptionCases: 1,
-      reports: 20,
-      businesses: [
-        { name: 'Blue Law Firm', address: 'Office 6, Building 12' },
-        { name: 'Blue Publishing', address: 'Shop 9, Street 13' }
-      ],
-      caseDescriptions: [
-        'Bias in court rulings'
-      ],
-      color: 'yellow'
-    },
-    {
-      id: 10,
-      name: 'Chief Inspector Gary White',
-      image: require('../../assets/images/jeph.jpg'), // Replace with actual image path
-      score: 3.9,
-      role: 'Chief Inspector',
-      corruptionCases: 3,
-      reports: 80,
-      businesses: [
-        { name: 'White Detective Agency', address: 'Office 7, Building 14' },
-        { name: 'White Security Store', address: 'Shop 10, Street 15' }
-      ],
-      caseDescriptions: [
-        'Accepting bribes',
-        'Tampering with evidence',
-        'Abuse of power'
+        'alleged procurement fraud',
+        'theft of public funds',
+        'Unlawful acquisition of Public Property'
       ],
       color: 'orange'
     }

@@ -126,9 +126,9 @@ export default function ReportLostID() {
         <View style={tw`flex-1 justify-center items-center bg-black bg-opacity-50`}>
           <View style={tw`bg-white p-6 rounded-lg`}>
             <Text style={[tw`text-xl mb-4`, { fontFamily: 'outfit-bold' }]}>Pay to Get Your ID</Text>
-            <Text style={[tw`text-center mb-4`, { fontFamily: 'outfit' }]}>Pay $100 to get your ID or passport back.</Text>
+            <Text style={[tw`text-center mb-4`, { fontFamily: 'outfit' }]}>Pay Kes 100 to get your ID or passport back.</Text>
             <TouchableOpacity style={styles.submitButton} onPress={handlePayment}>
-              <Text style={[tw`text-white text-center`, { fontFamily: 'outfit-bold' }]}>Pay $100</Text>
+              <Text style={[tw`text-white text-center`, { fontFamily: 'outfit-bold' }]}>Pay Kes 100</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.closeButton} onPress={() => setPaymentModalVisible(false)}>
               <Text style={[tw`text-white text-center`, { fontFamily: 'outfit-bold' }]}>Close</Text>
