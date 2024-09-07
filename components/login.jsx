@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Image, StyleSheet, Text, TouchableOpacity, Dimensions } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 import tw from 'tailwind-react-native-classnames';
 import { Colors } from '@/constants/Colors';
 import { useRouter } from 'expo-router';
@@ -10,38 +11,45 @@ const { width } = Dimensions.get('window');
 export default function App() {
   const router = useRouter();
   return (
-    <View style={[styles.container, tw`bg-green-600`]}>
-      <Image
-        source={require('../assets/images/Designer (1).jpeg')}
-        style={styles.logo}
-        resizeMode="contain"
-      />
-      <Text style={styles.title}>TAKA CONNECT</Text>
+    <LinearGradient
+      colors={['#4CAF50', '#2E7D32']}
+      style={styles.gradient}
+    >
+      <View style={styles.container}>
+        <Image
+          source={require('../assets/images/Designer (1).jpeg')}
+          style={styles.logo}
+          resizeMode="contain"
+        />
+        <Text style={styles.title}>TAKA CONNECT</Text>
 
-      <Text style={styles.securedText}>Secured by Privado.id</Text>
+        <Text style={styles.securedText}>Secured by Privado.id</Text>
 
+        {/* Privado Secure Logo */}
+        <Image
+          source={PrivadoSecure}
+          style={styles.privadoSecureLogo}
+          resizeMode="contain"
+        />
 
-      {/* Privado Secure Logo */}
-      <Image
-        source={PrivadoSecure}
-        style={styles.privadoSecureLogo}
-        resizeMode="contain"
-      />
+        {/* Spacing */}
+        <View style={styles.spacer} />
 
-      {/* Spacing */}
-      <View style={styles.spacer} />
-
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => router.push('auth/sign-in')}
-      >
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => router.push('auth/sign-in')}
+        >
           <Text style={styles.buttonText}>Get Started</Text>
-      </TouchableOpacity>
-    </View>
+        </TouchableOpacity>
+      </View>
+    </LinearGradient>
   );
 }
 
 const styles = StyleSheet.create({
+  gradient: {
+    flex: 1,
+  },
   container: {
     flex: 1,
     justifyContent: 'center',
@@ -51,8 +59,9 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   logo: {
-    width: 150,
-    height: 100,
+    width: 200,
+    height: 150,
+    marginBottom: 20,
   },
   title: {
     color: Colors.WHITE,
@@ -60,6 +69,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginTop: 20,
     marginBottom: 10,
+    textAlign: 'center',
   },
   privadoSecureLogo: {
     marginTop: 10,
@@ -83,6 +93,11 @@ const styles = StyleSheet.create({
     marginTop: 20,
     width: '85%', // Adjusted for better responsiveness
     alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
+    elevation: 5,
   },
   buttonText: {
     fontSize: width * 0.05,
@@ -90,8 +105,5 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: Colors.WHITE,
     fontWeight: 'bold', // Make the text bold
-    backgroundColor: 'green',
-    padding: 10,
-    borderRadius: 25,
   },
 });
