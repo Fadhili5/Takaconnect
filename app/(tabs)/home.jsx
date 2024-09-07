@@ -74,10 +74,10 @@ export default function App() {
           </View>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             {[
-              { name: 'Plastic', image: require('../../assets/images/water-bottle.png') },
-              { name: 'Glass', image: require('../../assets/images/glass.png') },
-              { name: 'Paper', image: require('../../assets/images/paper (1).png') },
-              { name: 'Metal', image: require('../../assets/images/metal.png') },
+              { name: 'Plastic', image: require('../../assets/images/plasticc.jpg') },
+              { name: 'Glass', image: require('../../assets/images/glasses.jpg') },
+              { name: 'Paper', image: require('../../assets/images/papers.jpg') },
+              { name: 'Metal', image: require('../../assets/images/metallic.jpg') },
             ].map((item, index) => (
               <View key={index} style={tw`bg-white rounded-lg p-4 items-center mr-2`}>
                 <Image source={item.image} style={tw`w-16 h-16`} />
