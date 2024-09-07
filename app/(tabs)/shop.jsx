@@ -4,27 +4,32 @@ import { Ionicons } from '@expo/vector-icons';
 import tw from 'tailwind-react-native-classnames';
 
 const data = [
-  { id: '1', name: 'Ceramic', img: require('../../assets/images/glass.png') },
-  { id: '2', name: 'Bags', img: require('../../assets/images/glass.png') },
-  { id: '3', name: 'Watches', img: require('../../assets/images/glass.png') },
-  { id: '4', name: 'Chairs', img: require('../../assets/images/glass.png') },
+  { id: '1', name: 'Ceramic', img: require('../../assets/images/ceramic.jpg') },
+  { id: '2', name: 'Bags', img: require('../../assets/images/plastic.jpg') },
+  { id: '3', name: 'Watches', img: require('../../assets/images/watch.jpg') },
+  { id: '4', name: 'Chairs', img: require('../../assets/images/chairs.jpg') },
 ];
 
 const recyclableData = [
-  { id: '1', name: 'Pots', img: require('../../assets/images/glass.png') },
-  { id: '2', name: 'Furniture', img: require('../../assets/images/glass.png') },
-  { id: '3', name: 'Electric', img: require('../../assets/images/glass.png') },
-  { id: '4', name: 'Books', img: require('../../assets/images/glass.png') },
+  { id: '1', name: 'Pots', img: require('../../assets/images/pots.jpg') },
+  { id: '2', name: 'Furniture', img: require('../../assets/images/furniture.jpg') },
+  { id: '3', name: 'Electric', img: require('../../assets/images/electric.jpg') },
+  { id: '4', name: 'Books', img: require('../../assets/images/books.jpg') },
 ];
 
 const bioFertilizersData = [
-  { id: '1', name: 'Organic', img: require('../../assets/images/glass.png') },
-  { id: '2', name: 'Fertilizer', img: require('../../assets/images/glass.png') },
-  { id: '3', name: 'Incense', img: require('../../assets/images/glass.png') },
-  { id: '4', name: 'Benzoin', img: require('../../assets/images/glass.png') },
+  { id: '1', name: 'Organic', img: require('../../assets/images/organic.jpg') },
+  { id: '2', name: 'Fertilizer', img: require('../../assets/images/fertilizer.jpg') },
+  { id: '3', name: 'Incense', img: require('../../assets/images/incense.jpg') },
+  { id: '4', name: 'Manure', img: require('../../assets/images/manure.jpg') },
 ];
 
-
+const bioFertilizersData1 = [
+  { id: '1', name: 'Organic', img: require('../../assets/images/organic.jpg') },
+  { id: '2', name: 'Fertilizer', img: require('../../assets/images/fertilizer.jpg') },
+  { id: '3', name: 'Incense', img: require('../../assets/images/incense.jpg') },
+  { id: '4', name: 'Manure', img: require('../../assets/images/manure.jpg') },
+];
 
 const CategoryItem = ({ item }) => (
   <View style={tw`flex-col items-center`}>
@@ -78,6 +83,14 @@ export default function ProductScreen() {
         <Text style={tw`font-bold text-lg mt-6 mb-4`}>Bio-fertilizers</Text>
         <FlatList
           data={bioFertilizersData}
+          renderItem={({ item }) => <CategoryItem item={item} />}
+          keyExtractor={(item) => item.id}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+        />
+        <Text style={tw`font-bold text-lg mt-6 mb-4`}>Bio-fertilizers</Text>
+        <FlatList
+          data={bioFertilizersData1}
           renderItem={({ item }) => <CategoryItem item={item} />}
           keyExtractor={(item) => item.id}
           horizontal
