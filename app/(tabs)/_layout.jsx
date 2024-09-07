@@ -21,23 +21,23 @@ export default function Layout() {
 
   return (
     <>
-    <View style={styles.container}>
-      <View style={styles.sessionButtonContainer}>
-        <TouchableOpacity style={styles.sessionButton} onPress={() => router.push('/session/page')}>
-          <MaterialCommunityIcons name="plus" size={24} color="white" />
-          <Text style={styles.sessionButtonText}>Taka</Text>
-        </TouchableOpacity>
-      </View>
+      <View style={styles.container}>
+        <View style={styles.sessionButtonContainer}>
+          <TouchableOpacity style={styles.sessionButton} onPress={() => router.push('/session/page')}>
+            <MaterialCommunityIcons name="plus" size={24} color="white" />
+            <Text style={styles.sessionButtonText}>Taka</Text>
+          </TouchableOpacity>
+        </View>
 
-      <View style={styles.qrCodeContainer}>
-        <QRCode
-          value="https://your-url.com"
-          size={64}
-          backgroundColor='white'
-          color='blue'
-        />
+        <View style={styles.qrCodeContainer}>
+          <QRCode
+            value="https://your-url.com"
+            size={64}
+            backgroundColor='white'
+            color='blue'
+          />
+        </View>
       </View>
-    </View>
       <Tabs
         screenOptions={{
           headerShown: false,
@@ -48,34 +48,45 @@ export default function Layout() {
         <Tabs.Screen
           name="home"
           options={{
-            tabBarLabel: 'Home',
+            tabBarLabel: '',
             tabBarIcon: ({ color }) => (
               <MaterialCommunityIcons name="home-circle-outline" size={30} color={color} />
             ),
           }}
         />
         <Tabs.Screen
-          name="chat"
+          name="location"
           options={{
-            tabBarLabel: 'Services',
+            tabBarLabel: '',
             tabBarIcon: ({ color }) => (
-              <MaterialIcons name="miscellaneous-services" size={24} color={color} />
+              <MaterialIcons name="location-on" size={30} color={color} />
             ),
           }}
         />
         <Tabs.Screen
-          name="community"
+          name="qrcode"
           options={{
-            tabBarLabel: 'Community',
+            tabBarLabel: '',
             tabBarIcon: ({ color }) => (
-              <MaterialCommunityIcons name="account-group" size={24} color={color} />
+              <View style={styles.qrCodeTab}>
+                <MaterialCommunityIcons name="qrcode-scan" size={40} color={color} />
+              </View>
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="shop"
+          options={{
+            tabBarLabel: '',
+            tabBarIcon: ({ color }) => (
+              <MaterialIcons name="shopping-cart" size={30} color={color} />
             ),
           }}
         />
         <Tabs.Screen
           name="profile"
           options={{
-            tabBarLabel: 'Profile',
+            tabBarLabel: '',
             tabBarIcon: ({ color }) => (
               <FontAwesome name="gear" size={24} color={color} />
             ),
@@ -88,13 +99,14 @@ export default function Layout() {
 
 const styles = StyleSheet.create({
   tabBar: {
-    height: 60,
+    height: 70,
     justifyContent: 'space-around',
     alignItems: 'center',
     backgroundColor: 'white',
     borderTopWidth: 1,
     borderColor: '#e2e2e2',
     position: 'relative',
+    paddingVertical: 10,
   },
   sessionButtonContainer: {
     position: 'absolute',
@@ -117,5 +129,15 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 16,
     marginLeft: 5,
+  },
+  qrCodeTab: {
+    position: 'absolute',
+    bottom: 10, // Adjust to position the QR code icon higher
+    backgroundColor: 'white',
+    borderRadius: 40,
+    padding: 10,
+    elevation: 4,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

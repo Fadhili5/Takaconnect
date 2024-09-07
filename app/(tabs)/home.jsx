@@ -90,25 +90,6 @@ export default function App() {
         {/* Statistics - Updated with EcoStatsCard */}
         <EcoStatsCard />
       </View>
-
-      {/* Bottom Navigation */}
-      <View style={tw`flex flex-row justify-around items-center bg-white py-2`}>
-        <TouchableOpacity>
-          <Ionicons name="ios-home-outline" size={24} color="gray" />
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Ionicons name="ios-calendar-outline" size={24} color="gray" />
-        </TouchableOpacity>
-        <TouchableOpacity style={tw`bg-green-600 p-4 rounded-full`}>
-          <Ionicons name="ios-add" size={32} color="white" />
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Ionicons name="ios-cart-outline" size={24} color="gray" />
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Ionicons name="ios-person-outline" size={24} color="gray" />
-        </TouchableOpacity>
-      </View>
     </ScrollView>
   );
 }
