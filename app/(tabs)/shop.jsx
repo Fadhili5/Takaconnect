@@ -24,6 +24,13 @@ const bioFertilizersData = [
   { id: '4', name: 'Manure', img: require('../../assets/images/manure.jpg') },
 ];
 
+const bioFertilizersData1 = [
+  { id: '1', name: 'Organic', img: require('../../assets/images/organic.jpg') },
+  { id: '2', name: 'Fertilizer', img: require('../../assets/images/fertilizer.jpg') },
+  { id: '3', name: 'Incense', img: require('../../assets/images/incense.jpg') },
+  { id: '4', name: 'Manure', img: require('../../assets/images/manure.jpg') },
+];
+
 const CategoryItem = ({ item }) => (
   <View style={styles.categoryItem}>
     <Image source={item.img} style={styles.image} />
