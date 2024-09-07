@@ -1,12 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { View, Text, TouchableOpacity, Image, ScrollView, StyleSheet, Modal } from 'react-native';
+import { View, Text, TouchableOpacity, Image, ScrollView, StyleSheet } from 'react-native';
 import { Camera } from 'expo-camera';
 import { Ionicons } from '@expo/vector-icons';
+import { BottomSheet } from '@rneui/themed'; // Ensure this import is correct
 
 export default function ScanScrapScreen() {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isBottomSheetVisible, setIsBottomSheetVisible] = useState(false);
   const cameraRef = useRef(null);
 
   useEffect(() => {
@@ -18,7 +19,7 @@ export default function ScanScrapScreen() {
 
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
-    setIsModalVisible(true);
+    setIsBottomSheetVisible(true);
     console.log(`Bar code with type ${type} and data ${data} has been scanned!`);
   };
 
@@ -47,60 +48,50 @@ export default function ScanScrapScreen() {
         </View>
       </Camera>
 
-      <Modal
-        visible={isModalVisible}
-        transparent={true}
-        animationType="slide"
-        onRequestClose={() => setIsModalVisible(false)}
-      >
-        <View style={styles.modalContainer}>
-          <View style={styles.modalContent}>
-            <Text style={styles.modalTitle}>Scan Scrap</Text>
-            <View style={styles.itemDetails}>
-              <Image
-                source={{ uri: 'https://via.placeholder.com/100' }}
-                style={styles.itemImage}
-              />
-              <View>
-                <Text style={styles.itemName}>Glass bottle</Text>
-                <View style={styles.itemSpecs}>
-                  <View style={styles.specItem}>
-                    <Text style={styles.specLabel}>Material</Text>
-                    <Text>Glass</Text>
-                  </View>
-                  <View style={styles.specItem}>
-                    <Text style={styles.specLabel}>Price</Text>
-                    <Text>₹4</Text>
-                  </View>
-                  <View style={styles.specItem}>
-                    <Text style={styles.specLabel}>Points</Text>
-                    <Text>3p</Text>
-                  </View>
-                  <View style={styles.specItem}>
-                    <Text style={styles.specLabel}>Saved CO2</Text>
-                    <Text>4g</Text>
-                  </View>
+      <BottomSheet isVisible={isBottomSheetVisible} onBackdropPress={() => setIsBottomSheetVisible(false)}>
+        <View style={styles.bottomSheetContent}>
+          <Text style={styles.bottomSheetTitle}>Scan Scrap</Text>
+          <View style={styles.itemDetails}>
+            <Image
+              source={{ uri: 'https://via.placeholder.com/100' }}
+              style={styles.itemImage}
+            />
+            <View>
+              <Text style={styles.itemName}>Glass bottle</Text>
+              <View style={styles.itemSpecs}>
+                <View style={styles.specItem}>
+                  <Text style={styles.specLabel}>Material</Text>
+                  <Text>Glass</Text>
+                </View>
+                <View style={styles.specItem}>
+                  <Text style={styles.specLabel}>Price</Text>
+                  <Text>₹4</Text>
+                </View>
+                <View style={styles.specItem}>
+                  <Text style={styles.specLabel}>Points</Text>
+                  <Text>3p</Text>
+                </View>
+                <View style={styles.specItem}>
+                  <Text style={styles.specLabel}>Saved CO2</Text>
+                  <Text>4g</Text>
                 </View>
               </View>
             </View>
-            <TouchableOpacity style={styles.sellButton}>
-              <Text style={styles.sellButtonText}>Sell</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.recycleButton}>
-              <Text style={styles.recycleButtonText}>Recycle Bottle</Text>
-            </TouchableOpacity>
-            <ScrollView style={styles.faqSection}>
-              <Text style={styles.faqItem}>How do you make recycled glass?</Text>
-              <Text style={styles.faqItem}>How can you reuse glass?</Text>
-              <Text style={styles.faqItem}>How can glass be recycled for cash?</Text>
-              <Text style={styles.faqItem}>How can we recycle glass waste at home?</Text>
-            </ScrollView>
-            <TouchableOpacity onPress={() => setIsModalVisible(false)} style={styles.closeButton}>
-              <Text style={styles.closeButtonText}>Close</Text>
-            </TouchableOpacity>
           </View>
+          <TouchableOpacity style={styles.sellButton}>
+            <Text style={styles.sellButtonText}>Sell</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.recycleButton}>
+            <Text style={styles.recycleButtonText}>Recycle Bottle</Text>
+          </TouchableOpacity>
+          <ScrollView style={styles.faqSection}>
+            <Text style={styles.faqItem}>How do you make recycled glass?</Text>
+            <Text style={styles.faqItem}>How can you reuse glass?</Text>
+            <Text style={styles.faqItem}>How can glass be recycled for cash?</Text>
+            <Text style={styles.faqItem}>How can we recycle glass waste at home?</Text>
+          </ScrollView>
         </View>
-      </Modal>
+      </BottomSheet>
 
       <View style={styles.bottomNavigation}>
         <TouchableOpacity>
@@ -181,18 +172,13 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginTop: 20,
   },
-  modalContainer: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-  },
-  modalContent: {
+  bottomSheetContent: {
     backgroundColor: 'white',
     padding: 16,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
   },
-  modalTitle: {
+  bottomSheetTitle: {
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 16,
@@ -254,18 +240,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '600',
     marginBottom: 8,
-  },
-  closeButton: {
-    backgroundColor: '#22c55e',
-    paddingVertical: 12,
-    paddingHorizontal: 16,
-    borderRadius: 9999,
-    marginTop: 16,
-  },
-  closeButtonText: {
-    color: 'white',
-    textAlign: 'center',
-    fontWeight: '600',
   },
   bottomNavigation: {
     flexDirection: 'row',
