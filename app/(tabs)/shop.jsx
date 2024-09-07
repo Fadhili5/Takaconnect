@@ -25,10 +25,10 @@ const bioFertilizersData = [
 ];
 
 const bioFertilizersData1 = [
-  { id: '1', name: 'Organic', img: require('../../assets/images/organic.jpg') },
-  { id: '2', name: 'Fertilizer', img: require('../../assets/images/fertilizer.jpg') },
-  { id: '3', name: 'Incense', img: require('../../assets/images/incense.jpg') },
-  { id: '4', name: 'Manure', img: require('../../assets/images/manure.jpg') },
+  { id: '1', name: 'Cans', img: require('../../assets/images/cans.jpg') },
+  { id: '2', name: 'Carton', img: require('../../assets/images/carton.jpg') },
+  { id: '3', name: 'Circuit', img: require('../../assets/images/circuit.jpg') },
+  { id: '4', name: 'Toilet', img: require('../../assets/images/toilet.jpg') },
 ];
 
 const CategoryItem = ({ item }) => (
