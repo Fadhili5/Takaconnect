@@ -29,14 +29,7 @@ export default function Layout() {
           </TouchableOpacity>
         </View>
 
-        <View style={styles.qrCodeContainer}>
-          <QRCode
-            value="https://your-url.com"
-            size={64}
-            backgroundColor='white'
-            color='blue'
-          />
-        </View>
+        
       </View>
       <Tabs
         screenOptions={{
