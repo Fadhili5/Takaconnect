@@ -2,6 +2,7 @@ import React from 'react';
 import { ScrollView, Text, View, Image, TouchableOpacity } from 'react-native';
 import tw from 'tailwind-react-native-classnames';
 import { Ionicons, FontAwesome5 } from '@expo/vector-icons';
+// import { useNavigation } from '@react-navigation/native';
 
 
 const ProfileScreen = () => {
@@ -49,7 +50,7 @@ const ProfileScreen = () => {
       </View>
 
       {/* EcoCoins Section */}
-      <View style={tw`p-4 border-t border-b mt-2`}>
+      <View style={tw`p-4 border-t border-b border-gray-200 mt-2`}>
         <View style={tw`flex-row justify-between items-center mb-2`}>
           <Text style={tw`text-lg font-bold text-black`}>EcoCoins</Text>
           <TouchableOpacity>
@@ -65,11 +66,11 @@ const ProfileScreen = () => {
       {/* EcoShop Section */}
       <View style={tw`p-4 flex-row`}>
         <View style={tw`flex-1`}>
-          <Image source={require('../../assets/images/glass.png')} style={tw`w-full h-24`} />
+          <Image source={require('../../assets/images/metal.png')} style={tw`w-full h-24`} />
           <Text style={tw`text-base font-bold`}>Health</Text>
         </View>
-        <View style={tw`flex-1 ml-2`}>
-          <Image source={require('../../assets/images/glass.png')} style={tw`w-full h-24`} />
+        <View style={tw`flex-1 ml-2 rounded-md rounded`}>
+          <Image source={require('../../assets/images/incense.jpg')} style={tw`w-full h-24`} />
           <Text style={tw`text-base font-bold`}>Clothes</Text>
         </View>
       </View>
