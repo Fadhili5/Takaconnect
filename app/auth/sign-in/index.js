@@ -3,7 +3,7 @@ import { StyleSheet, Text, TextInput, Touchable, TouchableOpacity, View } from '
 import React from 'react'
 import { useNavigation, useRouter } from 'expo-router'
 import { useEffect } from 'react'
-import { Colors } from '@/constants/Colors'
+import { Colors } from '../../../constants/Colors'
 import { Ionicons } from '@expo/vector-icons';
 
 export default function index() {

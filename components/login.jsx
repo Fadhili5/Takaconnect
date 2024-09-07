@@ -1,82 +1,56 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity, SafeAreaView, Dimensions } from 'react-native';
+import { View, Image, StyleSheet, Text, TouchableOpacity, Dimensions } from 'react-native';
+import tw from 'tailwind-react-native-classnames';
 import { Colors } from '@/constants/Colors';
 import { useRouter } from 'expo-router';
 
-const { width, height } = Dimensions.get('window');
 
-const Login = () => {
+const { width } = Dimensions.get('window'); // Get the screen width
+
+export default function App() {
   const router = useRouter();
-
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <View style={styles.container}>
-        <Image
-          source={require('../assets/images/Logo.png')}
-          style={styles.image}
-          resizeMode="cover"
-        />
-        <View style={styles.content}>
-          <Text style={styles.title}>HakiSpeaks</Text>
-          <Text style={styles.subtitle}>
-            Speak out your rights and let your voice be heard
-            lets stop corruption and injustice in our society
-          </Text>
-        </View>
-        <TouchableOpacity
+    <View style={[styles.container, tw`bg-green-600`]}>
+      <Image
+        source={require('../assets/images/Designer (1).jpeg')}
+        style={styles.logo}
+        resizeMode="contain"
+      />
+      <Text style={tw`text-white font-bold text-2xl`}>TAKA CONNECT</Text>
+
+      <TouchableOpacity
           style={styles.button}
           onPress={() => router.push('auth/sign-in')}
         >
-          <Text style={styles.buttonText}>Get Started</Text>
+          <Text >Get Started</Text>
         </TouchableOpacity>
-      </View>
-    </SafeAreaView>
+
+    </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  image: {
-    width: '100%',
-    height: height * 0.5,
-  },
-  content: {
-    padding: 25,
-    backgroundColor: Colors.WHITE,
-    marginTop: 30,
-    borderTopLeftRadius: 40,
-    borderTopRightRadius: 40,
-    height: height * 0.3,
     justifyContent: 'center',
+    alignItems: 'center',
+    width: 370
   },
-  title: {
-    fontSize: width * 0.1,
-    fontFamily: 'outfit-bold',
-    textAlign: 'center',
-    marginTop: 10,
-  },
-  subtitle: {
-    fontSize: width * 0.04,
-    fontFamily: 'outfit',
-    textAlign: 'center',
-    color: Colors.GRAY,
-    marginTop: 15,
+  logo: {
+    width: 150,
+    height: 100,
   },
   button: {
     padding: 15,
-    backgroundColor: Colors.PRIMARY,
+    backgroundColor: Colors.BLUE,
     borderRadius: 99,
     marginTop: '10%',
     alignItems: 'center',
   },
   buttonText: {
-    fontSize: width * 0.05,
+    fontSize: width * 0.05, // Use the screen width to calculate the font size
     fontFamily: 'outfit',
     textAlign: 'center',
     color: Colors.WHITE,
   },
 });
-
-export default Login;

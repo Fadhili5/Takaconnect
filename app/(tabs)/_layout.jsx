@@ -3,6 +3,8 @@ import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
 import { Tabs, useRouter } from 'expo-router';
 import { MaterialCommunityIcons, MaterialIcons, FontAwesome } from '@expo/vector-icons';
+import QRCode from 'react-native-qrcode-svg';
+import tw from 'tailwind-react-native-classnames';
 
 SplashScreen.preventAutoHideAsync(); // Ensure splash screen is handled
 
@@ -19,12 +21,23 @@ export default function Layout() {
 
   return (
     <>
+    <View style={styles.container}>
       <View style={styles.sessionButtonContainer}>
         <TouchableOpacity style={styles.sessionButton} onPress={() => router.push('/session/page')}>
           <MaterialCommunityIcons name="plus" size={24} color="white" />
-          <Text style={styles.sessionButtonText}>Ask kili</Text>
+          <Text style={styles.sessionButtonText}>Taka</Text>
         </TouchableOpacity>
       </View>
+
+      <View style={styles.qrCodeContainer}>
+        <QRCode
+          value="https://your-url.com"
+          size={64}
+          backgroundColor='white'
+          color='blue'
+        />
+      </View>
+    </View>
       <Tabs
         screenOptions={{
           headerShown: false,

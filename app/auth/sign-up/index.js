@@ -85,7 +85,7 @@ const index = () => {
     
             {/* sign up button */}
             <TouchableOpacity 
-                onPress={() => router.replace('auth/sign-up')}
+                onPress={() => router.replace('/home')}
             style={{
                 padding: 20,
                 backgroundColor: Colors.WHITE,
