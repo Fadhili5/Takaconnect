@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, TextInput, ScrollView, Image, TouchableOpacity } from 'react-native';
 import { Ionicons, FontAwesome5 } from '@expo/vector-icons';
 import tw from 'tailwind-react-native-classnames';
+import { useNavigation } from '@react-navigation/native';
 
 const EcoStatsCard = () => {
   return (
@@ -39,6 +40,8 @@ const StatItem = ({ icon, value, label, color }) => (
 );
 
 export default function App() {
+  const navigation = useNavigation();
+
   return (
     <ScrollView style={[tw`bg-gray-100`, { flex: 1 }]}>
       <View style={tw`p-4 mt-7`}>
@@ -49,10 +52,12 @@ export default function App() {
             <Text style={tw`font-semibold text-lg`}>Hi, Fadhili</Text>
             <Text style={tw`text-gray-500 text-sm`}>Nairobi, Kenya</Text>
           </View>
-          <View style={tw`flex flex-row items-center`}>
+          <TouchableOpacity style={tw`flex flex-row items-center`}
+            onPress={() => navigation.navigate('Notification/page')}
+          >
             <Ionicons name="notifications-outline" size={24} color="gray" style={tw`mr-4`} />
             <Image source={{ uri: 'https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg' }} style={tw`w-10 h-10 rounded-full`} />
-          </View>
+          </TouchableOpacity>
         </View>
 
         {/* Search Bar */}
