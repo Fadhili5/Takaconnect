@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { View, Text, Image, TouchableOpacity, FlatList, StyleSheet, Modal, TextInput } from 'react-native';
+import { View, Text, Image, TouchableOpacity, FlatList, StyleSheet, Modal, TextInput, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import tw from 'tailwind-react-native-classnames';
-import { Ionicons } from '@expo/vector-icons';
 
 const wasteData = [
   { id: '1', name: 'Plastic Bottles', image: require('../../assets/images/plasticc.jpg'), price: '$5/kg' },
@@ -20,6 +19,39 @@ const BuyWasteScreen = () => {
   const handleBidPress = (item) => {
     setSelectedItem(item);
     setModalVisible(true);
+  };
+
+  const handlePayment = async () => {
+    const requestData = {
+      first_name: 'Joe',
+      last_name: 'Doe',
+      email: 'joe@doe.com',
+      amount: parseFloat(bidAmount),  // Ensure bidAmount is a valid number
+      phone_number: '254708419386',   // Hardcoded phone number
+      api_ref: 'test',
+    };
+
+    try {
+      const response = await fetch('http://localhost:3000/api/pay', { // Updated endpoint
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestData),
+      });
+
+      const data = await response.json();
+      console.log('Payment Response:', data);
+
+      if (data.success) {
+        Alert.alert('Success', 'Payment successful!');
+      } else {
+        Alert.alert('Error', 'Payment failed, please try again.');
+      }
+    } catch (error) {
+      console.error('Payment Request Error:', error);
+      Alert.alert('Error', 'Payment request failed.');
+    }
   };
 
   const renderWasteItem = ({ item }) => (
@@ -69,7 +101,7 @@ const BuyWasteScreen = () => {
             <TouchableOpacity
               style={styles.submitButton}
               onPress={() => {
-                console.log(`Bid placed for ${selectedItem.name}: $${bidAmount}/kg`);
+                handlePayment();
                 setModalVisible(false);
               }}
             >
