@@ -1,5 +1,6 @@
 import { Text, View } from "react-native";
 import Signin from "../components/login";
+import SigninAs from "../components/signinas";
 // import { tw } from 'nativewind';
 
 

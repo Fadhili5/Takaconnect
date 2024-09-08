@@ -1,69 +1,100 @@
-import React from 'react';
-import { View, TextInput, TouchableOpacity, Image, StyleSheet } from 'react-native';
+// File: Map.js
+import  { useEffect, useState } from 'react';
+import { View } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
-import tw from 'tailwind-react-native-classnames';
+import axios from 'axios';
 
-export default function LocationScreen() {
-  return (
-    <View style={styles.container}>
-      <MapView
-        style={styles.map}
-        initialRegion={{
-          latitude: 37.78825,
-          longitude: -122.4324,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
-        }}
-      >
-        <Marker
-          coordinate={{ latitude: 37.78825, longitude: -122.4324 }}
-          title="Marker Title"
-          description="Marker Description"
-        />
-      </MapView>
+const ORS_API_KEY = '5b3ce3597851110001cf6248e7e723f7a3ef40b2bbcc38be7f59d9c5';
 
-      <View style={styles.overlay}>
-        <View style={styles.header}>
-          <TouchableOpacity>
-            <Image
-              source={{ uri: 'https://via.placeholder.com/40' }}
-              style={tw('w-10 h-10 rounded-full')}
+const Map = ({ buyerLocation, wasteSellers }) => {
+    const [distances, setDistances] = useState([]);
+
+    useEffect(() => {
+        const fetchDistances = async () => {
+            const updatedDistances = await Promise.all(wasteSellers.map((seller) => calculateDistance(buyerLocation, seller.location)));
+            setDistances(updatedDistances);
+        };
+
+        fetchDistances();
+    }, [buyerLocation, wasteSellers]);
+
+    const calculateDistance = async (buyer, seller) => {
+      const url = `https://api.openrouteservice.org/v2/directions/driving-car/geojson`;
+      const body = {
+          coordinates: [
+              [buyer.longitude, buyer.latitude],
+              [seller.longitude, seller.latitude]
+          ]
+      };
+      try {
+          const response = await axios.post(url, body, {
+              headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json',
+                  'Authorization': ORS_API_KEY
+              }
+          });
+          const distance = response.data.features[0].properties.segments[0].distance;
+          return (distance / 1000).toFixed(2); // distance in Km
+      } catch (error) {
+          console.error(error);
+          return null;
+      }
+    };
+
+    return (
+        <MapView
+            style={{ flex: 1 }}
+            initialRegion={{
+                latitude: buyerLocation.latitude,
+                longitude: buyerLocation.longitude,
+                latitudeDelta: 0.09,
+                longitudeDelta: 0.04
+            }}
+        >
+            <Marker
+                coordinate={buyerLocation}
+                title={'Buyer Location'}
+                pinColor={"blue"}
             />
-          </TouchableOpacity>
-        </View>
+            {wasteSellers.map((seller, index) => (
+                <Marker
+                    key={index}
+                    coordinate={seller.location}
+                    title={`Seller ${index + 1}`}
+                    description={`Distance: ${distances[index]} Km`}
+                />
+            ))}
+        </MapView>
+    );
+};
 
-        {/* Search Bar */}
-        <View style={styles.searchBar}>
-          <TextInput
-            placeholder="Search"
-            style={tw('bg-white p-2 rounded-full')}
-          />
-        </View>
-      </View>
-    </View>
-  );
-}
+export default Map;
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  map: {
-    flex: 1,
-  },
-  overlay: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    padding: 16,
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  searchBar: {
-    marginTop: 16,
-  },
-});
+
+// // File: App.js
+// import React from 'react';
+// import { SafeAreaView, StyleSheet } from 'react-native';
+// import Map from './Map';
+
+// const App = () => {
+//     const buyerLocation = { latitude: -1.286389, longitude: 36.817223 }; // Center of Nairobi
+//     const wasteSellers = [
+//         { location: { latitude: -1.280256, longitude: 36.816282 } }, // Example seller location
+//         { location: { latitude: -1.278001, longitude: 36.817527 } }  // Example seller location
+//     ];
+
+//     return (
+//         <SafeAreaView style={styles.container}>
+//             <Map buyerLocation={buyerLocation} wasteSellers={wasteSellers} />
+//         </SafeAreaView>
+//     );
+// };
+
+// const styles = StyleSheet.create({
+//     container: {
+//         flex: 1,
+//     }
+// });
+
+// export default App;

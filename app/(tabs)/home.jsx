@@ -1,15 +1,20 @@
 import React from 'react';
 import { View, Text, TextInput, ScrollView, Image, TouchableOpacity } from 'react-native';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import { NavigationContainer } from '@react-navigation/native';
-import { Ionicons, FontAwesome5 } from '@expo/vector-icons';
+import { Ionicons, FontAwesome5, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import tw from 'tailwind-react-native-classnames';
+import { useNavigation } from '@react-navigation/native';
 
-const Drawer = createDrawerNavigator();
+const StatItem = ({ icon, value, label, color }) => (
+  <View style={tw`items-center`}>
+    <FontAwesome5 name={icon} size={24} color={color} style={tw`mb-2`} />
+    <Text style={tw`font-bold text-xl text-white`}>{value}</Text>
+    <Text style={tw`text-white text-xs mt-1`}>{label}</Text>
+  </View>
+);
 
 const EcoStatsCard = () => {
   return (
-    <View style={tw`bg-green-500 rounded-xl p-6 shadow-lg`}>
+    <View style={tw`bg-green-500 rounded-xl p-6 shadow-lg mb-4`}>
       <View style={tw`flex-row justify-between items-center`}>
         <StatItem
           icon="coins"
@@ -34,27 +39,93 @@ const EcoStatsCard = () => {
   );
 };
 
-const StatItem = ({ icon, value, label, color }) => (
-  <View style={tw`items-center`}>
-    <FontAwesome5 name={icon} size={24} color={color} style={tw`mb-2`} />
-    <Text style={tw`font-bold text-xl text-white`}>{value}</Text>
-    <Text style={tw`text-white text-xs mt-1`}>{label}</Text>
-  </View>
+const BlockchainInfoCard = ({ navigation }) => (
+  <TouchableOpacity
+    style={tw`bg-blue-500 rounded-xl p-6 shadow-lg mb-4`}
+    onPress={() => navigation.navigate('blockchainInfo/page')}
+  >
+    <View style={tw`flex-row items-center mb-2`}>
+      <MaterialIcons name="attach-money" size={24} color="white" style={tw`mr-2`} />
+      <Text style={tw`text-white font-bold text-lg`}>Blockchain Verified</Text>
+    </View>
+    <Text style={tw`text-white mb-4`}>Your recycling efforts are securely recorded on the blockchain.</Text>
+    <View style={tw`flex-row justify-between`}>
+      <Text style={tw`text-white`}>Last Transaction:</Text>
+      <Text style={tw`text-white font-semibold`}>2 hours ago</Text>
+    </View>
+  </TouchableOpacity>
 );
 
-const HomeScreen = ({ navigation }) => {
+const ImpactCard = ({ navigation }) => (
+  <TouchableOpacity 
+    style={tw`bg-purple-500 rounded-xl p-6 shadow-lg mb-4`}
+    onPress={() => navigation.navigate('TrackYourTrash/page')}
+  >
+    <View style={tw`flex-row items-center mb-2`}>
+      <Ionicons name="footsteps" size={24} color="white" style={tw`mr-2`} />
+      <Text style={tw`text-white font-bold text-lg`}>Your Impact</Text>
+    </View>
+    <Text style={tw`text-white mb-4`}>See how your trash is making a difference!</Text>
+    <View style={tw`flex-row items-center`}>
+      <Text style={tw`text-white mr-2`}>Track Your Trash</Text>
+      <Ionicons name="arrow-forward" size={20} color="white" />
+    </View>
+  </TouchableOpacity>
+);
+
+const MarketplaceCard = ({ navigation }) => (
+  <TouchableOpacity 
+    style={tw`bg-yellow-500 rounded-xl p-6 shadow-lg mb-4`}
+    onPress={() => navigation.navigate('shop')}
+  >
+    <View style={tw`flex-row items-center mb-2`}>
+      <Ionicons name="cart" size={24} color="white" style={tw`mr-2`} />
+      <Text style={tw`text-white font-bold text-lg`}>Recycling Marketplace</Text>
+    </View>
+    <Text style={tw`text-white mb-4`}>Turn your trash into cash! Sell your recyclables.</Text>
+    <View style={tw`flex-row justify-between`}>
+      <Text style={tw`text-white`}>Active Listings:</Text>
+      <Text style={tw`text-white font-semibold`}>12</Text>
+    </View>
+  </TouchableOpacity>
+);
+
+const WasteTipsCard = ({ navigation }) => (
+  <TouchableOpacity 
+    style={tw`bg-green-500 rounded-xl p-6 shadow-lg mb-4`}
+    onPress={() => navigation.navigate('urbantips/page')}
+  >
+    <View style={tw`flex-row items-center mb-2`}>
+      <MaterialCommunityIcons name="lightbulb-outline" size={24} color="white" style={tw`mr-2`} />
+      <Text style={tw`text-white font-bold text-lg`}>Waste Tips</Text>
+    </View>
+    <Text style={tw`text-white mb-4`}>Get useful tips on managing waste effectively.</Text>
+    <View style={tw`flex-row items-center`}>
+      <Text style={tw`text-white mr-2`}>Learn More</Text>
+      <Ionicons name="arrow-forward" size={20} color="white" />
+    </View>
+  </TouchableOpacity>
+);
+
+export default function App() {
+  const navigation = useNavigation();
+
   return (
     <ScrollView style={[tw`bg-gray-100`, { flex: 1 }]}>
       <View style={tw`p-4 mt-7`}>
         
         {/* Header */}
         <View style={tw`flex flex-row justify-between items-center mb-2`}>
-          <View>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('RedeemPoints/page')}
+          >
             <Text style={tw`font-semibold text-lg`}>Hi, Fadhili</Text>
             <Text style={tw`text-gray-500 text-sm`}>Nairobi, Kenya</Text>
-          </View>
-          <TouchableOpacity style={tw`flex flex-row items-center`} onPress={() => navigation.openDrawer()}>
-            <Ionicons name="menu" size={24} color="gray" style={tw`mr-4`} />
+          </TouchableOpacity>
+          <TouchableOpacity style={tw`flex flex-row items-center`}
+            onPress={() => navigation.navigate('Notification/page')}
+          >
+            <Ionicons name="notifications-outline" size={24} color="gray" style={tw`mr-4`} />
             <Image source={{ uri: 'https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg' }} style={tw`w-10 h-10 rounded-full`} />
           </TouchableOpacity>
         </View>
@@ -78,13 +149,13 @@ const HomeScreen = ({ navigation }) => {
           </View>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             {[
-              { name: 'Plastic', image: 'https://example.com/plastic.jpg' },
-              { name: 'Glass', image: 'https://example.com/glass.jpg' },
-              { name: 'Paper', image: 'https://example.com/paper.jpg' },
-              { name: 'Metal', image: 'https://example.com/metal.jpg' },
+              { name: 'Plastic', image: require('../../assets/images/plasticc.jpg') },
+              { name: 'Glass', image: require('../../assets/images/glasses.jpg') },
+              { name: 'Paper', image: require('../../assets/images/papers.jpg') },
+              { name: 'Metal', image: require('../../assets/images/metallic.jpg') },
             ].map((item, index) => (
               <View key={index} style={tw`bg-white rounded-lg p-4 items-center mr-2`}>
-                <Image source={{ uri: item.image }} style={tw`w-16 h-16`} />
+                <Image source={item.image} style={tw`w-16 h-16`} />
                 <Text style={tw`mt-2`}>{item.name}</Text>
               </View>
             ))}
@@ -93,66 +164,19 @@ const HomeScreen = ({ navigation }) => {
 
         {/* Statistics */}
         <EcoStatsCard />
+
+        {/* Blockchain Info Card */}
+        <BlockchainInfoCard navigation={navigation} />
+
+        {/* Impact Card */}
+        <ImpactCard navigation={navigation} />
+
+        {/* Marketplace Card */}
+        <MarketplaceCard navigation={navigation} />
+
+        {/* Waste Tips Card */}
+        <WasteTipsCard navigation={navigation} />
       </View>
     </ScrollView>
   );
-};
-
-const RedeemPointsScreen = () => (
-  <View style={tw`flex-1 justify-center items-center`}>
-    <Text>Redeem Points Screen</Text>
-  </View>
-);
-
-const TrackTrashScreen = () => (
-  <View style={tw`flex-1 justify-center items-center`}>
-    <Text>Track Your Trash Screen</Text>
-  </View>
-);
-
-const SettingsScreen = () => (
-  <View style={tw`flex-1 justify-center items-center`}>
-    <Text>Settings Screen</Text>
-  </View>
-);
-
-const DrawerContent = ({ navigation }) => (
-  <View style={tw`flex-1 p-5`}>
-    <View style={tw`items-center mb-10`}>
-      <Image source={{ uri: 'https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg' }} style={tw`w-20 h-20 rounded-full mb-2`} />
-      <Text style={tw`text-lg font-bold`}>Fadhili</Text>
-      <Text style={tw`text-gray-500`}>Eco Warrior</Text>
-    </View>
-    <TouchableOpacity style={tw`flex-row items-center py-3`} onPress={() => navigation.navigate('Home')}>
-      <Ionicons name="home-outline" size={24} color="gray" style={tw`mr-3`} />
-      <Text>Home</Text>
-    </TouchableOpacity>
-    <TouchableOpacity style={tw`flex-row items-center py-3`} onPress={() => navigation.navigate('RedeemPoints')}>
-      <FontAwesome5 name="coins" size={24} color="gray" style={tw`mr-3`} />
-      <Text>Redeem Points</Text>
-    </TouchableOpacity>
-    <TouchableOpacity style={tw`flex-row items-center py-3`} onPress={() => navigation.navigate('TrackTrash')}>
-      <FontAwesome5 name="trash-alt" size={24} color="gray" style={tw`mr-3`} />
-      <Text>Track Your Trash</Text>
-    </TouchableOpacity>
-    <TouchableOpacity style={tw`flex-row items-center py-3`} onPress={() => navigation.navigate('Settings')}>
-      <Ionicons name="settings-outline" size={24} color="gray" style={tw`mr-3`} />
-      <Text>Settings</Text>
-    </TouchableOpacity>
-  </View>
-);
-
-const App = () => {
-  return (
-    <NavigationContainer>
-      <Drawer.Navigator drawerContent={(props) => <DrawerContent {...props} />}>
-        <Drawer.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
-        <Drawer.Screen name="RedeemPoints" component={RedeemPointsScreen} />
-        <Drawer.Screen name="TrackTrash" component={TrackTrashScreen} />
-        <Drawer.Screen name="Settings" component={SettingsScreen} />
-      </Drawer.Navigator>
-    </NavigationContainer>
-  );
-};
-
-export default App;
+}
