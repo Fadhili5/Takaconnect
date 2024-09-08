@@ -17,11 +17,11 @@ export default function App() {
     >
       <View style={styles.container}>
         <Image
-          source={require('../assets/images/Designer (1).jpeg')}
+          source={require('../assets/images/image copy 2.png')}
           style={styles.logo}
           resizeMode="contain"
         />
-        <Text style={styles.title}>TAKA CONNECT</Text>
+        <Text style={styles.title}>TAKACONNECT</Text>
 
         <Text style={styles.securedText}>Secured by Privado.id</Text>
 
@@ -49,6 +49,7 @@ export default function App() {
 const styles = StyleSheet.create({
   gradient: {
     flex: 1,
+    width: '100%',
   },
   container: {
     flex: 1,
@@ -60,7 +61,7 @@ const styles = StyleSheet.create({
   },
   logo: {
     width: 200,
-    height: 150,
+    height: 200,
     marginBottom: 20,
   },
   title: {
