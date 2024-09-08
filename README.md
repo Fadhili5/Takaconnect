@@ -2,6 +2,9 @@
 
 (https://www.youtube.com/watch?v=-_WVflQCTCQ)
 
+Demo pictures of the solution
+https://drive.google.com/drive/folders/1iVkQ92qd2vhGyEsbkzLc5ZgaC5BhJ842?usp=drive_link
+
 Our Solution is Waste management using Blockchain and AI with the verification and authentication being Privado.ID
 where users can scan their trash sell them and get coins and these coins are stored it BTC and users can use them to pay for bills charity, book rides, pay for transport and many others using the daraja api.
 
