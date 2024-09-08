@@ -1,8 +1,11 @@
 import React from 'react';
 import { View, Text, TextInput, ScrollView, Image, TouchableOpacity } from 'react-native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { NavigationContainer } from '@react-navigation/native';
 import { Ionicons, FontAwesome5 } from '@expo/vector-icons';
 import tw from 'tailwind-react-native-classnames';
-import { useNavigation } from '@react-navigation/native';
+
+const Drawer = createDrawerNavigator();
 
 const EcoStatsCard = () => {
   return (
@@ -32,16 +35,14 @@ const EcoStatsCard = () => {
 };
 
 const StatItem = ({ icon, value, label, color }) => (
-  <View style={tw`items-center `}>
+  <View style={tw`items-center`}>
     <FontAwesome5 name={icon} size={24} color={color} style={tw`mb-2`} />
     <Text style={tw`font-bold text-xl text-white`}>{value}</Text>
     <Text style={tw`text-white text-xs mt-1`}>{label}</Text>
   </View>
 );
 
-export default function App() {
-  const navigation = useNavigation();
-
+const HomeScreen = ({ navigation }) => {
   return (
     <ScrollView style={[tw`bg-gray-100`, { flex: 1 }]}>
       <View style={tw`p-4 mt-7`}>
@@ -52,10 +53,8 @@ export default function App() {
             <Text style={tw`font-semibold text-lg`}>Hi, Fadhili</Text>
             <Text style={tw`text-gray-500 text-sm`}>Nairobi, Kenya</Text>
           </View>
-          <TouchableOpacity style={tw`flex flex-row items-center`}
-            onPress={() => navigation.navigate('Notification/page')}
-          >
-            <Ionicons name="notifications-outline" size={24} color="gray" style={tw`mr-4`} />
+          <TouchableOpacity style={tw`flex flex-row items-center`} onPress={() => navigation.openDrawer()}>
+            <Ionicons name="menu" size={24} color="gray" style={tw`mr-4`} />
             <Image source={{ uri: 'https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg' }} style={tw`w-10 h-10 rounded-full`} />
           </TouchableOpacity>
         </View>
@@ -79,22 +78,81 @@ export default function App() {
           </View>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             {[
-              { name: 'Plastic', image: require('../../assets/images/plasticc.jpg') },
-              { name: 'Glass', image: require('../../assets/images/glasses.jpg') },
-              { name: 'Paper', image: require('../../assets/images/papers.jpg') },
-              { name: 'Metal', image: require('../../assets/images/metallic.jpg') },
+              { name: 'Plastic', image: 'https://example.com/plastic.jpg' },
+              { name: 'Glass', image: 'https://example.com/glass.jpg' },
+              { name: 'Paper', image: 'https://example.com/paper.jpg' },
+              { name: 'Metal', image: 'https://example.com/metal.jpg' },
             ].map((item, index) => (
               <View key={index} style={tw`bg-white rounded-lg p-4 items-center mr-2`}>
-                <Image source={item.image} style={tw`w-16 h-16`} />
+                <Image source={{ uri: item.image }} style={tw`w-16 h-16`} />
                 <Text style={tw`mt-2`}>{item.name}</Text>
               </View>
             ))}
           </ScrollView>
         </View>
 
-        {/* Statistics - Updated with EcoStatsCard */}
+        {/* Statistics */}
         <EcoStatsCard />
       </View>
     </ScrollView>
   );
-}
+};
+
+const RedeemPointsScreen = () => (
+  <View style={tw`flex-1 justify-center items-center`}>
+    <Text>Redeem Points Screen</Text>
+  </View>
+);
+
+const TrackTrashScreen = () => (
+  <View style={tw`flex-1 justify-center items-center`}>
+    <Text>Track Your Trash Screen</Text>
+  </View>
+);
+
+const SettingsScreen = () => (
+  <View style={tw`flex-1 justify-center items-center`}>
+    <Text>Settings Screen</Text>
+  </View>
+);
+
+const DrawerContent = ({ navigation }) => (
+  <View style={tw`flex-1 p-5`}>
+    <View style={tw`items-center mb-10`}>
+      <Image source={{ uri: 'https://t3.ftcdn.net/jpg/02/43/12/34/360_F_243123463_zTooub557xEWABDLk0jJklDyLSGl2jrr.jpg' }} style={tw`w-20 h-20 rounded-full mb-2`} />
+      <Text style={tw`text-lg font-bold`}>Fadhili</Text>
+      <Text style={tw`text-gray-500`}>Eco Warrior</Text>
+    </View>
+    <TouchableOpacity style={tw`flex-row items-center py-3`} onPress={() => navigation.navigate('Home')}>
+      <Ionicons name="home-outline" size={24} color="gray" style={tw`mr-3`} />
+      <Text>Home</Text>
+    </TouchableOpacity>
+    <TouchableOpacity style={tw`flex-row items-center py-3`} onPress={() => navigation.navigate('RedeemPoints')}>
+      <FontAwesome5 name="coins" size={24} color="gray" style={tw`mr-3`} />
+      <Text>Redeem Points</Text>
+    </TouchableOpacity>
+    <TouchableOpacity style={tw`flex-row items-center py-3`} onPress={() => navigation.navigate('TrackTrash')}>
+      <FontAwesome5 name="trash-alt" size={24} color="gray" style={tw`mr-3`} />
+      <Text>Track Your Trash</Text>
+    </TouchableOpacity>
+    <TouchableOpacity style={tw`flex-row items-center py-3`} onPress={() => navigation.navigate('Settings')}>
+      <Ionicons name="settings-outline" size={24} color="gray" style={tw`mr-3`} />
+      <Text>Settings</Text>
+    </TouchableOpacity>
+  </View>
+);
+
+const App = () => {
+  return (
+    <NavigationContainer>
+      <Drawer.Navigator drawerContent={(props) => <DrawerContent {...props} />}>
+        <Drawer.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
+        <Drawer.Screen name="RedeemPoints" component={RedeemPointsScreen} />
+        <Drawer.Screen name="TrackTrash" component={TrackTrashScreen} />
+        <Drawer.Screen name="Settings" component={SettingsScreen} />
+      </Drawer.Navigator>
+    </NavigationContainer>
+  );
+};
+
+export default App;

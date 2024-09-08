@@ -66,7 +66,7 @@ const QRCodeScreen = () => {
         <View style={styles.modalContent}>
           <View style={styles.modalHandle} />
           <Image
-            source={{ uri: 'https://example.com/glass-bottle.jpg' }} // Change URI to match your image
+            source={{ uri: 'https://images.pexels.com/photos/4498089/pexels-photo-4498089.jpeg' }} // Change URI to match your image
             style={styles.image}
           />
           <Text style={styles.title}>Glass bottle ♻️</Text>
