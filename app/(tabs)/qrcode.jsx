@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, Image, ScrollView, StyleSheet } from 'rea
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import Modal from 'react-native-modal';
 import tw from 'tailwind-react-native-classnames';
+import Scan from '../../assets/images/scan.jpg';
 
 const QRCodeScreen = () => {
   const [hasPermission, setHasPermission] = useState(null);
@@ -66,12 +67,12 @@ const QRCodeScreen = () => {
         <View style={styles.modalContent}>
           <View style={styles.modalHandle} />
           <Image
-            source={{ uri: 'https://images.pexels.com/photos/4498089/pexels-photo-4498089.jpeg' }} // Change URI to match your image
+            source={Scan} // Changed to use the imported asset image
             style={styles.image}
           />
           <Text style={styles.title}>Glass bottle ♻️</Text>
           <Text style={styles.text}>Materials: Glass</Text>
-          <Text style={styles.text}>Price: €4</Text>
+          <Text style={styles.text}>Price: ksh 4</Text>
           <Text style={styles.text}>Points: 3p</Text>
           <Text style={styles.text}>Saved CO2: 4g</Text>
           <View style={styles.buttonContainer}>

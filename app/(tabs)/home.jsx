@@ -42,15 +42,15 @@ const EcoStatsCard = () => {
 const BlockchainInfoCard = ({ navigation }) => (
   <TouchableOpacity
     style={tw`bg-blue-500 rounded-xl p-6 shadow-lg mb-4`}
-    onPress={() => navigation.navigate('blockchainInfo/page')}
+    onPress={() => navigation.navigate('businessVerification/page')}
   >
     <View style={tw`flex-row items-center mb-2`}>
       <MaterialIcons name="attach-money" size={24} color="white" style={tw`mr-2`} />
-      <Text style={tw`text-white font-bold text-lg`}>Blockchain Verified</Text>
+      <Text style={tw`text-white font-bold text-lg`}>Leaderboard</Text>
     </View>
-    <Text style={tw`text-white mb-4`}>Your recycling efforts are securely recorded on the blockchain.</Text>
+    <Text style={tw`text-white mb-4`}>See where you stand in your recycling efforts.</Text>
     <View style={tw`flex-row justify-between`}>
-      <Text style={tw`text-white`}>Last Transaction:</Text>
+      <Text style={tw`text-white`}>Last Update:</Text>
       <Text style={tw`text-white font-semibold`}>2 hours ago</Text>
     </View>
   </TouchableOpacity>

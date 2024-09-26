@@ -32,7 +32,7 @@ const BuyWasteScreen = () => {
     };
 
     try {
-      const response = await fetch('http://localhost:3000/mpesaStkPush', { // Updated endpoint
+      const response = await fetch('http://192.168.1.100:3000/mpesaStkPush', { // Replace with your local IP
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
