@@ -4,7 +4,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import tw from 'tailwind-react-native-classnames';
 import { Colors } from '@/constants/Colors';
 import { useRouter } from 'expo-router';
-import PrivadoSecure from '../assets/images/privado.png'; // Adjust the path as necessary
+import PrivadoSecure from '../assets/images/image-removebg-preview.png'; // Adjust the path as necessary
 
 const { width } = Dimensions.get('window');
 
@@ -23,7 +23,7 @@ export default function App() {
         />
         <Text style={styles.title}>TAKACONNECT</Text>
 
-        <Text style={styles.securedText}>Secured by Privado.id</Text>
+        <Text style={styles.securedText}>Powered by Africas Talking</Text>
 
         {/* Privado Secure Logo */}
         <Image

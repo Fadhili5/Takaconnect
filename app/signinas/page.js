@@ -29,7 +29,7 @@ const SignInScreen = () => {
         {/* Buy Waste Card */}
         <TouchableOpacity
           style={styles.card}
-          onPress={() => navigation.navigate('businessVerification/page')}
+          onPress={() => navigation.navigate('BuyWaste/page')}
         >
           <View style={tw`flex-row items-center mb-4`}>
             <MaterialCommunityIcons name="cart" size={40} color="#FFA500" style={tw`mr-4`} />
