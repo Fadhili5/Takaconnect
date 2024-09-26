@@ -23,16 +23,16 @@ const BuyWasteScreen = () => {
 
   const handlePayment = async () => {
     const requestData = {
-      first_name: 'Joe',
-      last_name: 'Doe',
-      email: 'joe@doe.com',
-      amount: parseFloat(bidAmount),  // Ensure bidAmount is a valid number
+      first_name: 'John',  // Hardcoded first name
+      last_name: 'Doe',    // Hardcoded last name
+      email: 'john.doe@example.com', // Hardcoded email
+      amount: parseFloat(bidAmount),  // User input for bid amount
       phone_number: '254708419386',   // Hardcoded phone number
-      api_ref: 'test',
+      api_ref: 'unique_reference',     // Hardcoded API reference
     };
 
     try {
-      const response = await fetch('http://localhost:3000/api/pay', { // Updated endpoint
+      const response = await fetch('http://localhost:3000/mpesaStkPush', { // Updated endpoint
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -93,7 +93,7 @@ const BuyWasteScreen = () => {
             <Image source={selectedItem.image} style={styles.modalImage} />
             <TextInput
               style={styles.input}
-              placeholder="Enter your bid amount"
+              placeholder="Enter your  amount"
               value={bidAmount}
               onChangeText={setBidAmount}
               keyboardType="numeric"
@@ -105,7 +105,7 @@ const BuyWasteScreen = () => {
                 setModalVisible(false);
               }}
             >
-              <Text style={styles.submitButtonText}>Submit Bid</Text>
+              <Text style={styles.submitButtonText}>Buy Now!</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.closeButton}
